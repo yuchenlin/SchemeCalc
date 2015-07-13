@@ -19,9 +19,8 @@ int main() {
 }
 
 int main1(){
-    LongInt a = (string)"12345678989012312313";
-    LongInt b = (string)"231402780973409871324803721094709231";
-    b-=a;
-    cout<<b<<endl;
+    LongInt a = (string)"123412347892134798023174";
+    LongInt b = (string)"231432423142314";
+    cout<<a/b<<endl;
     return 0;
 }

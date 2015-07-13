@@ -218,8 +218,8 @@ LongInt LongInt::operator * (const LongInt& obj) const{
                 break;
             else{
                 unsigned long long t = r;
-                if (j < n.size()) t += (long long int)a.n[j] * b.n[i];
-
+                if (j < n.size())
+                    t += (unsigned long long int)a.n[j] * b.n[i];
                 midRes.n.push_back(t % _base);
                 r = t / _base;
             }
@@ -303,6 +303,8 @@ LongInt LongInt::operator / (const LongInt &obj) const{
     LongInt ans=a,res=0;
     int i,left,right,mid;
     //尝试除法不要mode?
+    LongInt memory[100];
+    bool haveMem[100] = {0};
     for( i = a.n.size()-1; i>=0; --i)
     {
         //大数乘_base 要优化 直接移位
@@ -313,7 +315,12 @@ LongInt LongInt::operator / (const LongInt &obj) const{
         while(left<right)
         {
             mid = (left+right+1) >> 1;
-            if( b * mid > res)
+            if(!haveMem[mid]){
+                haveMem[mid] = true;
+                memory[mid] = b * mid;
+            }
+            //if( b * mid > res)
+            if (memory[mid] > res)
                 right = mid-1;
             else
                 left = mid;
