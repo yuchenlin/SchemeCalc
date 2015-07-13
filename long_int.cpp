@@ -345,7 +345,7 @@ LongInt LongInt::operator / (const LongInt &obj) const{
                 left = mid;
         }
         ans.n[i]=left;
-        res = res- b * left;
+        res -= b * left;
     }
     ans.mode();
     if(negative)
