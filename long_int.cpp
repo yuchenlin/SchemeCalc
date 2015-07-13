@@ -113,43 +113,28 @@ LongInt LongInt::operator + (const LongInt& obj) const{
     LongInt res;
     res.n.clear();
     int len = n.size(), obj_len = obj.n.size();
-    if(len<=0)
-        return obj;
-    
     if (*this>=0 and obj>=0)
     {
         for (int i=0, r=0; ; ++i)
         {
-            if (r == 0 and i >= len and i >= obj_len)
-
-            //if (i >= len and i >= obj_len)
+            if (r == 0 and i >= len and i >= obj_len) //youhua
                 break;
-            int t = r;
-            //int t =0 ;
+            int t = r;//buyouhua
             if (i < len)
                 t += n[i];
             if (i < obj_len)
                 t += obj.n[i];
-//            res.n.push_back(t);
+            res.n.push_back(t); //youhua
             
-            res.n.push_back(t % _base);
-            r = t / _base;
+//            res.n.push_back(t % _base);//buyouhua
+//            r = t / _base;//buyouhua
         }
-        res.mode();
-        //优化开始
-//        for (int i=0; i < max(len,obj_len); ++i){
-//            res.n.push_back(0);
-//            if(i<obj.n.size())
-//                res.n[i] += n[i];
-//            if(i<n.size())
-//                res.n[i] += obj.n[i];
-//        }
-//        res.mode();
-        //优化结束
+        res.mode(); //youhua
         return res;
     }
     if (*this<0 && obj<0)
     {
+        
         LongInt c = this->getABS() + obj.getABS();
         return c.getOpposite();
     }
@@ -179,28 +164,28 @@ LongInt LongInt::operator - (const LongInt& obj) const{
         if (*this > obj)
         {
             
-            for(int i = 0, g = 0; ; ++i)
-            {
-                if (g == 0 && i >= len && i >= obj_len) break;
-                int x = g;
-                if (i < len) x += n[i];
-                if (i < obj_len) x -= obj.n[i];
-                if (x < 0) {x += _base; g = -1; }
-                else g=0;
-                res.n.push_back(x); 
-            }
-            while (!res.n.back())
-                res.n.pop_back();
-            if (res.n.empty())
-                res.n.push_back(0);
-            return res;
+//            for(int i = 0, g = 0; ; ++i)
+//            {
+//                if (g == 0 && i >= len && i >= obj_len) break;
+//                int x = g;
+//                if (i < len) x += n[i];
+//                if (i < obj_len) x -= obj.n[i];
+//                if (x < 0) {x += _base; g = -1; }
+//                else g=0;
+//                res.n.push_back(x); 
+//            }
+//            while (!res.n.back())
+//                res.n.pop_back();
+//            if (res.n.empty())
+//                res.n.push_back(0);
+//            return res;
             
-//            //优化开始
-//            res = *this;
-//            for(int i = 0 ; i < obj.n.size() ; ++i)
-//                res.n[i] -= obj.n[i];
-//            res.mode();
-//            //优化结束
+            //优化开始
+            res = *this;
+            for(int i = 0 ; i < obj.n.size() ; ++i)
+                res.n[i] -= obj.n[i];
+            res.mode();
+            //优化结束
         }
         
         else
@@ -244,10 +229,10 @@ LongInt LongInt::operator * (const LongInt& obj) const{
     
     if (*this==0 or obj==0)
         return 0;
-    
+    LongInt midRes;//临时中间变量
     for (int i=0;i < obj.n.size();++i)
     {
-        LongInt midRes;//临时中间变量
+        
         midRes.n.clear();
         if (i)//如果i大于0
             for (int j=1;j<=i;++j)
@@ -260,6 +245,7 @@ LongInt LongInt::operator * (const LongInt& obj) const{
             else{
                 unsigned long long t = r;
                 if (j < n.size()) t += (long long int)a.n[j] * b.n[i];
+
                 midRes.n.push_back(t % _base);
                 r = t / _base;
             }
@@ -267,33 +253,21 @@ LongInt LongInt::operator * (const LongInt& obj) const{
         result += midRes;
     }
     
-//    //优化开始
-//    result = 0;
-//    for (int i = obj.n.size()-1 ; i >= 0; --i) {
-//        
-//        LongInt midres = *this;
-//        for (int i=0; i< n.size(); ++i) {
-//            midres.n[i] *= obj.n[i];
-//        }
-//        midres.mode();
-//        result = result * _base + midres;
-//    }
-//    //优化结束
     if(negative)
         result.changeSign();
     return result;
 }
 
-//优化开始
-LongInt LongInt::operator * (int b){
-    LongInt res = *this;
-    for (int i=0; i<n.size(); ++i) {
-        res.n[i] *= b;
-    }
-    res.mode();
-    return res;
-}
-//优化结束
+////优化开始
+//LongInt LongInt::operator * (int b){
+//    LongInt res = *this;
+//    for (int i=0; i<n.size(); ++i) {
+//        res.n[i] *= b;
+//    }
+//    res.mode();
+//    return res;
+//}
+////优化结束
 
 
 //各种关系运算符
@@ -354,13 +328,18 @@ LongInt LongInt::operator / (const LongInt &obj) const{
     int i,left,right,mid;
     for( i = a.n.size()-1; i>=0; --i)
     {
-        res=res*_base+a.n[i];
+        //大数乘_base 要优化 直接移位
+        res.n.insert(res.n.begin(), 0);
+        res = res + a.n[i];
+        //res=res*_base+a.n[i];
         left=0,right=_base-1;
         while(left<right)
         {
             mid=(left+right+1)>>1;
-            if(b*mid>res)right=mid-1;
-            else left=mid;
+            if( b * mid > res)
+                right=mid-1;
+            else
+                left=mid;
         }
         ans.n[i]=left;
         res=res-b*left;
@@ -416,3 +395,23 @@ double LongInt::getDouble(){
     }
     return negative ?  -res : res;
 }
+
+LongInt& LongInt::operator += (const LongInt& obj){
+    if(obj<0 or *this<0){
+        *this = *this + obj;
+        return *this;
+    }
+    
+    int len = max(n.size(), obj.n.size());
+    int this_size = n.size();
+    for (int k = 0; k < len - this_size; ++k) {
+        n.push_back(0);
+    }
+    for (int i = 0; i< len; ++i) {
+        if(i < obj.n.size() )
+            n[i] += obj.n[i];
+    }
+    mode();
+    return *this;
+}
+

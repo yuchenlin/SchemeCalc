@@ -17,3 +17,11 @@ int main() {
 	//system("pause");
     return 0;
 }
+
+int main1(){
+    LongInt a = (string)"12345678989012312313";
+    LongInt b = (string)"-231402780973409871324803721094709231";
+    a+=b;
+    cout<<a<<endl;
+    return 0;
+}

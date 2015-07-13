@@ -53,13 +53,9 @@ public:
     LongInt operator - (const LongInt& obj) const;
     LongInt operator / (const LongInt& b) const;
     LongInt operator % (const LongInt& b) const;
-    LongInt operator * (int b);
     LongInt operator * (const LongInt& obj) const;
     
-    LongInt& operator += (const LongInt& obj){
-        *this = *this + obj;
-        return *this;
-    }
+    LongInt& operator += (const LongInt& obj);
     LongInt& operator -= (const LongInt& obj){
         *this =  *this - obj;
         return *this;
