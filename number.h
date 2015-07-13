@@ -6,7 +6,8 @@ class Number {
 public:
 	enum{
 		RATIONAL = 1,
-		FLOAT = 2
+		FLOAT = 2,
+        COMPLEX=3
 	} type_;
 	Number(){}
 	virtual ~Number(){}
