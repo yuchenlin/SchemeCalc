@@ -326,24 +326,26 @@ LongInt LongInt::operator / (const LongInt &obj) const{
     //cout<<b<<endl;
     LongInt ans=a,res=0;
     int i,left,right,mid;
+    //尝试除法不要mode
+    
+    
     for( i = a.n.size()-1; i>=0; --i)
     {
         //大数乘_base 要优化 直接移位
         res.n.insert(res.n.begin(), 0);
-        res = res + a.n[i];
-        //res=res*_base+a.n[i];
+        res += a.n[i];
+        
         left=0,right=_base-1;
         while(left<right)
         {
-            mid=(left+right+1)>>1;
+            mid = (left+right+1) >> 1;
             if( b * mid > res)
-                right=mid-1;
+                right = mid-1;
             else
-                left=mid;
+                left = mid;
         }
         ans.n[i]=left;
-        res=res-b*left;
-        //cout<<res<<endl;
+        res = res- b * left;
     }
     ans.mode();
     if(negative)
@@ -412,6 +414,17 @@ LongInt& LongInt::operator += (const LongInt& obj){
             n[i] += obj.n[i];
     }
     mode();
+    return *this;
+}
+
+LongInt& LongInt::operator -= (const LongInt& obj){
+    if(*this > obj and obj > 0){
+        for (int i = 0; i< obj.n.size(); ++i) {
+                n[i] -= obj.n[i];
+        }
+        mode();
+    }else
+        *this = *this - obj;
     return *this;
 }
 

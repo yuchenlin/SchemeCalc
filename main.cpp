@@ -20,8 +20,8 @@ int main() {
 
 int main1(){
     LongInt a = (string)"12345678989012312313";
-    LongInt b = (string)"-231402780973409871324803721094709231";
-    a+=b;
-    cout<<a<<endl;
+    LongInt b = (string)"231402780973409871324803721094709231";
+    b-=a;
+    cout<<b<<endl;
     return 0;
 }
