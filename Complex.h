@@ -16,15 +16,18 @@
 class Complex:public Number {
     
 public:
-    Rational exact_real;
-    Rational exact_imag;
-    Float inexact_real;
-    Float inexact_imag;
+    //方便存取 于是写了四个
+//    Rational exact_real;
+//    Rational exact_imag;
+//    
+//    Float inexact_real;
+//    Float inexact_imag;
+    Number* real;
+    Number* imag;
     bool isExact;
 
     Complex();//默认时 real和imag都是0
-    Complex(Number* r,Number* i); //:real(r),imag(i);
-    
+    Complex(Number* r,Number* i);
     virtual ~Complex();
     virtual Number *convert(Number *number2);   //转换函数
     virtual Number *add(Number *number2);       //四则运算

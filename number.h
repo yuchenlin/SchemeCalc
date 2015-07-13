@@ -11,7 +11,7 @@ public:
 	} type_;
 	Number(){}
 	virtual ~Number(){}
-	virtual Number *convert(Number *number2) = 0;
+	virtual Number* convert(Number *number2) = 0;
 	virtual Number *add(Number *number2)  = 0;
 	virtual Number *sub(Number *number2)  = 0;
 	virtual Number *mul(Number *number2)  = 0;

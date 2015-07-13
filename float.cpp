@@ -29,7 +29,6 @@ Number *Float::convert(Number *number2)
         {
             Rational *tmp_r = SCAST_RATIONAL(number2);
             result->number_ = (double) *tmp_r;
-            //result->number_ = (double) tmp_r->numerator_ / (double)tmp_r->denominator_;
             break;
         }
         case FLOAT:
