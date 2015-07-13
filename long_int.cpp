@@ -59,11 +59,8 @@ LongInt& LongInt::operator= (long long obj){
         obj /= _base;
     }while(obj!=0);
     //除去前位0
-    while(not n.back() and not n.empty())
+    while (n.back()==0 and n.size()>1)
         n.pop_back();
-    if(n.empty())
-        n.push_back(0);
-    //如果就是0 则补回一个
     return *this;
 }
 
@@ -89,10 +86,8 @@ LongInt& LongInt::operator= (const string& obj){
         n.push_back(t);
     }
     //除去前位0
-    while(not n.back() and not n.empty())
+    while (n.back()==0 and n.size()>1)
         n.pop_back();
-    if(n.empty())
-        n.push_back(0);
     //如果就是0 则补回一个
     if(isNegative){
         removeSign();
@@ -154,32 +149,11 @@ LongInt LongInt::operator - (const LongInt& obj) const{
     res.n.clear();
     int len = n.size(), obj_len = obj.n.size();
     
-    if (*this == obj) //相等直接返回
-    {
-        res = 0;
-        return res;
-    }
+    
     if (*this>=0 && obj>=0)
     {
-        if (*this > obj)
+        if (*this >= obj)
         {
-            
-//            for(int i = 0, g = 0; ; ++i)
-//            {
-//                if (g == 0 && i >= len && i >= obj_len) break;
-//                int x = g;
-//                if (i < len) x += n[i];
-//                if (i < obj_len) x -= obj.n[i];
-//                if (x < 0) {x += _base; g = -1; }
-//                else g=0;
-//                res.n.push_back(x); 
-//            }
-//            while (!res.n.back())
-//                res.n.pop_back();
-//            if (res.n.empty())
-//                res.n.push_back(0);
-//            return res;
-            
             //优化开始
             res = *this;
             for(int i = 0 ; i < obj.n.size() ; ++i)
@@ -311,6 +285,8 @@ bool LongInt::operator ! () const{
 }
 //二分探商优化 效率比短除法大大提高...
 
+
+
 LongInt LongInt::operator / (const LongInt &obj) const{
     assert(obj!=0 && "devide zero");
     
@@ -326,16 +302,14 @@ LongInt LongInt::operator / (const LongInt &obj) const{
     //cout<<b<<endl;
     LongInt ans=a,res=0;
     int i,left,right,mid;
-    //尝试除法不要mode
-    
-    
+    //尝试除法不要mode?
     for( i = a.n.size()-1; i>=0; --i)
     {
         //大数乘_base 要优化 直接移位
         res.n.insert(res.n.begin(), 0);
         res += a.n[i];
         
-        left=0,right=_base-1;
+        left=0 , right = _base-1;
         while(left<right)
         {
             mid = (left+right+1) >> 1;
