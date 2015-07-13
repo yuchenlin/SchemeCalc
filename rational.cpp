@@ -135,7 +135,7 @@ Rational *Rational::from_string(char *expression)
     char* E_pos = strchr(expression,'E');
     char* e_pos = strchr(expression,'e');
     
-    if (d_pos || E_pos || e_pos) return NULL;
+    if (d_pos || E_pos || e_pos) return NULL;//会去构造一个Float
     if(sp) //如果存在分式标记
     {
         

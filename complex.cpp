@@ -22,8 +22,7 @@ Complex::Complex(Number* r, Number* i):real(r),imag(i){
 }
 
 Complex* Complex::from_string(char *expression){
-    char* sp = strchr(expression, '/');
-    
+    //总体思想是先判断
     return NULL;
 }
 
