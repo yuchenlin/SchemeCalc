@@ -8,7 +8,6 @@ int main(){
         Number *res;
 		for (Number *res;;) {
 			res = calc_exp();
-            cout<<"Ans:\t";
 			res -> print();
             cout<<endl;
 		}

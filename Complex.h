@@ -16,15 +16,9 @@
 class Complex:public Number {
     
 public:
-    //方便存取 于是写了四个
-//    Rational exact_real;
-//    Rational exact_imag;
-//    
-//    Float inexact_real;
-//    Float inexact_imag;
-    Number* real;
-    Number* imag;
-    bool isExact;
+    Number* real; //实部
+    Number* imag; //虚部
+    bool isExact; //判断
 
     Complex();//默认时 real和imag都是0
     Complex(Number* r,Number* i);

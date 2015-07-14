@@ -18,7 +18,7 @@ class LongInt{
         {
             char buf[40];
             //sprintf(buf, "%08d", x.n[i]);
-            sprintf(buf, "%01d", x.n[i]);
+            sprintf(buf, "%02d", x.n[i]);
             for (int j=0;j<strlen(buf);++j) out << buf[j];
         }
         return out;
