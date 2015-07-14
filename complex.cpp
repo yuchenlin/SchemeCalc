@@ -7,6 +7,7 @@
 //
 
 #include "complex.h"
+#include <cstring>
 
 Complex::~Complex(){
     delete real;

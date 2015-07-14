@@ -9,6 +9,7 @@
 #ifndef SchemeCalc_Complex_h
 #define SchemeCalc_Complex_h
 
+#include <cstring>
 #include "float.h"
 #include "number.h"
 #include "rational.h"

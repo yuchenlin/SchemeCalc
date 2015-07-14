@@ -1,7 +1,7 @@
 #pragma once
 
 #define SCAST_NUMBER(x) static_cast<Number*>(x)
-
+#include <cstring>
 class Number {
 public:
 	enum{

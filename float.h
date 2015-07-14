@@ -1,6 +1,7 @@
 #pragma once
 
 #include "number.h"
+#include <cstring>
 
 #define SCAST_FLOAT(x) static_cast<Float*>(x)
 

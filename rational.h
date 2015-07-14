@@ -1,7 +1,7 @@
 #pragma once
 #include "number.h"
 #include "long_int.h"
-
+#include <cstring>
 #define SCAST_RATIONAL(x) static_cast<Rational*>(x)
 
 class Rational:public Number{

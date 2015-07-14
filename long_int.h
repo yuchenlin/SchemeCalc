@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <cassert>
+#include <cstring>
 #define MAX(x,y) ((x)<(y)?(y):(x))
 #define MIN(x,y) ((x)<(y)?(x):(y))
 using namespace std;
@@ -19,7 +20,8 @@ class LongInt{
             char buf[40];
             //sprintf(buf, "%08d", x.n[i]);
             sprintf(buf, "%02d", x.n[i]);
-            for (int j=0;j<strlen(buf);++j) out << buf[j];
+            for (int j=0;j<strlen(buf);++j)
+                out << buf[j];
         }
         return out;
     }
