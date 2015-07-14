@@ -431,9 +431,10 @@ double LongInt::getDouble(){
     
     double res = 0;
     
-    for (int i = 0; i<n.size(); ++i) {
+    for (int i = n.size()-1; i >=0; --i) {
         res = res * _base + n[i];
     }
+    
 //    res = n.back() / (double)_base;
 //    for (int i = 2; i <= n.size(); ++i) {
 //        double tmp = (double)n[n.size()-i];
