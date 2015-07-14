@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-int main(){
+int main1(){
     
     try {
         Number *res;
@@ -19,11 +19,13 @@ int main(){
     return 0;
 }
 
-int main1(){
-    LongInt a = (string)"524134";
-    LongInt b = (string)"123";
-//    int a = -524134;
-//    int b = -123;
-    cout<<a%b<<endl;
+int main(){
+    char* str = "0.0-123123213213213i";
+//    string s = expression;
+    Complex* c;
+    c = Complex::from_string(str);
+    c->print();
+    if(c->isExact)
+        cout<<"\nexact"<<endl;
     return 0;
 }

@@ -124,7 +124,7 @@ void Rational::print()
         cout<<'/';
         cout<<denominator_;
     }
-    cout<<endl;
+//    cout<<endl;
 }
 
 //从string里读入一个Rational
@@ -136,7 +136,8 @@ Rational *Rational::from_string(char *expression)
     char* E_pos = strchr(expression,'E');
     char* e_pos = strchr(expression,'e');
     
-    if (d_pos || E_pos || e_pos) return NULL;//会去构造一个Float
+    if (d_pos || E_pos || e_pos)//有小数点 或者e的存在则 不是rational
+        return NULL;//会去构造一个Float
     if(sp) //如果存在分式标记
     {
         
@@ -171,7 +172,9 @@ Rational *Rational::from_string(char *expression)
         char* num_cs = new char [num_len+2];
         strncpy(num_cs, expression, num_len);
         num_cs[num_len]='\0';
+        
         string num_str = num_cs;
+        
         LongInt num = num_str;
         delete [] num_cs;
         return new Rational(num,1);
@@ -182,6 +185,9 @@ Rational *Rational::from_string(char *expression)
 
 //把一个Rational的值转换为double类型
 Rational::operator double(){
+    if(denominator_==1){
+        return numerator_.getDouble();
+    }
     double res = numerator_.getDouble() / denominator_.getDouble();
     return res;
 }

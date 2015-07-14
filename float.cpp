@@ -19,7 +19,7 @@ Float::~Float()
     
 }
 
-Number *Float::convert(Number *number2)
+Number* Float::convert(Number *number2)
 {
     assert(number2->type_ <= type_);
     //cout<<number2->type_<<endl;
@@ -70,24 +70,26 @@ Number *Float::mul(Number *number2)
 Number *Float::div(Number *number2)
 {
     Float *tmp = SCAST_FLOAT(number2);
-    assert(ABS(tmp->number_)>1e-100 && "divide zero");
+    assert(ABS(tmp->number_) > 1e-100 && "divide zero");
     Float *result = new Float(number_ / tmp->number_);
     return result;
 }
 
 void Float::print()
 {
-    cout<<setprecision(20)<<number_<<endl;
+    cout<<setprecision(20)<<number_;
+    //cout<<number_;
+//    cout<<endl;
 }
 
 Float *Float::from_string(char *expression)
 {
     string s = expression;
     char *end_pointer;
-    double val = 0;
-    val = strtod(expression, &end_pointer);
-    if (end_pointer == expression || end_pointer != expression + s.size())
+    double res = 0.0;
+    res = strtod(expression, &end_pointer);//转换成double
+    //如果是空的 或者 中间断了
+    if (end_pointer == expression or end_pointer != expression + s.length())
         return NULL;
-    //cout<<val<<endl;
-    return new Float(val);
+    return new Float(res);
 }

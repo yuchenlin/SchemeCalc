@@ -13,7 +13,9 @@ public:
     //构造函数
 	Rational(LongInt num=0, LongInt den=1);
     void reduce();
-    
+    int sgn(){
+        return numerator_.n.back()*denominator_.n.back();
+    }
     //各种虚函数
 	virtual ~Rational(); //析构函数
     virtual Number *convert(Number *number2);   //转换函数

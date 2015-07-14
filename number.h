@@ -18,6 +18,7 @@ public:
 	virtual Number *mul(Number *number2)  = 0;
 	virtual Number *div(Number *number2)  = 0;
 	virtual void print() = 0;
+    
 };
 
 

@@ -40,9 +40,15 @@ Number *calc_exp(){
 	}
     else
     {
+        
+        // 增加尝试复数
 		res=Rational::from_string(tk0);
-		if(!res) {res = Float::from_string(tk0);}
-		if(res==NULL){throw 0;}
+		if(!res)
+            res = Float::from_string(tk0);
+        if(!res)
+            res = Complex::from_string(tk0);
+		if(res==NULL)
+            throw 0;
     }
     return res;
 }

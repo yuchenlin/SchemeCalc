@@ -430,17 +430,21 @@ double LongInt::getDouble(){
     removeSign();
     
     double res = 0;
-    res = n.back() / (double)_base;
-    for (int i = 2; i <= n.size(); ++i) {
-        double tmp = (double)n[n.size()-i];
-        for (int j = 0; j<i; ++j) {
-            tmp/=_base;
-        }
-        res += tmp;
+    
+    for (int i = 0; i<n.size(); ++i) {
+        res = res * _base + n[i];
     }
-    for (int i = 0; i < n.size() ; ++i) {
-        res *= _base;
-    }
+//    res = n.back() / (double)_base;
+//    for (int i = 2; i <= n.size(); ++i) {
+//        double tmp = (double)n[n.size()-i];
+//        for (int j = 0; j<i; ++j) {
+//            tmp/=_base;
+//        }
+//        res += tmp;
+//    }
+//    for (int i = 0; i < n.size() ; ++i) {
+//        res *= _base;
+//    }
     return negative ?  -res : res;
 }
 
