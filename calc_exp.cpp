@@ -3,6 +3,7 @@
 #include "compare.h"
 #include "next_token.h"
 #include <cstring>
+#include <string>
 #include <cstdio>
 
 Number *calc_exp(){

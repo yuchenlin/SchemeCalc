@@ -5,6 +5,7 @@
 #include <cassert>
 #include <cstring>
 #include <iomanip>
+#include <string>
 
 #define ABS(x) ((x)<0?(-(x)):(x))
 
@@ -81,10 +82,11 @@ void Float::print()
 
 Float *Float::from_string(char *expression)
 {
+    string s = expression;
     char *end_pointer;
     double val = 0;
     val = strtod(expression, &end_pointer);
-    if (end_pointer == expression || end_pointer != expression + strlen(expression))
+    if (end_pointer == expression || end_pointer != expression + s.size())
         return NULL;
     //cout<<val<<endl;
     return new Float(val);

@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iomanip>
 #include <iterator>
+#include <string>
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>

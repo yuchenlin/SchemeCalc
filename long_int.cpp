@@ -2,6 +2,7 @@
 #include <cassert>
 #include <cstdio>
 #include <istream>
+#include <string>
 #include <cstring>
 #include <iostream>
 using namespace std;

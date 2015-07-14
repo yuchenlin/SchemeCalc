@@ -2,6 +2,7 @@
 
 #define SCAST_NUMBER(x) static_cast<Number*>(x)
 #include <cstring>
+#include <string>
 class Number {
 public:
 	enum{

@@ -5,6 +5,7 @@
 #include <cctype>
 #include <cstring>
 #include <cstdlib>
+#include <string>
 #include <iostream>
 using namespace std;
 FILE *input = stdin;

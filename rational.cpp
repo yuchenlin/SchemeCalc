@@ -3,6 +3,7 @@
 #include "rational.h"
 #include <cassert>
 #include <cstdlib>
+#include <string>
 #include <cstdio>
 #include <cstring>
 

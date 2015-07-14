@@ -10,6 +10,7 @@
 #define SchemeCalc_Complex_h
 
 #include <cstring>
+#include <string>
 #include "float.h"
 #include "number.h"
 #include "rational.h"
@@ -19,7 +20,7 @@ class Complex:public Number {
 public:
     Number* real; //实部
     Number* imag; //虚部
-    bool isExact; //判断
+    bool isExact; //精确性
 
     Complex();//默认时 real和imag都是0
     Complex(Number* r,Number* i);

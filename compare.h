@@ -6,8 +6,10 @@
 #include <cmath>
 #include <iomanip>
 #include <sstream>
+#include <string>
 #include <complex>
 #include <cstdlib>
+#include <cstring>
 #define SCAST_RATIONAL(x) static_cast<Rational*>(x)
 #define SCAST_FLOAT(x) static_cast<Float*>(x)
 

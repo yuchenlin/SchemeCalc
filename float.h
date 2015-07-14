@@ -2,6 +2,7 @@
 
 #include "number.h"
 #include <cstring>
+#include <string>
 
 #define SCAST_FLOAT(x) static_cast<Float*>(x)
 
