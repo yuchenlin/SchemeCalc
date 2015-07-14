@@ -203,6 +203,9 @@ LongInt LongInt::operator * (const LongInt& obj) const{
     
     if (*this==0 or obj==0)
         return 0;
+    int memory[100][100]={0};
+    bool haveMem[100][100]={0};
+    
     LongInt midRes;//临时中间变量
     for (int i=0;i < obj.n.size();++i)
     {
@@ -211,15 +214,23 @@ LongInt LongInt::operator * (const LongInt& obj) const{
         if (i)//如果i大于0
             for (int j=1;j<=i;++j)
                 midRes.n.push_back(0);
-        unsigned long long r = 0;//中间余数
+        int r = 0;//中间余数
         for (int j = 0; ; ++j)
         {
-            if (r == 0 && j >= n.size() )
+            if (r == 0 and j >= n.size() )
                 break;
             else{
-                unsigned long long t = r;
-                if (j < n.size())
-                    t += (unsigned long long int)a.n[j] * b.n[i];
+                int t = r;
+                if (j < n.size()){
+                    if(!haveMem[a.n[j]][b.n[i]]){
+                        haveMem[a.n[j]][b.n[i]] = true;
+                        haveMem[b.n[i]][a.n[j]] = true;
+                        memory[a.n[j]][b.n[i]] = a.n[j] * b.n[i];
+                        memory[b.n[i]][a.n[j]] = a.n[j] * b.n[i];
+                    }
+                    t += memory[a.n[j]][b.n[i]];
+                    //t += a.n[j] * b.n[i];
+                }
                 midRes.n.push_back(t % _base);
                 r = t / _base;
             }
@@ -326,8 +337,16 @@ LongInt LongInt::operator / (const LongInt &obj) const{
                 left = mid;
         }
         ans.n[i]=left;
-        res -= b * left;
+        
+        if(!haveMem[left]){
+            haveMem[left] = true;
+            memory[left] = b * left;
+        }
+        
+        res -= memory[left];
+        
     }
+    //cout<<res<<endl;
     ans.mode();
     if(negative)
         ans.changeSign();
@@ -336,7 +355,52 @@ LongInt LongInt::operator / (const LongInt &obj) const{
 
 //取余数 不考虑效率的做法....
 LongInt LongInt::operator % (const LongInt &obj) const{
-	return (*this) - (*this/obj)*obj;
+    
+    assert(obj!=0 && "devide zero");
+    
+    bool negative = (*this < 0);
+    LongInt a = this->getABS() , b = obj.getABS();
+    //两类特殊情况
+    if(a <= b)
+        return 0;
+    //cout<<a<<endl;
+    //cout<<b<<endl;
+    LongInt ans=a,res=0;
+    int i,left,right,mid;
+    //尝试除法不要mode?
+    LongInt memory[100];
+    bool haveMem[100] = {0};
+    for( i = a.n.size()-1; i>=0; --i)
+    {
+        //大数乘_base 要优化 直接移位
+        res.n.insert(res.n.begin(), 0);
+        res += a.n[i];
+        
+        left=0 , right = _base-1;
+        while(left<right)
+        {
+            mid = (left+right+1) >> 1;
+            if(!haveMem[mid]){
+                haveMem[mid] = true;
+                memory[mid] = b * mid;
+            }
+            //if( b * mid > res)
+            if (memory[mid] > res)
+                right = mid-1;
+            else
+                left = mid;
+        }
+        if(!haveMem[left]){
+            haveMem[left] = true;
+            memory[left] = b * left;
+        }
+        
+        res -= memory[left];
+        
+    }
+    if(negative)
+        res.changeSign();
+    return res;
 }
 
 void LongInt::changeSign(){
@@ -351,8 +415,8 @@ void LongInt::mode()
     n.push_back(0);
     for(int i=0;i<n.size();++i)
     {
-        for(;n[i]<0;--n[i+1],n[i]+=_base);
-        for(;n[i]>=_base;++n[i+1],n[i]-=_base);
+        for(;n[i]<0; --n[i+1],n[i] += _base);
+        for(;n[i]>=_base; ++n[i+1],n[i] -= _base);
     }
     
     while (n.back()==0 and n.size()>1)

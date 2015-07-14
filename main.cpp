@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int main(){
     
     try {
         Number *res;
@@ -19,8 +19,10 @@ int main() {
 }
 
 int main1(){
-    LongInt a = (string)"123412347892134798023174";
-    LongInt b = (string)"231432423142314";
-    cout<<a/b<<endl;
+    LongInt a = (string)"524134";
+    LongInt b = (string)"123";
+//    int a = -524134;
+//    int b = -123;
+    cout<<a%b<<endl;
     return 0;
 }
