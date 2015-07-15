@@ -22,7 +22,7 @@ int main1(){
 
 int main()
 {
-    char* s = "0+1e+123i";
+    char* s = "123i";
     Complex* c = Complex::from_string(s);
     c->print();
     

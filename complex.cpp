@@ -42,7 +42,9 @@ Complex* Complex::from_string(char *expression){
             //or短路运算技巧  +  为了避免 1123+1e-123i这种情况
             if( i_part_first==0 or (str[i_part_first-1] != 'e'  and str[i_part_first-1]!='E') )
                break;
-    //如果一直没有找到+或者-号 则是纯虚数 此时i_part_first = 0
+    //如果一直没有找到+或者-号 则是纯虚数 此时i_part_first = 0 或者-1
+    if (i_part_first<0) 
+        i_part_first = 0;
     string rstr,istr;
     //处理real
     rstr = (i_part_first == 0) ? "0" : rstr = str.substr(0,i_part_first);
@@ -61,20 +63,29 @@ Number* Complex::convert(Number *obj){
     switch (obj->type_) {
         case RATIONAL:
             res->real = SCAST_RATIONAL(obj);
+            res->isExact = true;
             break;
         case FLOAT:
             res->real = SCAST_FLOAT(obj);
+            res->isExact = false;
         case COMPLEX:
             Complex* c = SCAST_COMPLEX(obj);
-            real = c->real;
-            imag = c->imag;
+            res->real = c->real;
+            res->imag = c->imag;
+            res->isExact = c->isExact;
             break;
     }
-    return NULL;
+    //有点问题 就是 我的res指针指来指去 会乱
+    return res;
 }
 
 //四则运算
 Number* Complex::add(Number *number2){
+    
+    //之前在convert里面已经convert过了所以可以直接用
+    Complex* b = SCAST_COMPLEX(number2);
+    Complex* res = new Complex();
+    //现在的情况是 this 和 b 的exact 可能不一样 
     return NULL;
 }
 Number* Complex::sub(Number *number2){
@@ -99,7 +110,8 @@ void Complex::print(){
         i = SCAST_RATIONAL(imag);
 
         if(i->sgn() > 0){
-            cout<<"+";
+            if(!empty)
+                cout<<"+";
             imag->print();
             cout<<"i";
             empty = false;

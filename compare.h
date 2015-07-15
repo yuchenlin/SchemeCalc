@@ -9,9 +9,11 @@
 #include <string>
 #include <complex>
 #include <cstdlib>
+#include "complex.h"
 #include <cstring>
 #define SCAST_RATIONAL(x) static_cast<Rational*>(x)
 #define SCAST_FLOAT(x) static_cast<Float*>(x)
+#define SCAST_COMPLEX(x) static_cast<Complex*>(x)
 
 class Add : public Opt {
     /* Use the lowest level type */
@@ -21,10 +23,12 @@ class Add : public Opt {
 		Number *last;
         for (; con; con = con->cdr)
         {
-			if(con->car->type_>3||con->car->type_<1) { throw 0; }
+			if(con->car->type_>3||con->car->type_<1)
+                throw 0;
             Number *opr = con->car, *conv;
             last = res;
             //cout<<"opr type: "<<opr->type_<<endl;
+                
             if (res->type_ >= opr->type_)
 			{
 				res = res->add(conv = res->convert(opr));
