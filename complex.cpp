@@ -149,7 +149,7 @@ Number* Complex::div(Number *number2){
     res->isExact = isExact;
     res->real = real->mul(obj->real)->add(imag->mul(obj->imag))->div(den);
     res->imag = imag->mul(obj->real)->sub(real->mul(obj->imag))->div(den);
-    return NULL;
+    return res;
 }
 void Complex::print(){
     if(isExact){
