@@ -43,7 +43,7 @@ Complex* Complex::from_string(char *expression){
             if( i_part_first==0 or (str[i_part_first-1] != 'e'  and str[i_part_first-1]!='E') )
                break;
     //如果一直没有找到+或者-号 则是纯虚数 此时i_part_first = 0 或者-1
-    if (i_part_first<0) 
+    if (i_part_first<0)
         i_part_first = 0;
     string rstr,istr;
     //处理real
@@ -83,19 +83,55 @@ Number* Complex::convert(Number *obj){
 Number* Complex::add(Number *number2){
     
     //之前在convert里面已经convert过了所以可以直接用
-    Complex* b = SCAST_COMPLEX(number2);
+    Complex* obj = SCAST_COMPLEX(number2);
     Complex* res = new Complex();
-    //现在的情况是 this 和 b 的exact 可能不一样 
-    return NULL;
+    //现在的情况是 this 和 b 的exact 可能不一样 如果不同，需要把exact的转换一下
+    if(isExact != obj->isExact){
+        this->ToInexact();
+        obj->ToInexact();
+    }
+    res->isExact = isExact;
+    res->real = real->add(obj->real);
+    res->imag = imag->add(obj->imag);
+    return res;
 }
 Number* Complex::sub(Number *number2){
-     return NULL;
+    Complex* obj = SCAST_COMPLEX(number2);
+    Complex* res = new Complex();
+    if(isExact != obj->isExact){
+        this->ToInexact();
+        obj->ToInexact();
+    }
+    res->isExact = isExact;
+    res->real = real->sub(obj->real);
+    res->imag = imag->sub(obj->imag);
+    return res;
 }
 Number* Complex::mul(Number *number2){
-     return NULL;
+     //(a+bi)(c+di)=(ac-bd)+(bc+ad)i
+    Complex* obj = SCAST_COMPLEX(number2);
+    Complex* res = new Complex();
+    if(isExact != obj->isExact){
+        this->ToInexact();
+        obj->ToInexact();
+    }
+    res->isExact = isExact;
+    res->real = real->mul(obj->real)->sub(imag->mul(obj->imag));
+    res->imag = imag->mul(obj->real)->add(real->mul(obj->imag));
+    return res;
 }
 Number* Complex::div(Number *number2){
-     return NULL;
+    Complex* obj = SCAST_COMPLEX(number2);
+    Complex* res = new Complex();
+    if(isExact != obj->isExact){
+        this->ToInexact();
+        obj->ToInexact();
+    }
+    Number* den = obj->real->mul(obj->real)->add(obj->imag->mul(obj->imag));
+    res->isExact = isExact;
+    res->real = real->mul(obj->real)->add(imag->mul(obj->imag))->div(den);
+    res->imag = imag->mul(obj->real)->sub(real->mul(obj->imag))->div(den);
+    return NULL;
 }
 void Complex::print(){
     bool empty = true;
@@ -170,9 +206,21 @@ Complex::Complex(string rstr,string istr){
             real = imag->convert(real);
         else
             imag = real->convert(imag);
-            
     }
     
 }
 
 
+void Complex::ToInexact(){
+    if(isExact){
+        isExact = false;
+        Float* tempf = new Float();
+        if(real->type_==RATIONAL){
+            real = tempf->convert(real);
+        }
+        if(imag->type_==RATIONAL){
+            imag = tempf->convert(imag);
+        }
+        delete tempf;
+    }
+}

@@ -33,6 +33,7 @@ public:
     virtual Number *div(Number *number2);
     virtual void print();                       //打印输出
     static Complex *from_string(char *expression);  //从一个string里构造一个复数
+    void ToInexact();
     
 };
 
