@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-int main1(){
+int main(){
     
     try {
         Number *res;
@@ -20,7 +20,7 @@ int main1(){
 }
 
 
-int main()
+int main1()
 {
     char* s = "123i";
     Complex* c = Complex::from_string(s);

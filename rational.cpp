@@ -13,6 +13,9 @@ Rational::Rational(LongInt num, LongInt den):numerator_(num),denominator_(den)
     type_=RATIONAL;
     reduce();
 }
+Rational::Rational(const Rational& obj):numerator_(obj.numerator_),denominator_(obj.denominator_){
+    type_=RATIONAL;
+}
 
 Rational::~Rational()
 {
@@ -135,8 +138,9 @@ Rational *Rational::from_string(char *expression)
     char* d_pos = strchr(expression,'.');
     char* E_pos = strchr(expression,'E');
     char* e_pos = strchr(expression,'e');
+    char* i_pos = strchr(expression,'i');
     
-    if (d_pos || E_pos || e_pos)//有小数点 或者e的存在则 不是rational
+    if ( i_pos or d_pos or E_pos or e_pos)//有小数点 或者e的存在则 不是rational
         return NULL;//会去构造一个Float
     if(sp) //如果存在分式标记
     {

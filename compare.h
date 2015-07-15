@@ -39,8 +39,12 @@ class Add : public Opt {
 			}
 
             delete last;
-            delete conv;
-
+            try {
+                delete conv;
+            } catch(...) {
+                //do noting
+            }
+            
         }
         return res;
     }

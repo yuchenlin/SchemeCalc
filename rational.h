@@ -12,6 +12,7 @@ public:
 	LongInt denominator_; //分母
     //构造函数
 	Rational(LongInt num=0, LongInt den=1);
+    Rational(const Rational& obj);
     void reduce();
     int sgn(){
         return numerator_.n.back()*denominator_.n.back();

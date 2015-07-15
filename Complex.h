@@ -25,6 +25,7 @@ public:
     Complex();//默认时 real和imag都是0
     Complex(Number* r,Number* i);
     Complex(string rstr,string istr);//fromString时构造利用
+    Complex(const Complex& obj);
     virtual ~Complex();
     virtual Number *convert(Number *number2);   //转换函数
     virtual Number *add(Number *number2);       //四则运算

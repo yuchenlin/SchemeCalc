@@ -26,6 +26,22 @@ Complex::Complex(){
     type_ = COMPLEX;
 }
 
+Complex::Complex(const Complex& obj){
+    type_ = COMPLEX;
+    isExact = obj.isExact;
+    switch (isExact) {
+        case false:
+            //都是float
+            real = new Float(SCAST_FLOAT(obj.real)->number_);
+            imag = new Float(SCAST_FLOAT(obj.imag)->number_);
+            break;
+        case true:
+            real = new Rational(*SCAST_RATIONAL(obj.real));
+            imag = new Rational(*SCAST_RATIONAL(obj.real));
+            break;
+    }
+}
+
 Complex::Complex(Number* r, Number* i):real(r),imag(i){
     isExact = (r->type_ == FLOAT and i->type_ ==  FLOAT);
     type_ = COMPLEX;
@@ -60,19 +76,20 @@ Complex* Complex::from_string(char *expression){
 Number* Complex::convert(Number *obj){
     assert(obj->type_ <= type_); //确保转换是从Rational 或者 Float 或者 Complex也可以 来的
     Complex* res = new Complex();
+    //此处容易造成指针的乱走 必须手动复制
     switch (obj->type_) {
         case RATIONAL:
-            res->real = SCAST_RATIONAL(obj);
+            res->real = new Rational(*SCAST_RATIONAL(obj));
+            res->imag = new Rational(0,1);
             res->isExact = true;
             break;
         case FLOAT:
-            res->real = SCAST_FLOAT(obj);
+            res->real = new Float(SCAST_FLOAT(obj)->number_);
+            res->imag = new Float(0.0);
             res->isExact = false;
         case COMPLEX:
-            Complex* c = SCAST_COMPLEX(obj);
-            res->real = c->real;
-            res->imag = c->imag;
-            res->isExact = c->isExact;
+            //todo
+            res = new Complex(*SCAST_COMPLEX(obj));
             break;
     }
     //有点问题 就是 我的res指针指来指去 会乱
@@ -180,6 +197,8 @@ void Complex::print(){
 }
 //FromString的部分最后一步
 Complex::Complex(string rstr,string istr){
+    type_ = COMPLEX;
+    
     char* r = const_cast<char *>(rstr.c_str());
     char* i = const_cast<char *>(istr.c_str());
     
