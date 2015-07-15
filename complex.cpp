@@ -87,35 +87,48 @@ Number* Complex::div(Number *number2){
      return NULL;
 }
 void Complex::print(){
+    bool empty = true;
+
     if(isExact){
         Rational* i = SCAST_RATIONAL(real);
-        if(i->sgn()!=0)
+        if(i->sgn()!=0){
             i->print();
+            empty = false;
+        }
+        
         i = SCAST_RATIONAL(imag);
+
         if(i->sgn() > 0){
             cout<<"+";
             imag->print();
             cout<<"i";
+            empty = false;
         }else if(i->sgn() < 0){
             imag->print();
             cout<<"i";
+            empty = false;
         }
     }else{
         Float* i = SCAST_FLOAT(real);
-        if(fabs(i->number_) != 0)
+        if(fabs(i->number_) != 0){
            i->print();
+           empty = false;
+        }
         i = SCAST_FLOAT(imag);
-        if(fabs(i->number_) == 0  ){
-            return;
-        }else if(i->number_ < 0){
+        
+        if(i->number_ < 0){
             imag->print();
+            empty = false;
             cout<<"i";
-        }else{
+        }else if(i->number_ > 0){
             cout<<"+";
             imag->print();
+            empty = false;
             cout<<"i";
         }
     }
+    if(empty)
+    	cout<<0;
 }
 //FromString的部分最后一步
 Complex::Complex(string rstr,string istr){

@@ -6,6 +6,7 @@
 #include <cstring>
 #include <iomanip>
 #include <string>
+#include <sstream>
 
 #define ABS(x) ((x)<0?(-(x)):(x))
 
@@ -77,7 +78,7 @@ Number *Float::div(Number *number2)
 
 void Float::print()
 {
-    cout<<setprecision(20)<<number_;
+    cout<<setprecision(10)<<number_;
     //cout<<number_;
 //    cout<<endl;
 }
@@ -88,6 +89,9 @@ Float *Float::from_string(char *expression)
     char *end_pointer;
     double res = 0.0;
     res = strtod(expression, &end_pointer);//转换成double
+//    stringstream ss;
+//    ss<<s;
+//    ss>>res;
     //如果是空的 或者 中间断了
     if (end_pointer == expression or end_pointer != expression + s.length())
         return NULL;
