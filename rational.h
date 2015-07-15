@@ -26,7 +26,8 @@ public:
 	virtual Number *div(Number *number2);
 	virtual void print();                       //打印输出
     operator double ();
-	static Rational *from_string(char *expression); //从一个string里构造一个有理数 
+	static Rational *from_string(char *expression); //从一个string里构造一个有理数
+    bool is(int n);
 };
  
 

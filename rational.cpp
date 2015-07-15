@@ -187,6 +187,7 @@ Rational *Rational::from_string(char *expression)
     return NULL;
 }
 
+
 //把一个Rational的值转换为double类型
 Rational::operator double(){
     if(denominator_==1){
@@ -195,3 +196,17 @@ Rational::operator double(){
     double res = numerator_.getDouble() / denominator_.getDouble();
     return res;
 }
+
+bool Rational::is(int n){
+    bool ok = (numerator_== denominator_ * n);
+    return ok;
+}
+
+
+
+
+
+
+
+
+

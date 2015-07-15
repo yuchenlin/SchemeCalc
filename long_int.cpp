@@ -262,8 +262,9 @@ bool LongInt::operator < (const LongInt &obj) const{
         return true;
     else if(n.back() >=0 and obj.n.back()<0)
         return false;
-    else if(n.back() <0 and obj.n.back()<0 )
+    else if(n.back() <0 and obj.n.back()<0 ){
         return !(this->getABS() < obj.getABS());//递归
+    }
     else if(n.back() >= 0 and obj.n.back() >=0){
        if(n.size() != obj.n.size())
            return n.size() < obj.n.size();
@@ -271,6 +272,7 @@ bool LongInt::operator < (const LongInt &obj) const{
             if( n[k] != obj.n[k] )
                 return n[k] < obj.n[k];
         }
+        return false;
     }
     return false;
 }

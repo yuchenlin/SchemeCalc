@@ -37,7 +37,7 @@ Complex::Complex(const Complex& obj){
             break;
         case true:
             real = new Rational(*SCAST_RATIONAL(obj.real));
-            imag = new Rational(*SCAST_RATIONAL(obj.real));
+            imag = new Rational(*SCAST_RATIONAL(obj.imag));
             break;
     }
 }
@@ -87,6 +87,7 @@ Number* Complex::convert(Number *obj){
             res->real = new Float(SCAST_FLOAT(obj)->number_);
             res->imag = new Float(0.0);
             res->isExact = false;
+            break;
         case COMPLEX:
             //todo
             res = new Complex(*SCAST_COMPLEX(obj));
@@ -165,11 +166,15 @@ void Complex::print(){
         if(i->sgn() > 0){
             if(!empty)
                 cout<<"+";
-            imag->print();
+            if(not i->is(1))
+                imag->print();
             cout<<"i";
             empty = false;
         }else if(i->sgn() < 0){
-            imag->print();
+            if(i->is(-1))
+                cout<<"-";
+            else
+                imag->print();
             cout<<"i";
             empty = false;
         }
