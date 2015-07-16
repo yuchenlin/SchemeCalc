@@ -232,3 +232,57 @@ void Complex::ToInexact(){
         delete tempf;
     }
 }
+
+bool Complex::isReal(){
+    bool ok = false;
+    switch (imag->type_) {
+        case Number::RATIONAL:
+            ok = SCAST_RATIONAL(imag)->numerator_==ZERO;
+            break;
+        case Number::FLOAT:
+            ok = fabs(SCAST_FLOAT(imag)->number_) < 1e-200;
+            break;
+    }
+    return ok;
+}
+
+
+Number* Complex::abs(){
+    //根据Racket只有imag为0才可以用abs
+    assert(isReal() and "abs is only for rational");
+    return real->abs();
+}
+
+
+Number* Complex::quotient(Number* obj){
+    bool cando = false;
+    switch (obj->type_) {
+        case Number::RATIONAL:
+            cando = true;
+            break;
+        case Number::FLOAT:
+            cando = SCAST_FLOAT(obj)->isInteger();
+            break;
+        case Number::COMPLEX:
+            cando = SCAST_COMPLEX(obj)->isReal();
+            break;
+    }
+    
+    assert(isReal() and "abs is only for rational");
+    return NULL;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

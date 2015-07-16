@@ -196,6 +196,7 @@ Number* Float::toExact(){
     if(fabs(number_)<1e-8)
         return new Rational(ZERO,ONE);
     string dble;
+    //主要思想是利用string来处理小数点位 就怕正数部位太长
     stringstream ss;
     ss<<fixed<<setprecision(7)<<number_;
     ss>>dble;
