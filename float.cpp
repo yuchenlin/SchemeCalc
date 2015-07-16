@@ -71,7 +71,7 @@ Number *Float::mul(Number *number2)
 Number *Float::div(Number *number2)
 {
     Float *tmp = SCAST_FLOAT(number2);
-    assert(ABS(tmp->number_) > 1e-100 && "divide zero");
+    assert(ABS(tmp->number_) > 1e-200 && "divide zero");
     Float *result = new Float(number_ / tmp->number_);
     return result;
 }
