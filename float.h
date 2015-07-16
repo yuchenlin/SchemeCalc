@@ -20,26 +20,26 @@ public:
     static Float *from_string(char *expression);
     double number_;
     
-    virtual Number* abs(){return NULL;};
-    virtual Number* quotient(Number* obj){return NULL;};
-    virtual Number* remainder(Number* obj){return NULL;};
-    virtual Number* modulo(Number* obj){return NULL;};
-    virtual Number* gcd(Number* obj){return NULL;};
-    virtual Number* lcm(Number* obj){return NULL;};
-    virtual Number* expt(Number* obj){return NULL;};
-    virtual Number* sqrt(){return NULL;};
-    virtual Number* floor(){return NULL;};
-    virtual Number* ceiling(){return NULL;};
-    virtual Number* truncate(){return NULL;};
-    virtual Number* round(){return NULL;};
-    virtual Number* getMax(Number* obj){return NULL;};
-    virtual Number* getMin(Number * obj){return NULL;};
-    virtual Number* numerator(){return NULL;};
-    virtual Number* denominator(){return NULL;};
-    virtual Number* imag_part(){return NULL;};
-    virtual Number* real_part(){return NULL;};
-    virtual Number* toInexact(){return NULL;};
-    virtual Number* toExact(){return NULL;};
-    
+    virtual Number* abs();
+    virtual Number* quotient(Number* obj);
+    virtual Number* remainder(Number* obj);
+    virtual Number* modulo(Number* obj);
+    virtual Number* gcd(Number* obj);
+    virtual Number* lcm(Number* obj);
+    virtual Number* expt(Number* obj);
+    virtual Number* sqrt();
+    virtual Number* floor();
+    virtual Number* ceiling();
+    virtual Number* truncate();
+    virtual Number* round();
+    virtual Number* getMax(Number* obj);
+    virtual Number* getMin(Number* obj);
+    virtual Number* numerator();
+    virtual Number* denominator();
+    virtual Number* imag_part();
+    virtual Number* real_part();
+    virtual Number* toInexact();
+    virtual Number* toExact();
+    bool isInteger();//
 };
 

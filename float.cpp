@@ -6,6 +6,7 @@
 #include <cstring>
 #include <iomanip>
 #include <string>
+#include <cmath>
 #include <sstream>
 
 #define ABS(x) ((x)<0?(-(x)):(x))
@@ -103,7 +104,97 @@ Float *Float::from_string(char *expression)
 
 
 
+Number* Float::abs(){
+    return new Float(ABS(number_));
+}
+bool Float::isInteger(){
+    return number_ ==  trunc(number_);
+}
+Number* Float::quotient(Number* obj){
+    Float* tempf = SCAST_FLOAT(obj);
+    assert(tempf->isInteger() and isInteger() and "quotient is only for integer");
+    return this->div(obj)->truncate();
+    
+}
+Number* Float::remainder(Number* obj){
+    Float* tempf = SCAST_FLOAT(obj);
+    assert(tempf->isInteger() and isInteger() and "remainder is only for integer");
+    return new Float(fmod(number_, tempf->number_));
+}
+Number* Float::modulo(Number* obj){
+    Float* tempf = SCAST_FLOAT(obj);
+    assert(tempf->isInteger() and isInteger() and "modulo is only for integer");
+    bool flag = not (number_ * tempf->number_ >=0);
+    return new Float(fmod(number_, tempf->number_) + flag * tempf->number_);
+}
 
+Number* Float::gcd(Number* obj){
+    Float* tempf = SCAST_FLOAT(obj);
+    assert(tempf->isInteger() and isInteger() and "modulo is only for integer");
+    double b,s;
+    b = max(number_,tempf->number_);
+    s = min(number_,tempf->number_);
+    double t = fmod(b,s);
+    while(t){
+        b = s;
+        s = t;
+        t = fmod(b, s);
+    }
+    return new Float(s);
+}
+Number* Float::lcm(Number* obj){
+    return SCAST_FLOAT(this->mul(obj)->div(this->gcd(obj)));
+}
+
+Number* Float::expt(Number* obj){
+    return new Float(pow(number_, SCAST_FLOAT(obj)->number_));
+}
+Number* Float::sqrt(){
+    return new Float(::sqrt(number_));
+}
+Number* Float::floor(){
+    return new Float(::floor(number_));
+}
+Number* Float::ceiling(){
+    return new Float(::ceil(number_));
+}
+Number* Float::truncate(){
+    return new Float(::trunc(number_));
+}
+Number* Float::round(){
+    //round nearbyint rint  据说round在某些版本的g++有错误
+    return new Float(::round(number_));
+}
+Number* Float::getMax(Number* obj){
+    return new Float(max(number_,SCAST_FLOAT(obj)->number_));
+}
+Number* Float::getMin(Number* obj){
+    return new Float(min(number_, SCAST_FLOAT(obj)->number_));
+}
+//不知道这两个什么鬼 要先转换成Exact才可以吧
+Number* Float::numerator(){
+    return NULL;
+}
+Number* Float::denominator(){
+    return NULL;
+}
+
+
+
+
+Number* Float::imag_part(){
+    return new Float(0.0);
+}
+Number* Float::real_part(){
+    return new Float(number_);
+}
+Number* Float::toInexact(){
+    return new Float(number_);
+}
+Number* Float::toExact(){
+    //写在rational的convert函数内部的过程
+    return NULL;
+}
 
 
 

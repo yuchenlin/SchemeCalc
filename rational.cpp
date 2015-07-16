@@ -309,13 +309,6 @@ Number* Rational::truncate(){
 }
 
 Number* Rational::round(){
-
-    /*
-     1.2
-     1.2 + 0.5 flr = 1
-     -1.2
-     -1.2 -0.5 cei = -1
-     */
     Number* res;
     Rational* one_two = new Rational(ONE,LongInt(2));
     if(sgn()>=0)//正数
