@@ -99,9 +99,7 @@ Float *Float::from_string(char *expression)
     return new Float(res);
 }
 
-Number* Float::abs(){
-    return new Float(ABS(number));
-}
+
 
 
 

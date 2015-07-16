@@ -5,10 +5,9 @@
 #include <cstdlib>
 #include <string>
 #include <cstdio>
-#include <cmath>
 #include <cstring>
 
-
+#include <cmath>
 Rational::Rational(LongInt num, LongInt den):numerator_(num),denominator_(den)
 {
     type_=RATIONAL;
@@ -310,9 +309,15 @@ Number* Rational::truncate(){
 }
 
 Number* Rational::round(){
+
+    /*
+     1.2
+     1.2 + 0.5 flr = 1
+     -1.2
+     -1.2 -0.5 cei = -1
+     */
     Number* res;
     Rational* one_two = new Rational(ONE,LongInt(2));
-    
     if(sgn()>=0)//正数
         res = this->add(one_two)->floor();
     else
@@ -321,13 +326,24 @@ Number* Rational::round(){
     return res;
 }
 
-//
-//Number* Rational::sqrt(){
-//    double res = *this;
-//    res = ::sqrt(res);
-//    return new Fl
-//}
 
 
+Number* Rational::sqrt(){
+    assert( sgn()>=0 and "sqrt is for positive number" );
+    double res = *this; //已经重载了double的类型转换
+    res = ::sqrt(res);
+    return new Float(res);
+}
 
 
+Number* Rational::expt(Number* obj){
+    return new Float(pow(*this, SCAST_FLOAT(obj)->number_));
+}
+
+Number* Rational::toInexact(){
+    return new Float(*this);
+}
+
+Number* Rational::toExact(){
+    return new Rational(*this);
+}

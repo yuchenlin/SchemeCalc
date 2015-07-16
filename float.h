@@ -20,7 +20,7 @@ public:
     static Float *from_string(char *expression);
     double number_;
     
-    virtual Number* abs();
+    virtual Number* abs(){return NULL;};
     virtual Number* quotient(Number* obj){return NULL;};
     virtual Number* remainder(Number* obj){return NULL;};
     virtual Number* modulo(Number* obj){return NULL;};

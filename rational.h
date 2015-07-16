@@ -69,7 +69,6 @@ public:
     
     virtual Number* toInexact();
     virtual Number* toExact();
- 
 
-
+};
 
