@@ -36,6 +36,30 @@ public:
     static Complex *from_string(char *expression);  //从一个string里构造一个复数
     void ToInexact();
     
+    
+    
+    
+    virtual Number* abs(){return NULL;};
+    virtual Number* quotient(Number* obj){return NULL;};
+    virtual Number* remainder(Number* obj){return NULL;};
+    virtual Number* modulo(Number* obj){return NULL;};
+    virtual Number* gcd(Number* obj){return NULL;};
+    virtual Number* lcm(Number* obj){return NULL;};
+    virtual Number* expt(Number* obj){return NULL;};
+    virtual Number* sqrt(){return NULL;};
+    virtual Number* floor(){return NULL;};
+    virtual Number* ceiling(){return NULL;};
+    virtual Number* truncate(){return NULL;};
+    virtual Number* round(){return NULL;};
+    virtual Number* getMax(Number* obj){return NULL;};
+    virtual Number* getMin(Number * obj){return NULL;};
+    virtual Number* numerator(){return NULL;};
+    virtual Number* denominator(){return NULL;};
+    virtual Number* imag_part(){return NULL;};
+    virtual Number* real_part(){return NULL;};
+    virtual Number* toInexact(){return NULL;};
+    virtual Number* toExact(){return NULL;};
+    
 };
 
 #endif
