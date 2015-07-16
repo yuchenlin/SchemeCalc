@@ -98,3 +98,21 @@ Float *Float::from_string(char *expression)
         return NULL;
     return new Float(res);
 }
+
+Number* Float::abs(){
+    return new Float(ABS(number));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -11,18 +11,16 @@ public:
     Float(double number = 0);
     virtual ~Float();
     
-    virtual Number *convert(Number *number2);
-    virtual Number *add(Number *number2);
-    virtual Number *sub(Number *number2);
-    virtual Number *mul(Number *number2);
-    virtual Number *div(Number *number2);
+    virtual Number* convert(Number *number2);
+    virtual Number* add(Number *number2);
+    virtual Number* sub(Number *number2);
+    virtual Number* mul(Number *number2);
+    virtual Number* div(Number *number2);
     virtual void print();
     static Float *from_string(char *expression);
     double number_;
     
-    
-    
-    virtual Number* abs(){return NULL;};
+    virtual Number* abs();
     virtual Number* quotient(Number* obj){return NULL;};
     virtual Number* remainder(Number* obj){return NULL;};
     virtual Number* modulo(Number* obj){return NULL;};

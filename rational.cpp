@@ -1,10 +1,11 @@
 
-
+#include "float.h"
 #include "rational.h"
 #include <cassert>
 #include <cstdlib>
 #include <string>
 #include <cstdio>
+#include <cmath>
 #include <cstring>
 
 
@@ -25,11 +26,11 @@ Rational::~Rational()
 
 void Rational::reduce()
 {
-    assert(denominator_!=0 && "denominator is zero");
+    assert(denominator_!=ZERO && "denominator is zero");
     
     if(!numerator_) //已经重载了非运算符
     {
-        denominator_=1;//如果分子是0 直接让分母化为1
+        denominator_=ONE;//如果分子是0 直接让分母化为ONE
         return;
     }
     LongInt BIG, SMALL, tmp;
@@ -41,7 +42,7 @@ void Rational::reduce()
     SMALL = min(num_abs,den_abs);
     tmp = BIG % SMALL;
     
-    while(tmp!=0) // 辗转相除法 欧几里得
+    while(tmp!=ZERO) // 辗转相除法 欧几里得
     {
         BIG = SMALL;
         SMALL = tmp;
@@ -122,7 +123,7 @@ Number *Rational::div(Number *number2)
 void Rational::print()
 {
     cout<<numerator_;//先输出分子
-    if(denominator_ != 1) //判断分母是否为1
+    if(denominator_ != ONE) //判断分母是否为ONE
     {
         cout<<'/';
         cout<<denominator_;
@@ -181,7 +182,7 @@ Rational *Rational::from_string(char *expression)
         
         LongInt num = num_str;
         delete [] num_cs;
-        return new Rational(num,1);
+        return new Rational(num,ONE);
     }
     //为了编译通过 必须有一个返回值
     return NULL;
@@ -190,7 +191,7 @@ Rational *Rational::from_string(char *expression)
 
 //把一个Rational的值转换为double类型
 Rational::operator double(){
-    if(denominator_==1){
+    if(denominator_==ONE){
         return numerator_.getDouble();
     }
     double res = numerator_.getDouble() / denominator_.getDouble();
@@ -204,8 +205,128 @@ bool Rational::is(int n){
 
 
 
+Number* Rational::abs(){
+    Rational* res = new Rational();
+    res->numerator_ = numerator_;
+    res->denominator_ = denominator_;
+    res->numerator_.removeSign();
+    res->denominator_.removeSign();
+    return res;
+}
+
+Number* Rational::quotient(Number* obj){
+    Rational* tmpr = SCAST_RATIONAL(obj);
+    assert(denominator_==ONE and tmpr->denominator_==ONE and "quotient operation is only for Integer Type !");
+    return new Rational(numerator_ / tmpr->numerator_ , ONE);
+}
+Number* Rational::remainder(Number* obj){
+    Rational* tmpr = SCAST_RATIONAL(obj);
+    assert(denominator_==ONE and tmpr->denominator_==ONE and "remainder operation is only for Integer Type !");
+    return new Rational(numerator_ % tmpr->numerator_ , ONE);
+}
+
+Number* Rational::modulo(Number* obj){
+    Rational* tmpr = SCAST_RATIONAL(obj);
+    assert(denominator_==ONE and tmpr->denominator_==ONE and "madulo operation is only for Integer Type !");
+    if(numerator_.n.back() * tmpr->numerator_.n.back() >= 0) //除数和被除数同号
+        return new Rational(numerator_ % tmpr->numerator_ , ONE);
+    else
+        return new Rational(numerator_ % tmpr->numerator_
+                                            + tmpr->numerator_ , ONE);
+}
+Number* Rational::numerator(){
+    return new Rational(numerator_,ONE);
+}
+
+Number* Rational::denominator(){
+    return new Rational(denominator_,ONE);
+}
 
 
+Number* Rational::imag_part(){
+    return new Rational(ZERO,ONE);
+}
+
+Number* Rational::real_part(){
+    return new Rational(numerator_,denominator_);
+}
+
+Number* Rational::getMax(Number* obj){
+    Rational* toCheck = SCAST_RATIONAL(this->sub(obj));
+    return new Rational(toCheck->sgn()>=0 ? (*this) :(*(SCAST_RATIONAL(obj))));
+}
+
+Number* Rational::getMin(Number* obj){
+    Rational* toCheck = SCAST_RATIONAL(this->sub(obj));
+    return new Rational(toCheck->sgn()<0 ? (*this) :(*(SCAST_RATIONAL(obj))));
+}
+
+Number* Rational::gcd(Number* obj){
+    Rational* tmpr = SCAST_RATIONAL(obj);
+    assert(denominator_==ONE and tmpr->denominator_==ONE and "gcd operation is only for Integer Type !");
+    LongInt num_abs = numerator_.getABS(), den_abs = tmpr->numerator_.getABS();
+    LongInt BIG = max(num_abs,den_abs);
+    LongInt SMALL = min(num_abs,den_abs);
+    LongInt tmp = BIG % SMALL;
+    
+    while(!tmp) // 辗转相除法 欧几里得
+    {
+        BIG = SMALL;
+        SMALL = tmp;
+        tmp = BIG % SMALL;
+    }
+    
+    return new Rational(SMALL,ONE);
+}
+
+
+Number* Rational::lcm(Number* obj){
+    Rational* tmpr = SCAST_RATIONAL(obj);
+    assert(denominator_==ONE and tmpr->denominator_==ONE and "lcm operation is only for Integer Type !");
+    return this->mul(tmpr)->div(this->gcd(tmpr))->abs();
+}
+
+
+Number* Rational::floor(){
+    //本身是整数
+    if(denominator_==ONE)
+        return new Rational(numerator_,ONE);
+    LongInt q = numerator_ / denominator_;
+    return new Rational(sgn() >=0 ? q : q-ONE, ONE);
+}
+
+Number* Rational::ceiling(){
+    //本身是整数
+    if(denominator_==ONE)
+        return new Rational(numerator_,ONE);
+    LongInt q = numerator_ / denominator_;
+    return new Rational( sgn() >=0 ? q+ONE : q, ONE);
+}
+
+Number* Rational::truncate(){
+    if(denominator_==ONE)    //本身是整数
+        return new Rational(numerator_,ONE);
+    return new Rational( numerator_ / denominator_, ONE);
+}
+
+Number* Rational::round(){
+    Number* res;
+    Rational* one_two = new Rational(ONE,LongInt(2));
+    
+    if(sgn()>=0)//正数
+        res = this->add(one_two)->floor();
+    else
+        res = this->sub(one_two)->ceiling();
+    delete one_two;
+    return res;
+}
+
+//
+//Number* Rational::sqrt(){
+//    double res = *this;
+//    res = ::sqrt(res);
+//    return new Fl
+//}
 
 
 
