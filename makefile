@@ -15,6 +15,8 @@ long_int.o : long_int.cpp long_int.h
 		g++ -c long_int.cpp
 rational.o : rational.cpp rational.h
 		g++ -c rational.cpp
+complex.o : complex.cpp complex.h
+		g++ -c complex.cpp
 
 clean : 
 		rm $(objects) $(exe)

@@ -193,7 +193,19 @@ Number* Float::toInexact(){
 }
 Number* Float::toExact(){
     //写在rational的convert函数内部的过程
-    return NULL;
+    if(fabs(number_)<1e-8)
+        return new Rational(ZERO,ONE);
+    string dble;
+    stringstream ss;
+    ss<<fixed<<setprecision(7)<<number_;
+    ss>>dble;
+    int sp = dble.find(".");
+    //用字符串初始分子
+    LongInt son(dble.substr(0,sp)+dble.substr(sp+1,dble.length()-sp-1));
+    string mom = "1";
+    for (int k = 0; k< dble.length()-sp-1; ++k)
+        mom.append("0");
+    return new Rational(son,mom);
 }
 
 

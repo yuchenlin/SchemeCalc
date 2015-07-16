@@ -4,10 +4,10 @@
 #include <string>
 using namespace std;
 
-int main1(){
+int main(){
     
     try {
-        Number *res;
+        //Number *res;
 		for (Number *res;;) {
 			res = calc_exp();
 			res -> print();
@@ -20,12 +20,13 @@ int main1(){
 }
 
 
-int main()
-{
-    char* s = "1+12123i";
-    Complex* c = Complex::from_string(s);
-    c->print();
-    
-	return 0;
-}
+//int main1()
+//{
+//    
+//    char* s = "1-123i";
+//    Complex* c = Complex::from_string(s);
+//    c->print();
+//    
+//	return 0;
+//}
 
