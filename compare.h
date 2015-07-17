@@ -119,6 +119,10 @@ class Mul : public Opt {
         return res;
     }
 };
+
+
+
+
 class Div:public Opt{
 	Number *calc(Cons *con)
 	{
@@ -167,3 +171,212 @@ class Div:public Opt{
 		return res;
 	}
 };
+
+
+
+
+class Abs : public Opt{
+    Number* calc(Cons* con){
+        Cons* tmp = con;
+        int cnt = 0;
+        for (; con; con = con->cdr)
+        {
+            if(con->car->type_>3||con->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = con->car , *conv;
+        Number *res = opr->abs(),*last;
+        return res;
+    }
+};
+
+class Sqrt : public Opt{
+    Number* calc(Cons* con){
+        Cons* tmp = con;
+        int cnt = 0;
+        for (; con; con = con->cdr)
+        {
+            if(con->car->type_>3||con->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = con->car , *conv;
+        Number *res = opr->sqrt(),*last;
+        return res;
+    }
+};
+
+class Floor : public Opt{
+    Number* calc(Cons* con){
+        Cons* tmp = con;
+        int cnt = 0;
+        for (; con; con = con->cdr)
+        {
+            if(con->car->type_>3||con->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = con->car , *conv;
+        Number *res = opr->floor(),*last;
+        return res;
+    }
+};
+
+class Ceiling : public Opt{
+    Number* calc(Cons* con){
+        Cons* tmp = con;
+        int cnt = 0;
+        for (; con; con = con->cdr)
+        {
+            if(con->car->type_>3||con->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = con->car , *conv;
+        Number *res = opr->ceiling(),*last;
+        return res;
+    }
+};
+class Truncate : public Opt{
+    Number* calc(Cons* con){
+        Cons* tmp = con;
+        int cnt = 0;
+        for (; con; con = con->cdr)
+        {
+            if(con->car->type_>3||con->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = con->car , *conv;
+        Number *res = opr->truncate(),*last;
+        return res;
+    }
+};
+
+class Round : public Opt{
+    Number* calc(Cons* con){
+        Cons* tmp = con;
+        int cnt = 0;
+        for (; con; con = con->cdr)
+        {
+            if(con->car->type_>3||con->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = con->car , *conv;
+        Number *res = opr->round(),*last;
+        return res;
+    }
+};
+
+class Numerator : public Opt{
+    Number* calc(Cons* con){
+        Cons* tmp = con;
+        int cnt = 0;
+        for (; con; con = con->cdr)
+        {
+            if(con->car->type_>3||con->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = con->car , *conv;
+        Number *res = opr->numerator(),*last;
+        return res;
+    }
+};
+
+class Denominator : public Opt{
+    Number* calc(Cons* con){
+        Cons* tmp = con;
+        int cnt = 0;
+        for (; con; con = con->cdr)
+        {
+            if(con->car->type_>3||con->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = con->car , *conv;
+        Number *res = opr->denominator(),*last;
+        return res;
+    }
+};
+
+class ImagPart : public Opt{
+    Number* calc(Cons* con){
+        Cons* tmp = con;
+        int cnt = 0;
+        for (; con; con = con->cdr)
+        {
+            if(con->car->type_>3||con->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = con->car , *conv;
+        Number *res = opr->imag_part(),*last;
+        return res;
+    }
+};
+
+class RealPart : public Opt{
+    Number* calc(Cons* con){
+        Cons* tmp = con;
+        int cnt = 0;
+        for (; con; con = con->cdr)
+        {
+            if(con->car->type_>3||con->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = con->car , *conv;
+        Number *res = opr->real_part(),*last;
+        return res;
+    }
+};
+class GetExact : public Opt{
+    Number* calc(Cons* con){
+        Cons* tmp = con;
+        int cnt = 0;
+        for (; con; con = con->cdr)
+        {
+            if(con->car->type_>3||con->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = con->car , *conv;
+        Number *res = opr->toExact(),*last;
+        return res;
+    }
+};class ToInexact : public Opt{
+    Number* calc(Cons* con){
+        Cons* tmp = con;
+        int cnt = 0;
+        for (; con; con = con->cdr)
+        {
+            if(con->car->type_>3||con->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = con->car , *conv;
+        Number *res = opr->toInexact(),*last;
+        return res;
+    }
+};
+
+
+
+
+
+
