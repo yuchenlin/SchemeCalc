@@ -56,8 +56,11 @@ public:
     virtual Number* real_part();
     virtual Number* toInexact();
     virtual Number* toExact();
-    bool isInteger();//
+    
     bool isReal();//
+    
+    bool isInteger();//
+    
 };
 
 #endif

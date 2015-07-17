@@ -7,12 +7,10 @@ using namespace std;
 int main(){
     
     try {
-        //Number *res;
-		for (Number *res;;) {
-			res = calc_exp();
-			res -> print();
-            cout<<endl;
-		}
+        Number *res;
+        res = calc_exp();
+        res -> print();
+        cout<<endl;
 	}
 	catch(int){cerr<<"Wrong";}
 	//system("pause");

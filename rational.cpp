@@ -214,18 +214,18 @@ Number* Rational::abs(){
 }
 
 Number* Rational::quotient(Number* obj){
-    Rational* tmpr = SCAST_RATIONAL(obj);
+    Rational* tmpr = SCAST_RATIONAL(obj->toExact());
     assert(denominator_==ONE and tmpr->denominator_==ONE and "quotient operation is only for Integer Type !");
     return new Rational(numerator_ / tmpr->numerator_ , ONE);
 }
 Number* Rational::remainder(Number* obj){
-    Rational* tmpr = SCAST_RATIONAL(obj);
+    Rational* tmpr = SCAST_RATIONAL(obj->toExact());
     assert(denominator_==ONE and tmpr->denominator_==ONE and "remainder operation is only for Integer Type !");
     return new Rational(numerator_ % tmpr->numerator_ , ONE);
 }
 
 Number* Rational::modulo(Number* obj){
-    Rational* tmpr = SCAST_RATIONAL(obj);
+    Rational* tmpr = SCAST_RATIONAL(obj->toExact());
     assert(denominator_==ONE and tmpr->denominator_==ONE and "madulo operation is only for Integer Type !");
     if(numerator_.n.back() * tmpr->numerator_.n.back() >= 0) //除数和被除数同号
         return new Rational(numerator_ % tmpr->numerator_ , ONE);
@@ -251,17 +251,17 @@ Number* Rational::real_part(){
 }
 
 Number* Rational::getMax(Number* obj){
-    Rational* toCheck = SCAST_RATIONAL(this->sub(obj));
+    Rational* toCheck = SCAST_RATIONAL(this->sub(obj->toExact()));
     return new Rational(toCheck->sgn()>=0 ? (*this) :(*(SCAST_RATIONAL(obj))));
 }
 
 Number* Rational::getMin(Number* obj){
-    Rational* toCheck = SCAST_RATIONAL(this->sub(obj));
+    Rational* toCheck = SCAST_RATIONAL(this->sub(obj->toExact()));
     return new Rational(toCheck->sgn()<0 ? (*this) :(*(SCAST_RATIONAL(obj))));
 }
 
 Number* Rational::gcd(Number* obj){
-    Rational* tmpr = SCAST_RATIONAL(obj);
+    Rational* tmpr = SCAST_RATIONAL(obj->toExact());
     assert(denominator_==ONE and tmpr->denominator_==ONE and "gcd operation is only for Integer Type !");
     LongInt num_abs = numerator_.getABS(), den_abs = tmpr->numerator_.getABS();
     LongInt BIG = max(num_abs,den_abs);
@@ -280,7 +280,7 @@ Number* Rational::gcd(Number* obj){
 
 
 Number* Rational::lcm(Number* obj){
-    Rational* tmpr = SCAST_RATIONAL(obj);
+    Rational* tmpr = SCAST_RATIONAL(obj->toExact());
     assert(denominator_==ONE and tmpr->denominator_==ONE and "lcm operation is only for Integer Type !");
     return this->mul(tmpr)->div(this->gcd(tmpr))->abs();
 }

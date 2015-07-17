@@ -93,7 +93,7 @@ Number* Complex::convert(Number *obj){
             res = new Complex(*SCAST_COMPLEX(obj));
             break;
     }
-    //有点问题 就是 我的res指针指来指去 会乱
+    //之前有点问题 就是 我的res指针指来指去 会乱
     return res;
 }
 
@@ -232,15 +232,15 @@ void Complex::ToInexact(){
         delete tempf;
     }
 }
-
+//判断this是不是一个实数
 bool Complex::isReal(){
     bool ok = false;
     switch (imag->type_) {
         case Number::RATIONAL:
-            ok = SCAST_RATIONAL(imag)->numerator_==ZERO;
+            ok = SCAST_RATIONAL(imag)->numerator_ == ZERO;
             break;
         case Number::FLOAT:
-            ok = fabs(SCAST_FLOAT(imag)->number_) < 1e-200;
+            ok = fabs(SCAST_FLOAT(imag)->number_) < 1e-250;
             break;
     }
     return ok;
@@ -253,31 +253,158 @@ Number* Complex::abs(){
     return real->abs();
 }
 
-
-Number* Complex::quotient(Number* obj){
+bool Complex::isInteger(){
     bool cando = false;
-    switch (obj->type_) {
-        case Number::RATIONAL:
-            cando = true;
-            break;
-        case Number::FLOAT:
-            cando = SCAST_FLOAT(obj)->isInteger();
-            break;
-        case Number::COMPLEX:
-            cando = SCAST_COMPLEX(obj)->isReal();
-            break;
+    if(isReal()){
+        if(this->isExact){
+            cando = SCAST_RATIONAL(this->real)->denominator_==ONE;
+        }else
+            cando = SCAST_FLOAT(this->real)->isInteger();
     }
-    
-    assert(isReal() and "abs is only for rational");
-    return NULL;
+    return cando;
+}
+Number* Complex::quotient(Number* obj){
+    Complex* tempc = SCAST_COMPLEX(obj);
+    assert(isInteger() and tempc->isInteger() and "quotient is only for integer");
+    //分类讨论
+    if(this->isExact and tempc->isExact){
+        return new Rational
+        (SCAST_RATIONAL(this->real->quotient(tempc->real))->numerator_,ONE);
+    }else
+        return new Float
+        (SCAST_FLOAT(this->real->quotient(tempc->real))->number_);
 }
 
 
+Number* Complex::remainder(Number* obj){
+    Complex* tempc = SCAST_COMPLEX(obj);
+    assert(isInteger() and tempc->isInteger() and "remainder is only for integer");
+    //分类讨论 
+    if(this->isExact and tempc->isExact){
+        return new Rational
+        (SCAST_RATIONAL(this->real->remainder(tempc->real))->numerator_,ONE);
+    }else
+        return new Float
+        (SCAST_FLOAT(this->real->remainder(tempc->real))->number_);
+    
+}
+
+Number* Complex::modulo(Number* obj){
+    Complex* tempc = SCAST_COMPLEX(obj);
+    assert(isInteger() and tempc->isInteger() and "modulo is only for integer");
+    //分类讨论 
+    if(this->isExact and tempc->isExact){
+        return new Rational
+        (SCAST_RATIONAL(this->real->modulo(tempc->real))->numerator_,ONE);
+    }else
+        return new Float
+        (SCAST_FLOAT(this->real->modulo(tempc->real))->number_);
+    
+}
+Number* Complex::gcd(Number* obj){
+    Complex* tempc = SCAST_COMPLEX(obj);
+    assert(isInteger() and tempc->isInteger() and "gcd is only for integer");
+    //分类讨论
+
+    if(this->isExact and tempc->isExact){
+        return new Rational
+        (SCAST_RATIONAL(this->real->gcd(tempc->real))->numerator_,ONE);
+    }else
+        return new Float
+        (SCAST_FLOAT(this->real->gcd(tempc->real))->number_);
+    
+}
+Number* Complex::lcm(Number* obj){
+    Complex* tempc = SCAST_COMPLEX(obj);
+    assert(isInteger() and tempc->isInteger() and "lcm is only for integer");
+    //分类讨论
+
+    if(this->isExact and tempc->isExact){
+        return new Rational
+        (SCAST_RATIONAL(this->real->lcm(tempc->real))->numerator_,ONE);
+    }else
+        return new Float
+        (SCAST_FLOAT(this->real->lcm(tempc->real))->number_);
+    
+}
+Number* Complex::expt(Number* obj){
+    Complex* tempc = SCAST_COMPLEX(obj);
+    assert(isReal() and tempc->isReal() and "expt is only for real number");
+    return new Float(SCAST_FLOAT(real->expt(tempc->real))->number_);
+}
 
 
+Number* Complex::sqrt(){
+    assert(isReal() and "sqrt is only for real number");
+    return real->sqrt();
+}
+
+Number* Complex::floor(){
+    assert(isReal() and "floor is only for real number");
+    return real->floor();
+}
+Number* Complex::ceiling(){
+    assert(isReal() and "ceiling is only for real number");
+    return real->ceiling();
+}
+Number* Complex::truncate(){
+    assert(isReal() and "truncate is only for real number");
+    return real->truncate();
+}
+
+Number* Complex::round(){
+    assert(isReal() and "round is only for real number");
+    return real->truncate();
+}
 
 
+Number* Complex::numerator(){
+    assert(isReal() and isExact and "numerator is for integer");
+    return real->numerator();
+}
 
+Number* Complex::denominator(){
+    assert(isReal() and isExact and "denominator is for integer");
+    return real->denominator();
+}
+
+Number* Complex::getMax(Number* obj){
+    Complex* tempc = SCAST_COMPLEX(obj);
+    assert(isReal() and tempc->isReal() and "getMax is only for real numbers");
+    return real->getMax(tempc->real);
+}
+
+Number* Complex::getMin(Number* obj){
+    Complex* tempc = SCAST_COMPLEX(obj);
+    assert(isReal() and tempc->isReal() and "getMin is only for real numbers");
+    return real->getMin(tempc->real);
+}
+
+
+Number* Complex::imag_part(){
+    return imag_part();
+}
+
+Number* Complex::real_part(){
+    return real_part();
+}
+
+Number* Complex::toExact(){
+    Complex* res = new Complex();
+    res->isExact = true;
+    res->real = real->toExact();
+    res->imag = imag->toExact();
+    return res;
+    
+}
+
+Number* Complex::toInexact(){
+    Complex* res = new Complex();
+    res->isExact = false;
+    res->real = real->toInexact();
+    res->imag = imag->toInexact();
+    return res;
+}
 
 
 
