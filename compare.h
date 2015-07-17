@@ -177,7 +177,7 @@ class Div:public Opt{
 
 class Abs : public Opt{
     Number* calc(Cons* con){
-        Cons* tmp = con;
+        
         int cnt = 0;
         for (; con; con = con->cdr)
         {
@@ -186,15 +186,15 @@ class Abs : public Opt{
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car , *conv;
-        Number *res = opr->abs(),*last;
+        Number *opr = con->car ;
+        Number *res = opr->abs();
         return res;
     }
 };
 
 class Sqrt : public Opt{
     Number* calc(Cons* con){
-        Cons* tmp = con;
+        
         int cnt = 0;
         for (; con; con = con->cdr)
         {
@@ -203,15 +203,15 @@ class Sqrt : public Opt{
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car , *conv;
-        Number *res = opr->sqrt(),*last;
+        Number *opr = con->car ;
+        Number *res = opr->sqrt();
         return res;
     }
 };
 
 class Floor : public Opt{
     Number* calc(Cons* con){
-        Cons* tmp = con;
+        
         int cnt = 0;
         for (; con; con = con->cdr)
         {
@@ -220,15 +220,15 @@ class Floor : public Opt{
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car , *conv;
-        Number *res = opr->floor(),*last;
+        Number *opr = con->car ;
+        Number *res = opr->floor();
         return res;
     }
 };
 
 class Ceiling : public Opt{
     Number* calc(Cons* con){
-        Cons* tmp = con;
+        
         int cnt = 0;
         for (; con; con = con->cdr)
         {
@@ -237,14 +237,14 @@ class Ceiling : public Opt{
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car , *conv;
-        Number *res = opr->ceiling(),*last;
+        Number *opr = con->car ;
+        Number *res = opr->ceiling();
         return res;
     }
 };
 class Truncate : public Opt{
     Number* calc(Cons* con){
-        Cons* tmp = con;
+        
         int cnt = 0;
         for (; con; con = con->cdr)
         {
@@ -253,15 +253,15 @@ class Truncate : public Opt{
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car , *conv;
-        Number *res = opr->truncate(),*last;
+        Number *opr = con->car ;
+        Number *res = opr->truncate();
         return res;
     }
 };
 
 class Round : public Opt{
     Number* calc(Cons* con){
-        Cons* tmp = con;
+        
         int cnt = 0;
         for (; con; con = con->cdr)
         {
@@ -270,15 +270,15 @@ class Round : public Opt{
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car , *conv;
-        Number *res = opr->round(),*last;
+        Number *opr = con->car ;
+        Number *res = opr->round();
         return res;
     }
 };
 
 class Numerator : public Opt{
     Number* calc(Cons* con){
-        Cons* tmp = con;
+        
         int cnt = 0;
         for (; con; con = con->cdr)
         {
@@ -287,15 +287,15 @@ class Numerator : public Opt{
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car , *conv;
-        Number *res = opr->numerator(),*last;
+        Number *opr = con->car ;
+        Number *res = opr->numerator();
         return res;
     }
 };
 
 class Denominator : public Opt{
     Number* calc(Cons* con){
-        Cons* tmp = con;
+        
         int cnt = 0;
         for (; con; con = con->cdr)
         {
@@ -304,15 +304,15 @@ class Denominator : public Opt{
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car , *conv;
-        Number *res = opr->denominator(),*last;
+        Number *opr = con->car ;
+        Number *res = opr->denominator();
         return res;
     }
 };
 
 class ImagPart : public Opt{
     Number* calc(Cons* con){
-        Cons* tmp = con;
+        
         int cnt = 0;
         for (; con; con = con->cdr)
         {
@@ -321,15 +321,15 @@ class ImagPart : public Opt{
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car , *conv;
-        Number *res = opr->imag_part(),*last;
+        Number *opr = con->car ;
+        Number *res = opr->imag_part();
         return res;
     }
 };
 
 class RealPart : public Opt{
     Number* calc(Cons* con){
-        Cons* tmp = con;
+        
         int cnt = 0;
         for (; con; con = con->cdr)
         {
@@ -338,14 +338,14 @@ class RealPart : public Opt{
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car , *conv;
-        Number *res = opr->real_part(),*last;
+        Number *opr = con->car ;
+        Number *res = opr->real_part();
         return res;
     }
 };
 class GetExact : public Opt{
     Number* calc(Cons* con){
-        Cons* tmp = con;
+        
         int cnt = 0;
         for (; con; con = con->cdr)
         {
@@ -354,13 +354,13 @@ class GetExact : public Opt{
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car , *conv;
-        Number *res = opr->toExact(),*last;
+        Number *opr = con->car ;
+        Number *res = opr->toExact();
         return res;
     }
 };class ToInexact : public Opt{
     Number* calc(Cons* con){
-        Cons* tmp = con;
+        
         int cnt = 0;
         for (; con; con = con->cdr)
         {
@@ -369,8 +369,8 @@ class GetExact : public Opt{
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car , *conv;
-        Number *res = opr->toInexact(),*last;
+        Number *opr = con->car ;
+        Number *res = opr->toInexact();
         return res;
     }
 };
