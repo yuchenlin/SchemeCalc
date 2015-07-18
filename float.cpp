@@ -79,7 +79,7 @@ Number *Float::div(Number *number2)
 
 void Float::print()
 {
-    cout<<setprecision(10)<<number_;
+    cout<<setprecision(20)<<number_;
     //cout<<number_;
 //    cout<<endl;
 }

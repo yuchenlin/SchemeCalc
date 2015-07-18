@@ -36,7 +36,7 @@ Number *calc_exp(){
 		else throw 0;
         while ((val = calc_exp()))
         {
-//            cout << "test";
+           // cout << "test";
             tail->cdr = new Cons(val, NULL);
             tail = tail->cdr;
         }
