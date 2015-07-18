@@ -39,11 +39,8 @@ class Add : public Opt {
 			}
 
             delete last;
-            try {
-                delete conv;
-            } catch(...) {
-                //do noting
-            }
+            delete conv;
+            
             
         }
         return res;
@@ -172,7 +169,7 @@ class Div:public Opt{
 	}
 };
 
-
+//一元函数
 
 
 class Abs : public Opt{
@@ -358,7 +355,9 @@ class GetExact : public Opt{
         Number *res = opr->toExact();
         return res;
     }
-};class ToInexact : public Opt{
+};
+
+class ToInexact : public Opt{
     Number* calc(Cons* con){
         
         int cnt = 0;
@@ -374,6 +373,211 @@ class GetExact : public Opt{
         return res;
     }
 };
+
+//二元函数
+
+class Quotient : public Opt{
+    Number* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(tmp->car->type_>3 or tmp->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "Quotient is only for two values");
+        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        Number* res,* last;
+        
+        if(opr1->type_ >= opr2->type_)
+            res = opr1->quotient(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->quotient(opr1);
+        
+        delete conv;
+        return res;
+    }
+};
+
+
+
+class Remainder : public Opt{
+    Number* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(tmp->car->type_>3 or tmp->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "Remainder is only for two values");
+        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        Number* res,* last;
+        
+        if(opr1->type_ > opr2->type_)
+            res = opr1->remainder(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->remainder(opr1);
+        
+        delete conv;
+        return res;
+    }
+};
+
+
+class Modulo : public Opt{
+    Number* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(tmp->car->type_>3 or tmp->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "Modulo is only for two values");
+        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        Number* res,* last;
+        
+        if(opr1->type_ > opr2->type_)
+            res = opr1->modulo(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->modulo(opr1);
+        
+        delete conv;
+        return res;
+    }
+};
+class GCD : public Opt{
+    Number* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(tmp->car->type_>3 or tmp->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "GCD is only for two values");
+        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        Number* res,* last;
+        
+        if(opr1->type_ > opr2->type_)
+            res = opr1->gcd(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->gcd(opr1);
+        
+        delete conv;
+        return res;
+    }
+};
+
+class LCM : public Opt{
+    Number* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(tmp->car->type_>3 or tmp->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "LCM is only for two values");
+        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        Number* res,* last;
+        
+        if(opr1->type_ > opr2->type_)
+            res = opr1->lcm(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->lcm(opr1);
+        
+        delete conv;
+        return res;
+    }
+};
+
+
+class Expt : public Opt{
+    Number* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(tmp->car->type_>3 or tmp->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "Expt is only for two values");
+        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        Number* res,* last;
+        
+        if(opr1->type_ > opr2->type_)
+            res = opr1->expt(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->expt(opr1);
+        
+        delete conv;
+        return res;
+    }
+};
+
+class GetMax : public Opt{
+    Number* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(tmp->car->type_>3 or tmp->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "getMax is only for two values");
+        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        Number* res,* last;
+        
+        if(opr1->type_ > opr2->type_)
+            res = opr1->getMax(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->getMax(opr1);
+        
+        delete conv;
+        return res;
+    }
+};
+
+
+
+class GetMin : public Opt{
+    Number* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(tmp->car->type_>3 or tmp->car->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "getMin is only for two values");
+        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        Number* res,* last;
+        
+        if(opr1->type_ > opr2->type_)
+            res = opr1->getMin(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->getMin(opr1);
+        
+        delete conv;
+        return res;
+    }
+};
+
+
+
+
+
+
 
 
 

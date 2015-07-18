@@ -19,7 +19,20 @@ Number *calc_exp(){
 		if(strcmp(tk1,"+")==0)opt=new Add();
 		else if(strcmp(tk1,"-")==0)opt=new Sub();
 		else if(strcmp(tk1,"*")==0)opt=new Mul();
-		else if(strcmp(tk1,"/")==0)opt=new Div();
+        else if(strcmp(tk1,"/")==0)opt=new Div();
+        
+        else if(strcmp(tk1,"abs")==0)opt=new Abs();
+        else if(strcmp(tk1,"sqrt")==0)opt=new Sqrt();
+        else if(strcmp(tk1,"floor")==0)opt=new Floor();
+        else if(strcmp(tk1,"ceiling")==0)opt=new Ceiling();
+        else if(strcmp(tk1,"truncate")==0)opt=new Truncate();
+        else if(strcmp(tk1,"round")==0)opt=new Round();
+        else if(strcmp(tk1,"numerator")==0)opt=new Numerator();
+        else if(strcmp(tk1,"denominator")==0)opt=new Denominator();
+        else if(strcmp(tk1,"imag-part")==0)opt=new ImagPart();
+        else if(strcmp(tk1,"real-part")==0)opt=new RealPart();
+        else if(strcmp(tk1,"exact->inexact")==0)opt=new ToInexact();
+        else if(strcmp(tk1,"inexact->exact")==0)opt=new GetExact();
 		else throw 0;
         while ((val = calc_exp()))
         {

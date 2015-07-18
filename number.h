@@ -32,7 +32,7 @@ public:
     virtual Number* real_part()=0;
     virtual Number* toInexact()=0;
     virtual Number* toExact()=0;
-    
+    //二元函数
     virtual Number* quotient(Number* obj)=0;
     virtual Number* remainder(Number* obj)=0;
     virtual Number* modulo(Number* obj)=0;
