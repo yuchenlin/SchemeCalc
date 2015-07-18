@@ -8,9 +8,11 @@ int main(){
     
     try {
         Number *res;
-        res = calc_exp();
-        res -> print();
-        cout<<endl;
+        for(;res;){
+            res = calc_exp();
+            res -> print();
+            cout<<endl;
+        }
 	}
 	catch(int){cerr<<"Wrong";}
 	//system("pause");
