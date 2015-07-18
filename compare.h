@@ -193,7 +193,7 @@ class Sqrt : public Opt{
     Number* calc(Cons* con){
         Cons* contmp = con;
         int cnt = 0;
-        for (; con; contmp = contmp->cdr)
+        for (; contmp; contmp = contmp->cdr)
         {
             if(contmp->car->type_>3||contmp->car->type_<1)
                 throw 0;
@@ -210,7 +210,7 @@ class Floor : public Opt{
     Number* calc(Cons* con){
         Cons* contmp = con;
         int cnt = 0;
-        for (; con; contmp = contmp->cdr)
+        for (; contmp; contmp = contmp->cdr)
         {
             if(contmp->car->type_>3||contmp->car->type_<1)
                 throw 0;
@@ -227,7 +227,7 @@ class Ceiling : public Opt{
     Number* calc(Cons* con){
         Cons* contmp = con;
         int cnt = 0;
-        for (; con; contmp = contmp->cdr)
+        for (; contmp; contmp = contmp->cdr)
         {
             if(contmp->car->type_>3||contmp->car->type_<1)
                 throw 0;
@@ -243,7 +243,7 @@ class Truncate : public Opt{
     Number* calc(Cons* con){
         Cons* contmp = con;
         int cnt = 0;
-        for (; con; contmp = contmp->cdr)
+        for (; contmp; contmp = contmp->cdr)
         {
             if(contmp->car->type_>3||contmp->car->type_<1)
                 throw 0;
@@ -260,7 +260,7 @@ class Round : public Opt{
     Number* calc(Cons* con){
         Cons* contmp = con;
         int cnt = 0;
-        for (; con; contmp = contmp->cdr)
+        for (; contmp; contmp = contmp->cdr)
         {
             if(contmp->car->type_>3||contmp->car->type_<1)
                 throw 0;
@@ -277,7 +277,7 @@ class Numerator : public Opt{
     Number* calc(Cons* con){
         Cons* contmp = con;
         int cnt = 0;
-        for (; con; contmp = contmp->cdr)
+        for (; contmp; contmp = contmp->cdr)
         {
             if(contmp->car->type_>3||contmp->car->type_<1)
                 throw 0;
@@ -294,7 +294,7 @@ class Denominator : public Opt{
     Number* calc(Cons* con){
         Cons* contmp = con;
         int cnt = 0;
-        for (; con; contmp = contmp->cdr)
+        for (; contmp; contmp = contmp->cdr)
         {
             if(contmp->car->type_>3||contmp->car->type_<1)
                 throw 0;
@@ -311,7 +311,7 @@ class ImagPart : public Opt{
     Number* calc(Cons* con){
         Cons* contmp = con;
         int cnt = 0;
-        for (; con; contmp = contmp->cdr)
+        for (; contmp; contmp = contmp->cdr)
         {
             if(contmp->car->type_>3||contmp->car->type_<1)
                 throw 0;
@@ -328,7 +328,7 @@ class RealPart : public Opt{
     Number* calc(Cons* con){
         Cons* contmp = con;
         int cnt = 0;
-        for (; con; contmp = contmp->cdr)
+        for (; contmp; contmp = contmp->cdr)
         {
             if(contmp->car->type_>3||contmp->car->type_<1)
                 throw 0;
@@ -344,7 +344,7 @@ class GetExact : public Opt{
     Number* calc(Cons* con){
         Cons* contmp = con;
         int cnt = 0;
-        for (; con; contmp = contmp->cdr)
+        for (; contmp; contmp = contmp->cdr)
         {
             if(contmp->car->type_>3||contmp->car->type_<1)
                 throw 0;
@@ -361,7 +361,7 @@ class ToInexact : public Opt{
     Number* calc(Cons* con){
         Cons* contmp = con;
         int cnt = 0;
-        for (; con; contmp = contmp->cdr)
+        for (; contmp; contmp = contmp->cdr)
         {
             if(contmp->car->type_>3||contmp->car->type_<1)
                 throw 0;

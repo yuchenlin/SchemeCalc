@@ -8,7 +8,7 @@ int main(){
     
     try {
         Number *res;
-        for(;res;){
+        for(;;){
             res = calc_exp();
             res -> print();
             cout<<endl;
