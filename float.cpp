@@ -149,7 +149,15 @@ Number* Float::lcm(Number* obj){
 }
 
 Number* Float::expt(Number* obj){
-    return new Float(pow(number_, SCAST_FLOAT(obj)->number_));
+    
+    if(number_>=0)
+        return new Float(pow(number_, SCAST_FLOAT(obj)->number_));
+    else{
+        Complex* c = new Complex();
+        c = SCAST_COMPLEX(c->convert(this));
+        Complex* d = SCAST_COMPLEX(c->convert(obj));
+        return c->expt(d);
+    }
 }
 Number* Float::sqrt(){
     if(number_>=0){

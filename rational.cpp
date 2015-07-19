@@ -343,10 +343,16 @@ Number* Rational::sqrt(){
 
 
 Number* Rational::expt(Number* obj){
-//    Float* tmpf = new Float();
-//    tmpf = SCAST_FLOAT(tmpf->convert(obj));
-//    
-    return new Float(pow(double(*this), double(*SCAST_RATIONAL(obj))));
+    if(sgn()<0){
+        Complex* c = new Complex();
+        c = SCAST_COMPLEX(c->convert(this));
+        Complex* d = SCAST_COMPLEX(c->convert(obj));
+        return c->expt(d);
+    }else{
+        Float* tmpf = new Float();
+        tmpf = SCAST_FLOAT(tmpf->convert(obj));
+        return new Float(pow(double(*this), double(*SCAST_RATIONAL(obj))));
+    }
 }
 
 Number* Rational::toInexact(){
