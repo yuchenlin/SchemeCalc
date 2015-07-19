@@ -393,7 +393,7 @@ class Quotient : public Opt{
         if(opr1->type_ >= opr2->type_)
             res = opr1->quotient(conv = opr1->convert(opr2));
         else
-            res = (conv = opr2->convert(opr1) )->quotient(opr1);
+            res = (conv = opr2->convert(opr1) )->quotient(opr2);
         
         delete conv;
         return res;
@@ -419,7 +419,7 @@ class Remainder : public Opt{
         if(opr1->type_ > opr2->type_)
             res = opr1->remainder(conv = opr1->convert(opr2));
         else
-            res = (conv = opr2->convert(opr1) )->remainder(opr1);
+            res = (conv = opr2->convert(opr1) )->remainder(opr2);
         
         delete conv;
         return res;
@@ -444,7 +444,7 @@ class Modulo : public Opt{
         if(opr1->type_ > opr2->type_)
             res = opr1->modulo(conv = opr1->convert(opr2));
         else
-            res = (conv = opr2->convert(opr1) )->modulo(opr1);
+            res = (conv = opr2->convert(opr1) )->modulo(opr2);
         
         delete conv;
         return res;
@@ -467,7 +467,7 @@ class GCD : public Opt{
         if(opr1->type_ > opr2->type_)
             res = opr1->gcd(conv = opr1->convert(opr2));
         else
-            res = (conv = opr2->convert(opr1) )->gcd(opr1);
+            res = (conv = opr2->convert(opr1) )->gcd(opr2);
         
         delete conv;
         return res;
@@ -491,7 +491,7 @@ class LCM : public Opt{
         if(opr1->type_ > opr2->type_)
             res = opr1->lcm(conv = opr1->convert(opr2));
         else
-            res = (conv = opr2->convert(opr1) )->lcm(opr1);
+            res = (conv = opr2->convert(opr1) )->lcm(opr2);
         
         delete conv;
         return res;
@@ -516,7 +516,7 @@ class Expt : public Opt{
         if(opr1->type_ > opr2->type_)
             res = opr1->expt(conv = opr1->convert(opr2));
         else
-            res = (conv = opr2->convert(opr1) )->expt(opr1);
+            res = (conv = opr2->convert(opr1) )->expt(opr2);
         
         delete conv;
         return res;
@@ -540,7 +540,7 @@ class GetMax : public Opt{
         if(opr1->type_ > opr2->type_)
             res = opr1->getMax(conv = opr1->convert(opr2));
         else
-            res = (conv = opr2->convert(opr1) )->getMax(opr1);
+            res = (conv = opr2->convert(opr1) )->getMax(opr2);
         
         delete conv;
         return res;
@@ -566,7 +566,7 @@ class GetMin : public Opt{
         if(opr1->type_ > opr2->type_)
             res = opr1->getMin(conv = opr1->convert(opr2));
         else
-            res = (conv = opr2->convert(opr1) )->getMin(opr1);
+            res = (conv = opr2->convert(opr1) )->getMin(opr2);
         
         delete conv;
         return res;

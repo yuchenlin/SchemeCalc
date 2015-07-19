@@ -268,7 +268,7 @@ Number* Rational::gcd(Number* obj){
     LongInt SMALL = min(num_abs,den_abs);
     LongInt tmp = BIG % SMALL;
     
-    while(!tmp) // 辗转相除法 欧几里得
+    while(tmp!=ZERO) // 辗转相除法 欧几里得
     {
         BIG = SMALL;
         SMALL = tmp;
@@ -330,7 +330,10 @@ Number* Rational::sqrt(){
 
 
 Number* Rational::expt(Number* obj){
-    return new Float(pow(*this, SCAST_FLOAT(obj)->number_));
+//    Float* tmpf = new Float();
+//    tmpf = SCAST_FLOAT(tmpf->convert(obj));
+//    
+    return new Float(pow(double(*this), double(*SCAST_RATIONAL(obj))));
 }
 
 Number* Rational::toInexact(){

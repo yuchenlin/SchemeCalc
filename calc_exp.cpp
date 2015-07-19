@@ -19,7 +19,8 @@ Number *calc_exp(){
 		if(strcmp(tk1,"+")==0)opt=new Add();
 		else if(strcmp(tk1,"-")==0)opt=new Sub();
 		else if(strcmp(tk1,"*")==0)opt=new Mul();
-        else if(strcmp(tk1,"/")==0)opt=new Div(); 
+        else if(strcmp(tk1,"/")==0)opt=new Div();
+        //新增一元函数
         else if(strcmp(tk1,"abs")==0)opt=new Abs();
         else if(strcmp(tk1,"sqrt")==0)opt=new Sqrt();
         else if(strcmp(tk1,"floor")==0)opt=new Floor();
@@ -32,7 +33,16 @@ Number *calc_exp(){
         else if(strcmp(tk1,"real-part")==0)opt=new RealPart();
         else if(strcmp(tk1,"exact->inexact")==0)opt=new ToInexact();
         else if(strcmp(tk1,"inexact->exact")==0)opt=new GetExact();
-		else throw 0;
+        //新增二元函数
+        else if(strcmp(tk1,"quotient")==0)opt=new Quotient();
+        else if(strcmp(tk1,"remainder")==0)opt=new Remainder();
+        else if(strcmp(tk1,"modulo")==0)opt=new Modulo();
+        else if(strcmp(tk1,"gcd")==0)opt=new GCD();
+        else if(strcmp(tk1,"lcm")==0)opt=new LCM();
+        else if(strcmp(tk1,"expt")==0)opt=new Expt();
+        else if(strcmp(tk1,"max")==0)opt=new GetMax();
+        else if(strcmp(tk1,"min")==0)opt=new GetMin();
+        else throw 0;
         while ((val = calc_exp()))
         {
            // cout << "test";
