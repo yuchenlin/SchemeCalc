@@ -450,54 +450,6 @@ class Modulo : public Opt{
         return res;
     }
 };
-class GCD : public Opt{
-    Number* calc(Cons* con){
-        Cons *tmp = con;
-        int cnt = 0;
-        for (; tmp; tmp=tmp->cdr) {
-            if(tmp->car->type_>3 or tmp->car->type_<1)
-                throw 0;
-            cnt++;
-        }
-        if(cnt>2)
-            assert(0 and "GCD is only for two values");
-        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
-        Number* res,* last;
-        
-        if(opr1->type_ > opr2->type_)
-            res = opr1->gcd(conv = opr1->convert(opr2));
-        else
-            res = (conv = opr2->convert(opr1) )->gcd(opr2);
-        
-        delete conv;
-        return res;
-    }
-};
-
-class LCM : public Opt{
-    Number* calc(Cons* con){
-        Cons *tmp = con;
-        int cnt = 0;
-        for (; tmp; tmp=tmp->cdr) {
-            if(tmp->car->type_>3 or tmp->car->type_<1)
-                throw 0;
-            cnt++;
-        }
-        if(cnt>2)
-            assert(0 and "LCM is only for two values");
-        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
-        Number* res,* last;
-        
-        if(opr1->type_ > opr2->type_)
-            res = opr1->lcm(conv = opr1->convert(opr2));
-        else
-            res = (conv = opr2->convert(opr1) )->lcm(opr2);
-        
-        delete conv;
-        return res;
-    }
-};
-
 
 class Expt : public Opt{
     Number* calc(Cons* con){
@@ -522,6 +474,55 @@ class Expt : public Opt{
         return res;
     }
 };
+//二元  可多元函数
+
+class GCD : public Opt{
+    Number* calc(Cons* con){
+        
+        Number* res,*last;
+        res = new Rational(0,1);
+        for (; con; con=con->cdr) {
+            if(con->car->type_>3 or con->car->type_<1)
+                throw 0;
+            Number* opr = con->car, *conv;
+            last = res;
+            if(res->type_ > opr->type_)
+                res = res->gcd(conv= res->convert(opr));
+            else
+                res = (conv = opr->convert(res))->gcd(opr);
+            delete last;
+            delete conv;
+        }
+        return res;
+    }
+};
+
+
+
+class LCM : public Opt{
+    Number* calc(Cons* con){
+        
+        Number* res,*last;
+        res = new Rational(1,1);
+        for (; con; con=con->cdr) {
+            if(con->car->type_>3 or con->car->type_<1)
+                throw 0;
+            Number* opr = con->car, *conv;
+            last = res;
+            if(res->type_ > opr->type_)
+                res = res->lcm(conv= res->convert(opr));
+            else
+                res = (conv = opr->convert(res))->lcm(opr);
+            delete last;
+            delete conv;
+        }
+        return res;
+    }
+};
+
+
+
+
 
 class GetMax : public Opt{
     Number* calc(Cons* con){
@@ -532,17 +533,23 @@ class GetMax : public Opt{
                 throw 0;
             cnt++;
         }
-        if(cnt>2)
-            assert(0 and "getMax is only for two values");
-        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        if(cnt==0) throw 0;
+        
+        
         Number* res,* last;
-        
-        if(opr1->type_ > opr2->type_)
-            res = opr1->getMax(conv = opr1->convert(opr2));
-        else
-            res = (conv = opr2->convert(opr1) )->getMax(opr2);
-        
-        delete conv;
+        Number* opr = con->car, *conv;
+        res = opr;
+        con = con->cdr;
+        for (; con; con=con->cdr) {
+            opr = con->car;
+            last = res;
+            if(res->type_ > opr->type_)
+                res = res->getMax(conv = res->convert(opr));
+            else
+                res = (conv = opr->convert(res))->getMax(opr);
+            delete last;
+            delete conv;
+        }
         return res;
     }
 };
@@ -558,23 +565,26 @@ class GetMin : public Opt{
                 throw 0;
             cnt++;
         }
-        if(cnt>2)
-            assert(0 and "getMin is only for two values");
-        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        if(cnt==0) throw 0;
+        
+        
         Number* res,* last;
-        
-        if(opr1->type_ > opr2->type_)
-            res = opr1->getMin(conv = opr1->convert(opr2));
-        else
-            res = (conv = opr2->convert(opr1) )->getMin(opr2);
-        
-        delete conv;
+        Number* opr = con->car, *conv;
+        res = opr;
+        con = con->cdr;
+        for (; con; con=con->cdr) {
+            opr = con->car;
+            last = res;
+            if(res->type_ > opr->type_)
+                res = res->getMin(conv = res->convert(opr));
+            else
+                res = (conv = opr->convert(res))->getMin(opr);
+            delete last;
+            delete conv;
+        }
         return res;
     }
 };
-
-
-
 
 
 

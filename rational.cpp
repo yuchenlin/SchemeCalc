@@ -266,6 +266,8 @@ Number* Rational::gcd(Number* obj){
     LongInt num_abs = numerator_.getABS(), den_abs = tmpr->numerator_.getABS();
     LongInt BIG = max(num_abs,den_abs);
     LongInt SMALL = min(num_abs,den_abs);
+    if(SMALL==ZERO)
+        return new Rational(BIG,ONE);
     LongInt tmp = BIG % SMALL;
     
     while(tmp!=ZERO) // 辗转相除法 欧几里得
@@ -280,6 +282,7 @@ Number* Rational::gcd(Number* obj){
 
 
 Number* Rational::lcm(Number* obj){
+    
     Rational* tmpr = SCAST_RATIONAL(obj->toExact());
     assert(denominator_==ONE and tmpr->denominator_==ONE and "lcm operation is only for Integer Type !");
     return this->mul(tmpr)->div(this->gcd(tmpr))->abs();
