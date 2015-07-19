@@ -207,6 +207,49 @@ Number* Float::real_part(){
 Number* Float::toInexact(){
     return new Float(number_);
 }
+
+
+Number* Float::toExact(){
+    
+    if(isInteger())
+        return new Rational(::trunc(number_),ONE);
+    
+    double *px = &number_; //取地址为了进行分析
+    
+    //为了进行二进制操作 用重解释转换 换成 ll的指针
+    long long int* py = reinterpret_cast<long long int*>(px);
+    //取出值
+    long long int y=*py;
+    long long int p=1;
+    
+    bool v[100]={0};
+    
+    for (int i=1;i<=64;++i)
+        v[i] = y&p,y>>=1;
+    
+    int tmp=0;
+    for (int i=63;i>=53;--i)
+        tmp<<=1,tmp+=v[i];
+    tmp-=1022;
+    for (int i=1;i<=11;++i)
+        v[52+i] = tmp&p,tmp>>=1;
+    long long int i_num=0;
+    
+    for (int i=63;i>=1;--i)
+        i_num<<=1,i_num+=v[i];
+    string s_num="";
+    
+    while (i_num!=0)
+    {
+        s_num+=(char)(i_num%10+'0');
+        i_num/=10;
+    }
+    std::reverse(s_num.begin(),s_num.end());
+    LongInt num = s_num;
+    return new Rational(num,_one_pow_52);
+}
+
+/*
 Number* Float::toExact(){
     if(isInteger())
         return new Rational(trunc(number_),ONE);
@@ -227,8 +270,7 @@ Number* Float::toExact(){
     
     //然后用分子分母 初始化一个Rational 构造函数里进了reduce约分
     return new Rational(son,mom);
-}
-
+}*/
 
 
 

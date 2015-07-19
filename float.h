@@ -1,10 +1,12 @@
 #pragma once
 
 #include "number.h"
+#include "long_int.h"
 #include <cstring>
 #include <string>
 
 #define SCAST_FLOAT(x) static_cast<Float*>(x)
+const LongInt _one_pow_52("4503599627370496");
 
 class Float : public Number {
 public:
