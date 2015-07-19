@@ -19,8 +19,7 @@ Number *calc_exp(){
 		if(strcmp(tk1,"+")==0)opt=new Add();
 		else if(strcmp(tk1,"-")==0)opt=new Sub();
 		else if(strcmp(tk1,"*")==0)opt=new Mul();
-        else if(strcmp(tk1,"/")==0)opt=new Div();
-        
+        else if(strcmp(tk1,"/")==0)opt=new Div(); 
         else if(strcmp(tk1,"abs")==0)opt=new Abs();
         else if(strcmp(tk1,"sqrt")==0)opt=new Sqrt();
         else if(strcmp(tk1,"floor")==0)opt=new Floor();

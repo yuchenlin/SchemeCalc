@@ -193,25 +193,24 @@ Number* Float::toInexact(){
     return new Float(number_);
 }
 Number* Float::toExact(){
-    
-    
     if(isInteger())
         return new Rational(trunc(number_),ONE);
-    
-    //写在rational的convert函数内部的过程
     if(fabs(number_)<1e-8)
         return new Rational(ZERO,ONE);
     string dble;
-    //主要思想是利用string来处理小数点位 就怕正数部位太长
+    //主要思想是利用string来处理小数点位
     stringstream ss;
-    ss<<fixed<<setprecision(7)<<number_;
+    ss<<fixed<<setprecision(7)<<number_; //把这个double输出时保留7位小数
     ss>>dble;
-    int sp = dble.find(".");
-    //用字符串初始分子
+    int sp = dble.find("."); //找到小数点的位置
+    //用扣去小数点之后的字符串初始化一个LongInt的做分子
     LongInt son(dble.substr(0,sp)+dble.substr(sp+1,dble.length()-sp-1));
     string mom = "1";
+    //用和原始字符串的长度来初始化一个分母 1000000...n个0
     for (int k = 0; k< dble.length()-sp-1; ++k)
         mom.append("0");
+    
+    //然后用分子分母 初始化一个Rational 构造函数里进了reduce约分
     return new Rational(son,mom);
 }
 

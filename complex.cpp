@@ -382,11 +382,11 @@ Number* Complex::getMin(Number* obj){
 
 
 Number* Complex::imag_part(){
-    return imag_part();
+    return imag;
 }
 
 Number* Complex::real_part(){
-    return real_part();
+    return real;
 }
 
 Number* Complex::toExact(){
