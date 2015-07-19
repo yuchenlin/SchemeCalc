@@ -1,5 +1,6 @@
-#include "float.h"
+﻿#include "float.h"
 #include "rational.h"
+#include "complex.h"
 #include <cstdio>
 #include <cstdlib>
 #include <cassert>
@@ -72,7 +73,7 @@ Number *Float::mul(Number *number2)
 Number *Float::div(Number *number2)
 {
     Float *tmp = SCAST_FLOAT(number2);
-    assert(ABS(tmp->number_) > 1e-200 && "divide zero");
+    //assert(ABS(tmp->number_) > 1e-315 && "divide zero");
     Float *result = new Float(number_ / tmp->number_);
     return result;
 }
@@ -151,7 +152,13 @@ Number* Float::expt(Number* obj){
     return new Float(pow(number_, SCAST_FLOAT(obj)->number_));
 }
 Number* Float::sqrt(){
-    return new Float(::sqrt(number_));
+    if(number_>=0){
+        return new Float(::sqrt(number_));
+    }else{
+        Complex* c = new Complex(new Float(0),new Float(::sqrt(fabs(number_))));
+        c->isExact = false;
+        return c;
+    }
 }
 Number* Float::floor(){
     return new Float(::floor(number_));

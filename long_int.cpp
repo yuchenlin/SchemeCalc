@@ -358,10 +358,15 @@ LongInt LongInt::operator / (const LongInt &obj) const{
 
 //取余数 不考虑效率的做法....
 LongInt LongInt::operator % (const LongInt &obj) const{
+    assert (obj!=LongInt(0) and "devide zero");
+    return (*this - (*this / obj)*obj);
+}
+/*
+LongInt LongInt::operator % (const LongInt &obj) const{
     
     assert(obj!=0 && "devide zero");
     
-    bool negative = (*this < 0);
+    bool negative = ((*this < 0)^(obj<0));
     LongInt a = this->getABS() , b = obj.getABS();
     //两类特殊情况
     if(a <= b)
@@ -406,6 +411,7 @@ LongInt LongInt::operator % (const LongInt &obj) const{
     return res;
 }
 
+*/
 void LongInt::changeSign(){
     n.back() = -(n.back());
 }

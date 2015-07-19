@@ -70,6 +70,8 @@ Complex* Complex::from_string(char *expression){
         istr = "1";
     else if(istr == "-")
         istr = "-1";
+    else if (istr=="")
+        istr = "1";
     return new Complex(rstr,istr);
 }
 //从其他类型转换为Complex的时候
@@ -174,14 +176,10 @@ void Complex::print(){
         i->print();
         i = SCAST_FLOAT(imag);
         
-        if(i->number_ < 0){
-            imag->print();
-            cout<<"i";
-        }else if(i->number_ >= 0){
+        if(i->number_ >= 0)
             cout<<"+";
-            imag->print();
-            cout<<"i";
-        }
+        imag->print();
+        cout<<"i";
     }
 }
 //FromString的部分最后一步
@@ -327,10 +325,21 @@ Number* Complex::lcm(Number* obj){
         (SCAST_FLOAT(this->real->lcm(tempc->real))->number_);
     
 }
+#include <complex>
 Number* Complex::expt(Number* obj){
     Complex* tempc = SCAST_COMPLEX(obj);
-    assert(isReal() and tempc->isReal() and "expt is only for real number");
-    return new Float(SCAST_FLOAT(real->expt(tempc->real))->number_);
+    Complex* a = SCAST_COMPLEX(this->toInexact());
+    Complex* b = SCAST_COMPLEX(tempc->toInexact());
+    complex<double> ca(SCAST_FLOAT(a->real)->number_,SCAST_FLOAT(a->imag)->number_);
+    complex<double> cb(SCAST_FLOAT(b->real)->number_,SCAST_FLOAT(b->imag)->number_);
+    complex<double> cres = exp(cb*log(ca));
+    Complex* res = new Complex();
+    res->isExact = false;
+    res->real = new Float(::real(cres));
+    res->imag = new Float(::imag(cres));
+    delete a;
+    delete b;
+    return res;
 }
 
 

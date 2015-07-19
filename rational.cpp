@@ -1,5 +1,6 @@
 
 #include "float.h"
+#include "complex.h"
 #include "rational.h"
 #include <cassert>
 #include <cstdlib>
@@ -230,8 +231,7 @@ Number* Rational::modulo(Number* obj){
     if(numerator_.n.back() * tmpr->numerator_.n.back() >= 0) //除数和被除数同号
         return new Rational(numerator_ % tmpr->numerator_ , ONE);
     else
-        return new Rational(numerator_ % tmpr->numerator_
-                                            + tmpr->numerator_ , ONE);
+        return new Rational(numerator_ % tmpr->numerator_+ tmpr->numerator_ , ONE);
 }
 Number* Rational::numerator(){
     return new Rational(numerator_,ONE);
@@ -285,6 +285,8 @@ Number* Rational::lcm(Number* obj){
     
     Rational* tmpr = SCAST_RATIONAL(obj->toExact());
     assert(denominator_==ONE and tmpr->denominator_==ONE and "lcm operation is only for Integer Type !");
+    if(this->numerator_ == ZERO and tmpr->numerator_==ZERO)
+        return new Rational(ZERO,ONE);
     return this->mul(tmpr)->div(this->gcd(tmpr))->abs();
 }
 
@@ -325,10 +327,18 @@ Number* Rational::round(){
 
 
 Number* Rational::sqrt(){
-    assert( sgn()>=0 and "sqrt is for positive number" );
-    double res = *this; //已经重载了double的类型转换
-    res = ::sqrt(res);
-    return new Float(res);
+//    assert( sgn()>=0 and "sqrt is for positive number" );
+    if(sgn()>=0){
+        double res = *this; //已经重载了double的类型转换
+        res = ::sqrt(res);
+        return new Float(res);
+    }else{
+        double res = *this;
+        res = ::sqrt(fabs(res));
+        Complex* c = new Complex(new Float(0),new Float(res));
+        c->isExact = false;
+        return c;
+    }
 }
 
 
