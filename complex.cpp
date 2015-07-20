@@ -330,6 +330,7 @@ Number* Complex::expt(Number* obj){
     Complex* tempc = SCAST_COMPLEX(obj);
     Complex* a = SCAST_COMPLEX(this->toInexact());
     Complex* b = SCAST_COMPLEX(tempc->toInexact());
+    
     complex<double> ca(SCAST_FLOAT(a->real)->number_,SCAST_FLOAT(a->imag)->number_);
     complex<double> cb(SCAST_FLOAT(b->real)->number_,SCAST_FLOAT(b->imag)->number_);
     complex<double> cres = exp(cb*log(ca));
