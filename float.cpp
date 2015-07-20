@@ -189,11 +189,9 @@ Number* Float::getMin(Number* obj){
 }
 //不知道这两个什么鬼 要先转换成Exact才可以吧
 Number* Float::numerator(){
-//    assert(isInteger() and "numerator is only for integer");
     return this->toExact()->numerator();
 }
 Number* Float::denominator(){
-//    assert(isInteger() and "denominator is only for integer");
     return this->toExact()->denominator();
 }
 
