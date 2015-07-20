@@ -4,29 +4,21 @@
 #include <string>
 using namespace std;
 
-int main(){
+int main1(){
     
     try {
-        Number *res;
-        for(;;){
+        Base *res;
+//        for(;;){
             res = calc_exp();
             res -> print();
             cout<<endl;
-        }
+//        }
 	}
 	catch(int){cerr<<"Wrong";}
-	//system("pause");
     return 0;
 }
 
-
-//int main1()
-//{
-//    
-//    char* s = "1-123i";
-//    Complex* c = Complex::from_string(s);
-//    c->print();
-//    
-//	return 0;
-//}
-
+int main(){
+    Boolean b(true);
+    b.print();
+}

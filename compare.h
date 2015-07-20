@@ -23,10 +23,10 @@ class Add : public Opt {
 		Number *last;
         for (; con; con = con->cdr)
         {
-			if(con->car->type_>3||con->car->type_<1)
+            Number *opr = SCAST_NUMBER( con->car ), *conv;
+			if(opr->type_>3||opr->type_<1)
                 throw 0;
-            Number *opr = con->car, *conv;
-            last = res;
+                        last = res;
             //cout<<"opr type: "<<opr->type_<<endl;
                 
             if (res->type_ >= opr->type_)
@@ -53,14 +53,14 @@ class Sub:public Opt{
 		int cnt=0;
 		for(;tmp;tmp=tmp->cdr)
 		{
-			if(tmp->car->type_>3||tmp->car->type_<1)
+			if(SCAST_NUMBER(tmp->car)->type_>3||SCAST_NUMBER(tmp->car)->type_<1)
 			{
 				throw 0;
 			}
 			cnt++;
 		}
 		Number *res=new Rational(0, 1),*last;
-		Number *opr = con->car, *conv;
+		Number *opr = SCAST_NUMBER(con->car), *conv;
 		last=res;
 		if(cnt==1)
 		{
@@ -81,7 +81,7 @@ class Sub:public Opt{
         delete conv;
 		for(;con;con=con->cdr)
 		{
-			opr=con->car;
+			opr=SCAST_NUMBER(con->car);
 			last=res;
 			if(res->type_>opr->type_)
 				res=res->sub(conv=res->convert(opr));
@@ -100,11 +100,11 @@ class Mul : public Opt {
         Number *res = new Rational(1, 1), *last;
         for (; con; con = con->cdr)
         {
-			if(con->car->type_>3||con->car->type_<1)
+			if(SCAST_NUMBER(con->car)->type_>3||SCAST_NUMBER(con->car)->type_<1)
 			{
 				throw 0;
 			}
-            Number *opr = con->car, *conv;
+            Number *opr = SCAST_NUMBER(con->car), *conv;
             last = res;
             if (res->type_ > opr->type_)
                 res = res->mul(conv = res->convert(opr));
@@ -127,14 +127,14 @@ class Div:public Opt{
 		int cnt=0;
 		for(;tmp;tmp=tmp->cdr)
 		{
-			if(tmp->car->type_>3||tmp->car->type_<1)
+			if(SCAST_NUMBER(tmp->car)->type_>3||SCAST_NUMBER(tmp->car)->type_<1)
 			{
 				throw 0;
 			}
 			cnt++;
 		}
 		Number *res=new Rational(1,1),*last;
-		Number *opr=con->car,*conv;
+		Number *opr = SCAST_NUMBER(con->car),*conv;
 		last=res;
 		Number *zero = new Float(0.0);
 		if(cnt==1)
@@ -156,7 +156,7 @@ class Div:public Opt{
 		delete conv;
 		for(;con;con=con->cdr)
 		{
-			opr=con->car;
+			opr=SCAST_NUMBER(con->car);
 			last=res;
 			if(res->type_>opr->type_)
 				res=res->div(conv=res->convert(opr));
@@ -178,12 +178,12 @@ class Abs : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(contmp->car->type_>3||contmp->car->type_<1)
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car ;
+        Number *opr = SCAST_NUMBER(con->car);
         Number *res = opr->abs();
         return res;
     }
@@ -195,12 +195,12 @@ class Sqrt : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(contmp->car->type_>3||contmp->car->type_<1)
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car ;
+        Number *opr = SCAST_NUMBER(con->car);
         Number *res = opr->sqrt();
         return res;
     }
@@ -212,12 +212,12 @@ class Floor : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(contmp->car->type_>3||contmp->car->type_<1)
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car ;
+        Number *opr = SCAST_NUMBER(con->car);
         Number *res = opr->floor();
         return res;
     }
@@ -229,12 +229,12 @@ class Ceiling : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(contmp->car->type_>3||contmp->car->type_<1)
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car ;
+        Number *opr = SCAST_NUMBER(con->car);
         Number *res = opr->ceiling();
         return res;
     }
@@ -245,12 +245,12 @@ class Truncate : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(contmp->car->type_>3||contmp->car->type_<1)
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car ;
+        Number *opr = SCAST_NUMBER(con->car);
         Number *res = opr->truncate();
         return res;
     }
@@ -262,12 +262,12 @@ class Round : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(contmp->car->type_>3||contmp->car->type_<1)
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car ;
+        Number *opr = SCAST_NUMBER(con->car);
         Number *res = opr->round();
         return res;
     }
@@ -279,12 +279,12 @@ class Numerator : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(contmp->car->type_>3||contmp->car->type_<1)
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car ;
+        Number *opr = SCAST_NUMBER(con->car);
         Number *res = opr->numerator();
         return res;
     }
@@ -296,12 +296,12 @@ class Denominator : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(contmp->car->type_>3||contmp->car->type_<1)
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car ;
+        Number *opr = SCAST_NUMBER(con->car);
         Number *res = opr->denominator();
         return res;
     }
@@ -313,12 +313,12 @@ class ImagPart : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(contmp->car->type_>3||contmp->car->type_<1)
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car ;
+        Number *opr = SCAST_NUMBER(con->car);
         Number *res = opr->imag_part();
         return res;
     }
@@ -330,12 +330,12 @@ class RealPart : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(contmp->car->type_>3||contmp->car->type_<1)
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car ;
+        Number *opr = SCAST_NUMBER(con->car);
         Number *res = opr->real_part();
         return res;
     }
@@ -346,12 +346,12 @@ class GetExact : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(contmp->car->type_>3||contmp->car->type_<1)
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car ;
+        Number *opr = SCAST_NUMBER(con->car);
         Number *res = opr->toExact();
         return res;
     }
@@ -363,12 +363,12 @@ class ToInexact : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(contmp->car->type_>3||contmp->car->type_<1)
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = con->car ;
+        Number *opr = SCAST_NUMBER(con->car);
         Number *res = opr->toInexact();
         return res;
     }
@@ -381,13 +381,13 @@ class Quotient : public Opt{
         Cons *tmp = con;
         int cnt = 0;
         for (; tmp; tmp=tmp->cdr) {
-            if(tmp->car->type_>3 or tmp->car->type_<1)
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt>2)
             assert(0 and "Quotient is only for two values");
-        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
         Number* res,* last;
         
         if(opr1->type_ >= opr2->type_)
@@ -407,13 +407,13 @@ class Remainder : public Opt{
         Cons *tmp = con;
         int cnt = 0;
         for (; tmp; tmp=tmp->cdr) {
-            if(tmp->car->type_>3 or tmp->car->type_<1)
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt>2)
             assert(0 and "Remainder is only for two values");
-        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
         Number* res,* last;
         
         if(opr1->type_ > opr2->type_)
@@ -432,13 +432,13 @@ class Modulo : public Opt{
         Cons *tmp = con;
         int cnt = 0;
         for (; tmp; tmp=tmp->cdr) {
-            if(tmp->car->type_>3 or tmp->car->type_<1)
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt>2)
             assert(0 and "Modulo is only for two values");
-        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
         Number* res,* last;
         
         if(opr1->type_ > opr2->type_)
@@ -456,13 +456,13 @@ class Expt : public Opt{
         Cons *tmp = con;
         int cnt = 0;
         for (; tmp; tmp=tmp->cdr) {
-            if(tmp->car->type_>3 or tmp->car->type_<1)
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
         if(cnt>2)
             assert(0 and "Expt is only for two values");
-        Number* opr1 = con->car, *opr2 = con->cdr->car,*conv;
+        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
         Number* res,* last;
         
         if(opr1->type_ > opr2->type_)
@@ -482,9 +482,9 @@ class GCD : public Opt{
         Number* res,*last;
         res = new Rational(0,1);
         for (; con; con=con->cdr) {
-            if(con->car->type_>3 or con->car->type_<1)
+            if(SCAST_NUMBER(con->car)->type_>3 or SCAST_NUMBER(con->car)->type_<1)
                 throw 0;
-            Number* opr = con->car, *conv;
+            Number* opr = SCAST_NUMBER(con->car), *conv;
             last = res;
             if(res->type_ > opr->type_)
                 res = res->gcd(conv= res->convert(opr));
@@ -505,9 +505,11 @@ class LCM : public Opt{
         Number* res,*last;
         res = new Rational(1,1);
         for (; con; con=con->cdr) {
-            if(con->car->type_>3 or con->car->type_<1)
+            if(SCAST_NUMBER(con->car)->type_>3 or SCAST_NUMBER(con->car)->type_<1)
+
                 throw 0;
-            Number* opr = con->car, *conv;
+            Number* opr = SCAST_NUMBER(con->car), *conv;
+
             last = res;
             if(res->type_ > opr->type_)
                 res = res->lcm(conv= res->convert(opr));
@@ -529,7 +531,7 @@ class GetMax : public Opt{
         Cons *tmp = con;
         int cnt = 0;
         for (; tmp; tmp=tmp->cdr) {
-            if(tmp->car->type_>3 or tmp->car->type_<1)
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
@@ -537,11 +539,12 @@ class GetMax : public Opt{
         
         
         Number* res,* last;
-        Number* opr = con->car, *conv;
+        Number* opr = SCAST_NUMBER(con->car), *conv;
+
         res = opr;
         con = con->cdr;
         for (; con; con=con->cdr) {
-            opr = con->car;
+            opr = SCAST_NUMBER(con->car);
             last = res;
             if(res->type_ > opr->type_)
                 res = res->getMax(conv = res->convert(opr));
@@ -561,7 +564,7 @@ class GetMin : public Opt{
         Cons *tmp = con;
         int cnt = 0;
         for (; tmp; tmp=tmp->cdr) {
-            if(tmp->car->type_>3 or tmp->car->type_<1)
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
                 throw 0;
             cnt++;
         }
@@ -569,11 +572,12 @@ class GetMin : public Opt{
         
         
         Number* res,* last;
-        Number* opr = con->car, *conv;
+        Number* opr = SCAST_NUMBER(con->car), *conv;
+
         res = opr;
         con = con->cdr;
         for (; con; con=con->cdr) {
-            opr = con->car;
+            opr = SCAST_NUMBER(con->car);
             last = res;
             if(res->type_ > opr->type_)
                 res = res->getMin(conv = res->convert(opr));

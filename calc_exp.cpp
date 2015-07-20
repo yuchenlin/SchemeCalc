@@ -6,15 +6,16 @@
 #include <string>
 #include <cstdio>
 
-Number *calc_exp(){
+Base *calc_exp(){
+    
     char *tk0 = next_token();
-    Number *res;
+    Base *res;
     if (*tk0 == '(')
     {
         char *tk1 = next_token(); 
         Opt *opt;
         Cons *cons = new Cons(NULL, NULL), *tail = cons;
-        Number *val;
+        Base *val;
 		if(tk1==NULL){printf("123");throw 0;}
 		if(strcmp(tk1,"+")==0)opt=new Add();
 		else if(strcmp(tk1,"-")==0)opt=new Sub();
@@ -43,9 +44,8 @@ Number *calc_exp(){
         else if(strcmp(tk1,"max")==0)opt=new GetMax();
         else if(strcmp(tk1,"min")==0)opt=new GetMin();
         else throw 0;
-        while ((val = calc_exp()))
+        while ((val = (calc_exp())))
         {
-           // cout << "test";
             tail->cdr = new Cons(val, NULL);
             tail = tail->cdr;
         }
@@ -62,14 +62,13 @@ Number *calc_exp(){
 	}
     else
     {
-        
         // 增加尝试复数
 		res=Rational::from_string(tk0);
 		if(!res)
             res = Float::from_string(tk0);
         if(!res)
             res = Complex::from_string(tk0);
-		if(res==NULL)      
+		if(res == NULL)
             throw 0;
     }
     return res;

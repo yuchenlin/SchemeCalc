@@ -5,4 +5,6 @@
 #include "complex.h"
 #include <cstring>
 #include <string>
-Number* calc_exp();
+#include "boolean.h"
+#include "base.h"
+Base* calc_exp();

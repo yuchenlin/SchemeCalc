@@ -3,14 +3,19 @@
 #define SCAST_NUMBER(x) static_cast<Number*>(x)
 #include <cstring>
 #include <string>
-class Number {
+#include "base.h"
+
+
+class Number : public Base{
 public:
 	enum{
 		RATIONAL = 1,
 		FLOAT = 2,
         COMPLEX=3
 	} type_;
-	Number(){}
+	Number(){
+        clasType = NUMBER;
+    }
 	virtual ~Number(){}
 	virtual Number* convert(Number *number2) = 0;
 	virtual Number *add(Number *number2)  = 0;

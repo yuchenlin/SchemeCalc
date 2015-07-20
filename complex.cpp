@@ -360,45 +360,36 @@ Number* Complex::ceiling(){
 Number* Complex::truncate(){
     assert(isReal() and "truncate is only for real number");
     return real->truncate();
-}
-
+} 
 Number* Complex::round(){
     assert(isReal() and "round is only for real number");
     return real->truncate();
-}
-
-
+} 
 Number* Complex::numerator(){
     assert(isReal() and isExact and "numerator is for integer");
     return real->numerator();
-}
-
+}  
 Number* Complex::denominator(){
     assert(isReal() and isExact and "denominator is for integer");
     return real->denominator();
-}
-
+} 
 Number* Complex::getMax(Number* obj){
     Complex* tempc = SCAST_COMPLEX(obj);
     assert(isReal() and tempc->isReal() and "getMax is only for real numbers");
     return real->getMax(tempc->real);
-}
-
+} 
 Number* Complex::getMin(Number* obj){
     Complex* tempc = SCAST_COMPLEX(obj);
     assert(isReal() and tempc->isReal() and "getMin is only for real numbers");
     return real->getMin(tempc->real);
-}
-
+} 
 
 Number* Complex::imag_part(){
     return imag;
-}
-
+} 
 Number* Complex::real_part(){
     return real;
-}
-
+} 
 Number* Complex::toExact(){
     Complex* res = new Complex();
     res->isExact = true;
@@ -406,8 +397,7 @@ Number* Complex::toExact(){
     res->imag = imag->toExact();
     return res;
     
-}
-
+} 
 Number* Complex::toInexact(){
     Complex* res = new Complex();
     res->isExact = false;
