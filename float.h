@@ -2,6 +2,7 @@
 
 #include "number.h"
 #include "long_int.h"
+#include "boolean.h"
 #include <cstring>
 #include <string>
 
@@ -61,7 +62,25 @@ public:
     virtual Number* magnitude();
     virtual Number* angle();
 
+   //精度判断
+    virtual Boolean* JudgeExact();
+    virtual Boolean* JudgeInExact();
+   //属性判断
+    virtual Boolean* JudgeZero();
+    virtual Boolean* JudgeNegative();
+    virtual Boolean* JudgePositive();
+    virtual Boolean* JudgeOdd();
+    virtual Boolean* JudgeEven();
 
-
+    //类型判断
+   virtual Boolean* JudgeInteger();
+   virtual Boolean* JudgeRational();
+   virtual Boolean* JudgeReal();
+   virtual Boolean* JudgeComplex();
+//不等判断
+   virtual Boolean* JudgeLessThan(Number* obj);
+   virtual Boolean* JudgeGreaterThan(Number* obj);
+   virtual Boolean* JudgeLessThanOrEuqalTo(Number* obj);
+   virtual Boolean* JudgeGreaterThanOrEuqalTo(Number* obj);
 };
 

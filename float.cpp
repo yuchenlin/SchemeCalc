@@ -1,5 +1,6 @@
 ﻿#include "float.h"
 #include "rational.h"
+#include "boolean.h"
 #include "complex.h"
 #include <cstdio>
 #include <cstdlib>
@@ -272,6 +273,70 @@ Number* Float::magnitude(){
 Number* Float::angle(){
     complex<double> cres(0,number_);
     return new Float(std::arg(cres));
+}
+
+
+Boolean* Float::JudgeExact(){
+    return new Boolean(false);
+}
+
+
+Boolean* Float::JudgeInExact(){
+    return new Boolean(true);
+}
+
+Boolean* Float::JudgeZero(){
+    return new Boolean(number_ == 0);
+}
+
+Boolean* Float::JudgeNegative(){
+    return new Boolean(number_ < 0);
+}
+
+Boolean* Float::JudgePositive(){
+    return new Boolean(number_ > 0);
+}
+
+Boolean* Float::JudgeOdd(){
+    if(isInteger()){
+        return new Boolean(trunc(number_)%2==1));
+    }else
+        assert(0 and "for integer");
+        return NULL;
+}
+
+Boolean* Float::JudgeEven(){
+    if(isInteger()){
+        return new Boolean(trunc(number_)%2==0));
+    }else
+        assert(0 and "for integer");
+        return NULL;
+}
+//类型判断
+Boolean* Float::JudgeInteger(){
+    return new Boolean(isInteger());
+}
+Boolean* Float::JudgeRational(){
+    return new Boolean(true);
+}
+Boolean* Float::JudgeReal(){
+    return new Boolean(true);
+}
+Boolean* Float::JudgeComplex(){
+    return new Boolean(true);
+} 
+//不等判断
+Boolean* Float::JudgeLessThan(Number* obj){
+    return new Boolean(number_ < SCAST_FLOAT(obj)->number_);
+}
+Boolean* Float::JudgeGreaterThan(Number* obj){
+    return new Boolean(number_ > SCAST_FLOAT(obj)->number_);
+}
+Boolean* Float::JudgeLessThanOrEuqalTo(Number* obj){
+    return new Boolean(number_ <= SCAST_FLOAT(obj)->number_);
+}
+Boolean* Float::JudgeGreaterThanOrEuqalTo(Number* obj){
+    return new Boolean(number_ >= SCAST_FLOAT(obj)->number_);
 }
 
 

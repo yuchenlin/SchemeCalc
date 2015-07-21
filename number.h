@@ -81,18 +81,20 @@ public:
     virtual Boolean* JudgeOdd()=0;
     virtual Boolean* JudgeEven()=0;
     
-//    //类型判断
-//    virtual Boolean* JudgeInteger()=0;
-//    virtual Boolean* JudgeRational()=0;
-//    virtual Boolean* JudgeReal()=0;
-//    virtual Boolean* JudgeComplex()=0;
-//    virtual Boolean* JudgeNumber()=0;
-      //不等判断
-//    virtual Boolean* JudgeLessThan()=0;
-//    virtual Boolean* JudgeGreaterThan()=0;
-//    virtual Boolean* JudgeLessThanOrEuqalTo()=0;
-//    virtual Boolean* JudgeLessThanOrEuqalTo()=0;
-//    
+   //类型判断
+    virtual Boolean* JudgeNumber(){ //此函数不是抽象函数
+        return new Boolean(true);
+    }
+    virtual Boolean* JudgeInteger()=0;
+    virtual Boolean* JudgeRational()=0;
+    virtual Boolean* JudgeReal()=0;
+    virtual Boolean* JudgeComplex()=0;
+    //不等判断
+    virtual Boolean* JudgeLessThan(Number* obj)=0;
+    virtual Boolean* JudgeGreaterThan(Number* obj)=0;
+    virtual Boolean* JudgeLessThanOrEuqalTo(Number* obj)=0;
+    virtual Boolean* JudgeGreaterThanOrEuqalTo(Number* obj)=0;
+   
 };
 
 

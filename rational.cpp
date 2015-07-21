@@ -251,6 +251,8 @@ Number* Rational::real_part(){
     return new Rational(numerator_,denominator_);
 }
 
+
+
 Number* Rational::getMax(Number* obj){
     Rational* toCheck = SCAST_RATIONAL(this->sub(obj->toExact()));
     return new Rational(toCheck->sgn()>=0 ? (*this) :(*(SCAST_RATIONAL(obj))));
@@ -425,3 +427,87 @@ Number* Rational::toInexact(){
 Number* Rational::toExact(){
     return new Rational(*this);
 }
+
+
+Boolean* Rational::JudgeExact(){
+    return new Boolean(true);
+}
+
+
+Boolean* Rational::JudgeInExact(){
+    return new Boolean(false);
+}
+
+Boolean* Rational::JudgeZero(){
+    return new Boolean(numerator_ == ZERO);
+}
+
+Boolean* Rational::JudgeNegative(){
+    return new Boolean(sgn() < 0);
+}
+
+Boolean* Rational::JudgePositive(){
+    return new Boolean(sgn() > 0);
+}
+
+Boolean* Rational::JudgeOdd(){
+    if(JudgeInteger()->flag){
+        return new Boolean(numerator_ %2 == ONE);
+    }else
+        assert(0 and "for integer");
+        return NULL;
+}
+
+Boolean* Rational::JudgeEven(){
+    if(JudgeInteger()->flag){
+        return new Boolean(numerator_ %2 == ZERO);
+    }else
+        assert(0 and "for integer");
+        return NULL;
+}
+//类型判断
+Boolean* Rational::JudgeInteger(){
+    return new Boolean(denominator_ == ONE);
+}
+Boolean* Rational::JudgeRational(){
+    return new Boolean(true);
+}
+Boolean* Rational::JudgeReal(){
+    return new Boolean(true);
+}
+Boolean* Rational::JudgeComplex(){
+    return new Boolean(true);
+} 
+// 不等判断
+
+
+Boolean* Rational::JudgeLessThan(Number* obj){
+    return new Boolean(*this<obj);
+}
+Boolean* Rational::JudgeGreaterThan(Number* obj){
+    return new Boolean(*this>obj);
+}
+Boolean* Rational::JudgeLessThanOrEuqalTo(Number* obj){
+    return new Boolean(*this<=obj);
+}
+Boolean* Rational::JudgeGreaterThanOrEuqalTo(Number* obj){
+    return new Boolean(*this>=obj);
+}
+
+
+bool Rational::operator < (const Ratinal& obj){
+    Rational* toCheck = SCAST_RATIONAL(this->sub(obj->toExact()));
+    return toCheck->sgn < 0;
+}
+bool Rational::operator > (const Ratinal& obj){
+    return obj < *this ;
+}
+bool Rational::operator <= (const Ratinal& obj){
+    return !(*this>obj);
+}
+bool Rational::operator >= (const Rational& obj){
+    return !(*this<obj);
+}
+
+
+
