@@ -13,8 +13,10 @@
 #include <iostream>
 #include <cstring>
 #include "complex.h"
-
+#include <complex>
 #include <cmath>
+
+using namespace std;
 
 Complex::~Complex(){
     delete real;
@@ -325,7 +327,7 @@ Number* Complex::lcm(Number* obj){
         (SCAST_FLOAT(this->real->lcm(tempc->real))->number_);
     
 }
-#include <complex>
+
 Number* Complex::expt(Number* obj){
     Complex* tempc = SCAST_COMPLEX(obj);
     Complex* a = SCAST_COMPLEX(this->toInexact());
@@ -404,9 +406,89 @@ Number* Complex::toInexact(){
     res->real = real->toInexact();
     res->imag = imag->toInexact();
     return res;
+} 
+
+
+Number* Complex::sin(){
+    Complex* a = SCAST_COMPLEX(this->toInexact());
+    complex<double> ca
+    (SCAST_FLOAT(a->real)->number_,
+        SCAST_FLOAT(a->imag)->number_);
+    complex<double> cres = std::sin(ca);
+    Complex* res = new Complex();
+    res->isExact = false;
+    res->real = new Float(::real(cres));
+    res->imag = new Float(::imag(cres));
+    delete a;
+    return res;
 }
 
+Number* Complex::asin(){
+    Complex* a = SCAST_COMPLEX(this->toInexact());
+    complex<double> ca
+    (SCAST_FLOAT(a->real)->number_,
+     SCAST_FLOAT(a->imag)->number_);
+    complex<double> cres = std::asin(ca);
+    Complex* res = new Complex();
+    res->isExact = false;
+    res->real = new Float(::real(cres));
+    res->imag = new Float(::imag(cres));
+    delete a;
+    return res;
+}
 
+Number* Complex::cos(){
+    Complex* a = SCAST_COMPLEX(this->toInexact());
+    complex<double> ca
+    (SCAST_FLOAT(a->real)->number_,
+     SCAST_FLOAT(a->imag)->number_);
+    complex<double> cres = std::cos(ca);
+    Complex* res = new Complex();
+    res->isExact = false;
+    res->real = new Float(::real(cres));
+    res->imag = new Float(::imag(cres));
+    delete a;
+    return res;
+}
+Number* Complex::acos(){
+    Complex* a = SCAST_COMPLEX(this->toInexact());
+    complex<double> ca
+    (SCAST_FLOAT(a->real)->number_,
+     SCAST_FLOAT(a->imag)->number_);
+    complex<double> cres = std::acos(ca);
+    Complex* res = new Complex();
+    res->isExact = false;
+    res->real = new Float(::real(cres));
+    res->imag = new Float(::imag(cres));
+    delete a;
+    return res;
+}
+Number* Complex::tan(){
+    Complex* a = SCAST_COMPLEX(this->toInexact());
+    complex<double> ca
+    (SCAST_FLOAT(a->real)->number_,
+     SCAST_FLOAT(a->imag)->number_);
+    complex<double> cres = std::tan(ca);
+    Complex* res = new Complex();
+    res->isExact = false;
+    res->real = new Float(::real(cres));
+    res->imag = new Float(::imag(cres));
+    delete a;
+    return res;
+}
+Number* Complex::atan(){
+    Complex* a = SCAST_COMPLEX(this->toInexact());
+    complex<double> ca
+    (SCAST_FLOAT(a->real)->number_,
+     SCAST_FLOAT(a->imag)->number_);
+    complex<double> cres = std::atan(ca);
+    Complex* res = new Complex();
+    res->isExact = false;
+    res->real = new Float(::real(cres));
+    res->imag = new Float(::imag(cres));
+    delete a;
+    return res;
+}
 
 
 

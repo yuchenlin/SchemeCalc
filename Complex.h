@@ -57,6 +57,17 @@ public:
     virtual Number* toInexact();
     virtual Number* toExact();
     
+    
+    //三角函数
+    virtual Number* sin();
+    virtual Number* cos();
+    virtual Number* tan();
+    virtual Number* asin();
+    virtual Number* acos();
+    virtual Number* atan();
+    
+    
+    
     bool isReal();//
     
     bool isInteger();//

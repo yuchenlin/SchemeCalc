@@ -218,69 +218,27 @@ Number* Float::toExact(){
     return new Rational(LongInt(son),LongInt(mom));
 }
 
-/*
- 尚氏特色.....
- double *px = &number_; //取地址为了进行分析
- 
- //为了进行二进制操作 用重解释转换 换成 ll的指针
- long long int* py = reinterpret_cast<long long int*>(px);
- //取出值
- long long int y=*py;
- long long int p=1;
- 
- bool v[100]={0};
- 
- for (int i=1;i<=64;++i)
- v[i] = y&p,y>>=1;
- 
- int tmp=0;
- for (int i=63;i>=53;--i)
- tmp<<=1,tmp+=v[i];
- tmp-=1022;
- for (int i=1;i<=11;++i)
- v[52+i] = tmp&p,tmp>>=1;
- long long int i_num=0;
- 
- for (int i=63;i>=1;--i)
- i_num<<=1,i_num+=v[i];
- string s_num="";
- 
- while (i_num!=0)
- {
- s_num+=(char)(i_num%10+'0');
- i_num/=10;
- }
- std::reverse(s_num.begin(),s_num.end());
- LongInt num = s_num;
- return new Rational(num,_one_pow_52);
- */
 
-/*
-Number* Float::toExact(){
-    if(isInteger())
-        return new Rational(trunc(number_),ONE);
-    if(fabs(number_)<1e-8)
-        return new Rational(ZERO,ONE);
-    string dble;
-    //主要思想是利用string来处理小数点位
-    stringstream ss;
-    ss<<fixed<<setprecision(7)<<number_; //把这个double输出时保留7位小数
-    ss>>dble;
-    int sp = dble.find("."); //找到小数点的位置
-    //用扣去小数点之后的字符串初始化一个LongInt的做分子
-    LongInt son(dble.substr(0,sp)+dble.substr(sp+1,dble.length()-sp-1));
-    string mom = "1";
-    //用和原始字符串的长度来初始化一个分母 1000000...n个0
-    for (int k = 0; k< dble.length()-sp-1; ++k)
-        mom.append("0");
-    
-    //然后用分子分母 初始化一个Rational 构造函数里进了reduce约分
-    return new Rational(son,mom);
-}*/
+Number* Float::sin(){
+    return new Float(::sin(number_));
+}
 
+Number* Float::asin(){
+    return new Float(::asin(number_));
+}
 
-
-
+Number* Float::cos(){
+    return new Float(::cos(number_));
+}
+Number* Float::acos(){
+    return new Float(::acos(number_));
+}
+Number* Float::tan(){
+    return new Float(::tan(number_));
+}
+Number* Float::atan(){
+    return new Float(::atan(number_));
+}
 
 
 

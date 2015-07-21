@@ -2,9 +2,11 @@
 #include <iostream>
 #include <cstring>
 #include <string>
+#include <complex>
+#include <cmath>
 using namespace std;
 
-int main1(){
+int main(){
     
     try {
         Base *res;
@@ -18,7 +20,9 @@ int main1(){
     return 0;
 }
 
-int main(){
-    Boolean b(true);
-    b.print();
+int main1(){
+    complex<double> ca(1.1, 1.2);
+    cout<<asin(ca)<<endl;
+    cout<<"sad"<<endl;
+    return 0;
 }

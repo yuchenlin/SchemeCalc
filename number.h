@@ -4,6 +4,7 @@
 #include <cstring>
 #include <string>
 #include "base.h"
+#include "boolean.h"
 
 
 class Number : public Base{
@@ -48,6 +49,47 @@ public:
     virtual Number* getMax(Number* obj)=0;
     virtual Number* getMin(Number * obj)=0;
     
+    //Week3新增函数
+    
+    //三角函数
+    virtual Number* sin()=0;
+    virtual Number* cos()=0;
+    virtual Number* tan()=0;
+    virtual Number* asin()=0;
+    virtual Number* acos()=0;
+    virtual Number* atan()=0;
+    
+//    //幂和对数
+//    virtual Number* exp()=0;
+//    virtual Number* log()=0;
+//    //复数运算
+//    virtual Number* rectangular()=0;
+//    virtual Number* polar()=0;
+//    virtual Number* magnitude()=0;
+//    virtual Number* angle()=0;
+//    
+//    //判断类函数
+//    //精度判断
+//    virtual Boolean* JudgeExact()=0;
+//    virtual Boolean* JudgeInExact()=0;
+//    //属性判断
+//    virtual Boolean* JudgeZero()=0;
+//    virtual Boolean* JudgeNegative()=0;
+//    virtual Boolean* JudgePositive()=0;
+//    virtual Boolean* JudgeOdd()=0;
+//    virtual Boolean* JudgeEven()=0;
+//    //类型判断
+//    virtual Boolean* JudgeInteger()=0;
+//    virtual Boolean* JudgeRational()=0;
+//    virtual Boolean* JudgeReal()=0;
+//    virtual Boolean* JudgeComplex()=0;
+//    virtual Boolean* JudgeNumber()=0;
+      //不等判断
+//    virtual Boolean* JudgeLessThan()=0;
+//    virtual Boolean* JudgeGreaterThan()=0;
+//    virtual Boolean* JudgeLessThanOrEuqalTo()=0;
+//    virtual Boolean* JudgeLessThanOrEuqalTo()=0;
+//    
 };
 
 

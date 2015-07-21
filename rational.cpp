@@ -355,6 +355,28 @@ Number* Rational::expt(Number* obj){
     }
 }
 
+Number* Rational::sin(){
+    return new Float(::sin(double(*this)));
+}
+
+Number* Rational::asin(){
+    return new Float(::asin(double(*this)));
+}
+
+Number* Rational::cos(){
+    return new Float(::cos(double(*this)));
+}
+Number* Rational::acos(){
+    return new Float(::acos(double(*this)));
+}
+Number* Rational::tan(){
+    return new Float(::tan(double(*this)));
+}
+Number* Rational::atan(){
+    return new Float(::atan(double(*this)));
+}
+
+
 Number* Rational::toInexact(){
     return new Float(*this);
 }
