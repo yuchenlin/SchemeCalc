@@ -239,6 +239,12 @@ Number* Float::tan(){
 Number* Float::atan(){
     return new Float(::atan(number_));
 }
+Number* Float::exp(){
+    return new Float(::exp(number_));
+}
+Number* Float::log(){
+    return new Float(::log(number_));
+}
 
 
 

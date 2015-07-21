@@ -377,6 +377,14 @@ Number* Rational::atan(){
 }
 
 
+Number* Rational::exp(){
+    return new Float(::exp(double(*this)));
+}
+Number* Rational::log(){
+    return new Float(::log(double(*this)));
+}
+
+
 Number* Rational::toInexact(){
     return new Float(*this);
 }

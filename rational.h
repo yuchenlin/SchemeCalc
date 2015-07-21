@@ -78,6 +78,9 @@ public:
     virtual Number* asin();
     virtual Number* acos();
     virtual Number* atan();
+    
+    virtual Number* exp();
+    virtual Number* log();
 
 };
 

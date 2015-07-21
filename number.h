@@ -59,9 +59,9 @@ public:
     virtual Number* acos()=0;
     virtual Number* atan()=0;
     
-//    //幂和对数
-//    virtual Number* exp()=0;
-//    virtual Number* log()=0;
+    //幂和对数
+    virtual Number* exp()=0;
+    virtual Number* log()=0;
 //    //复数运算
 //    virtual Number* rectangular()=0;
 //    virtual Number* polar()=0;

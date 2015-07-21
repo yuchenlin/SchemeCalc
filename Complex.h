@@ -66,7 +66,8 @@ public:
     virtual Number* acos();
     virtual Number* atan();
     
-    
+    virtual Number* exp();
+    virtual Number* log();
     
     bool isReal();//
     
