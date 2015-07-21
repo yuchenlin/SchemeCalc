@@ -68,6 +68,14 @@ public:
     
     virtual Number* exp();
     virtual Number* log();
+
+    virtual Number* rectangular(Number* obj);
+    virtual Number* polar(Number* obj);
+
+    //for real
+    virtual Number* magnitude();
+    virtual Number* angle();
+
     
     bool isReal();//
     

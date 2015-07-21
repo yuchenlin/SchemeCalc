@@ -518,8 +518,59 @@ Number* Complex::log(){
     return res;
 }
 
+Number* Complex::rectangular(Number* obj){
+    Complex* tempc = SCAST_COMPLEX(obj);
+    if(isReal() and tempc->isReal()){
+        Complex* res = new Complex();
+        if(this->isExact and tempc->isExact){
+            res->isExact = true;
+            res->real = this->real->toExact();
+            res->imag = tempc->real->toExact();
+        }else{
+            res->isExact = false;
+            res->real = this->real->toInexact();
+            res->imag = tempc->real->toInexact();
+        }
+        return res;
+    }else{
+        assert(0 and "not for complex");
+        return NULL;
+    }
+}
 
+Number* Complex::polar(Number* obj){
+    Complex* tempc = SCAST_COMPLEX(obj);
+    if(isReal() and tempc->isReal()){
+        complex<double> cres;
+        cres = std::polar((SCAST_FLOAT(this->real->toInexact())->number_,
+                SCAST_FLOAT(tempc->real->toInexact())->number_));
+        Complex* res = new Complex();
+        res->isExact = false;
+        res->real = new Float(std::real(cres));
+        res->imag = new Float(std::imag(cres));
+        return res;
+    }else{
+        assert(0 and "not for complex");
+        return NULL;
+    }
+}
 
+Number* Complex::magnitude(){
+    Complex* a = SCAST_COMPLEX(this->toInexact());
+    complex<double> ca
+    (SCAST_FLOAT(a->real)->number_,
+     SCAST_FLOAT(a->imag)->number_);
+    delete a;
+    return new Float(std::abs(ca));
+}
 
+Number* Complex::angle(){
+    Complex* a = SCAST_COMPLEX(this->toInexact());
+    complex<double> ca
+    (SCAST_FLOAT(a->real)->number_,
+     SCAST_FLOAT(a->imag)->number_);
+    delete a;
+    return new Float(std::arg(ca));
+}
 
 

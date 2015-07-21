@@ -62,22 +62,25 @@ public:
     //幂和对数
     virtual Number* exp()=0;
     virtual Number* log()=0;
+    
 //    //复数运算
-//    virtual Number* rectangular()=0;
-//    virtual Number* polar()=0;
-//    virtual Number* magnitude()=0;
-//    virtual Number* angle()=0;
-//    
+    //这两个只支持实数两个实数阿的 这两个只是支持实数的运算
+    virtual Number* rectangular(Number* obj)=0; //二元函数
+    virtual Number* polar(Number* obj)=0; //二元函数
+    virtual Number* magnitude()=0; //一元
+    virtual Number* angle()=0;//一元
+
 //    //判断类函数
 //    //精度判断
-//    virtual Boolean* JudgeExact()=0;
-//    virtual Boolean* JudgeInExact()=0;
+    virtual Boolean* JudgeExact()=0;
+    virtual Boolean* JudgeInExact()=0;
 //    //属性判断
-//    virtual Boolean* JudgeZero()=0;
-//    virtual Boolean* JudgeNegative()=0;
-//    virtual Boolean* JudgePositive()=0;
-//    virtual Boolean* JudgeOdd()=0;
-//    virtual Boolean* JudgeEven()=0;
+    virtual Boolean* JudgeZero()=0;
+    virtual Boolean* JudgeNegative()=0;
+    virtual Boolean* JudgePositive()=0;
+    virtual Boolean* JudgeOdd()=0;
+    virtual Boolean* JudgeEven()=0;
+    
 //    //类型判断
 //    virtual Boolean* JudgeInteger()=0;
 //    virtual Boolean* JudgeRational()=0;

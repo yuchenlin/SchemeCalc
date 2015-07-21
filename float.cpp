@@ -9,6 +9,7 @@
 #include <string>
 #include <cmath>
 #include <sstream>
+#include <complex>
 
 #define ABS(x) ((x)<0?(-(x)):(x))
 
@@ -246,7 +247,31 @@ Number* Float::log(){
     return new Float(::log(number_));
 }
 
+Number* Float::rectangular(Number* obj){
+    Complex* res = new Complex();
+    res->isExact = false;
+    res->real = new Float(number_);
+    res->imag = new Float(SCAST_FLOAT(obj)->number_);
+    return res;
+}
 
+Number* Float::polar(Number* obj){
+    complex<double> cres;
+    cres = std::polar(number_,SCAST_FLOAT(obj)->number_);
+    Complex* res = new Complex();
+    res->isExact = false;
+    res->real = new Float(std::real(cres));
+    res->imag = new Float(std::imag(cres));
+    return res;
+}
 
+Number* Float::magnitude(){
+    return new Float(number_);
+}
+
+Number* Float::angle(){
+    complex<double> cres(0,number_);
+    return new Float(std::arg(cres));
+}
 
 

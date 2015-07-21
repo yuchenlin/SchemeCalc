@@ -55,5 +55,13 @@ public:
     
     virtual Number* exp();
     virtual Number* log();
+
+    virtual Number* rectangular(Number* obj); //二元函数
+    virtual Number* polar(Number* obj); //二元函数
+    virtual Number* magnitude();
+    virtual Number* angle();
+
+
+
 };
 

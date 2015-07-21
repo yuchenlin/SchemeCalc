@@ -7,6 +7,7 @@
 #include <string>
 #include <cstdio>
 #include <cstring>
+#include <complex>
 
 #include <cmath>
 Rational::Rational(LongInt num, LongInt den):numerator_(num),denominator_(den)
@@ -384,6 +385,38 @@ Number* Rational::log(){
     return new Float(::log(double(*this)));
 }
 
+Number* Rational::magnitude(){
+    return new Rational(numerator_,denominator_);
+}
+
+Number* Rational::angle(){
+    complex<double> cres(0,double(*this));
+    return new Float(std::arg(cres));
+}
+
+Number* Rational::rectangular(Number* obj){
+    Complex* res = new Complex();
+    if(obj->type_==FLOAT){
+        res->isExact = false;
+        res->real = this->toInexact();
+        res->imag = obj->toInexact();
+    }else{
+        res->isExact = true;
+        res->real = this->toExact();
+        res->imag = obj->toExact();
+    }
+    return res;
+}
+
+Number* Rational::polar(Number* obj){
+    complex<double> cres;
+    cres = std::polar(SCAST_FLOAT(toInexact())->number_,SCAST_FLOAT(obj->toInexact())->number_);
+    Complex* res = new Complex();
+    res->isExact = false;
+    res->real = new Float(std::real(cres));
+    res->imag = new Float(std::imag(cres));
+    return res;
+}
 
 Number* Rational::toInexact(){
     return new Float(*this);
