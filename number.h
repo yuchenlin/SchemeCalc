@@ -15,10 +15,10 @@ public:
         COMPLEX=3
 	} type_;
 	Number(){
-        clasType = NUMBER;
+        classType = NUMBER;
     }
 	virtual ~Number(){}
-	virtual Number* convert(Number *number2) = 0;
+	virtual Number *convert(Number *number2) = 0;
 	virtual Number *add(Number *number2)  = 0;
 	virtual Number *sub(Number *number2)  = 0;
 	virtual Number *mul(Number *number2)  = 0;
@@ -82,7 +82,7 @@ public:
     virtual Boolean* JudgeEven()=0;
     
    //类型判断
-    virtual Boolean* JudgeNumber(){ //此函数不是抽象函数
+    Base* JudgeNumber(){ //此函数不是抽象函数
         return new Boolean(true);
     }
     virtual Boolean* JudgeInteger()=0;

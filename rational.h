@@ -110,10 +110,9 @@ public:
     virtual Boolean* JudgeGreaterThanOrEuqalTo(Number* obj);
 
 
-    bool operator < (const Rational& obj) const;
-    bool operator > (const Rational& obj) const;
-    bool operator <= (const Rational& obj) const;
-    bool operator >= (const Rational& obj) const;
-
+    bool operator < (const Rational& obj);
+    bool operator > (const Rational& obj);
+    bool operator <= (const Rational& obj);
+    bool operator >= (const Rational& obj);
 };
 

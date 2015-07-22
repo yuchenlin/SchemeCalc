@@ -1,4 +1,3 @@
-    //
 //  complex.cpp
 //  SchemeCalc
 //
@@ -575,60 +574,60 @@ Number* Complex::angle(){
 
 
 //精度判断
-virtual Boolean* Complex::JudgeExact(){
+Boolean* Complex::JudgeExact(){
     return new Boolean(isExact);
 }
-virtual Boolean* Complex::JudgeInExact(){
+Boolean* Complex::JudgeInExact(){
     return new Boolean(not isExact);
 }
 //属性判断
-virtual Boolean* Complex::JudgeZero(){
+Boolean* Complex::JudgeZero(){
     return new Boolean(real->JudgeZero()->flag and imag->JudgeZero()->flag);
 }
-virtual Boolean* Complex::JudgeNegative(){
+Boolean* Complex::JudgeNegative(){
     assert(isReal() and "for real numbers");
     return new Boolean(real->JudgeNegative()->flag);
 }
-virtual Boolean* Complex::JudgePositive(){
+Boolean* Complex::JudgePositive(){
     assert(isReal() and "for real numbers");
     return new Boolean(real->JudgePositive()->flag);
 }
-virtual Boolean* Complex::JudgeOdd(){
+Boolean* Complex::JudgeOdd(){
     assert(isReal() and "for real numbers");
     return new Boolean(real->JudgeOdd()->flag);
 }
-virtual Boolean* Complex::JudgeEven(){
+Boolean* Complex::JudgeEven(){
     assert(isReal() and "for real numbers");
     return new Boolean(real->JudgeEven()->flag);
 }
 
 //类型判断
-virtual Boolean* Complex::JudgeInteger(){
+Boolean* Complex::JudgeInteger(){
     return new Boolean(isInteger());
 }
-virtual Boolean* Complex::JudgeRational(){
+Boolean* Complex::JudgeRational(){
     return new Boolean(isReal());
 }
-virtual Boolean* Complex::JudgeReal(){
+Boolean* Complex::JudgeReal(){
     return new Boolean(isReal());
 }
-virtual Boolean* Complex::JudgeComplex(){
+Boolean* Complex::JudgeComplex(){
     return new Boolean(true);
 }
 //不等判断
-virtual Boolean* Complex::JudgeLessThan(Number* obj){
+Boolean* Complex::JudgeLessThan(Number* obj){
     assert(isReal() and obj->JudgeReal()->flag and "for real");
     return new Boolean(this->real->JudgeLessThan(obj));
 }
-virtual Boolean* Complex::JudgeGreaterThan(Number* obj){
+Boolean* Complex::JudgeGreaterThan(Number* obj){
     assert(isReal() and obj->JudgeReal()->flag and "for real");
     return new Boolean(this->real->JudgeGreaterThan(obj));
 }
-virtual Boolean* Complex::JudgeLessThanOrEuqalTo(Number* obj){
+Boolean* Complex::JudgeLessThanOrEuqalTo(Number* obj){
     assert(isReal() and obj->JudgeReal()->flag and "for real");
     return new Boolean(this->real->JudgeLessThanOrEuqalTo(obj));
 }
-virtual Boolean* Complex::JudgeGreaterThanOrEuqalTo(Number* obj){
+Boolean* Complex::JudgeGreaterThanOrEuqalTo(Number* obj){
     assert(isReal() and obj->JudgeReal()->flag and "for real");
     return new Boolean(this->real->JudgeGreaterThanOrEuqalTo(obj));
 }

@@ -17,7 +17,7 @@ class Boolean : public Base{
     
 public:
     Boolean(bool f = false):flag(f){
-        clasType = BOOLEAN;
+        classType = BOOLEAN;
     }
     bool flag;
     ~Boolean(){};
@@ -28,5 +28,9 @@ public:
             cout<<"#f";
     }
     
+    virtual Base* JudgeNumber(){
+        return new Boolean(false);
+    }
 };
+
 #endif /* defined(__SchemeCalc__boolean__) */

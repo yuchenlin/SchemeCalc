@@ -482,32 +482,19 @@ Boolean* Rational::JudgeComplex(){
 
 
 Boolean* Rational::JudgeLessThan(Number* obj){
-    return new Boolean(*this<obj);
+    Rational* toCheck = SCAST_RATIONAL(this->sub(obj->toExact()));
+    return new Boolean(toCheck->sgn() < 0 );
 }
 Boolean* Rational::JudgeGreaterThan(Number* obj){
-    return new Boolean(*this>obj);
+    return obj->JudgeLessThan(this);
 }
 Boolean* Rational::JudgeLessThanOrEuqalTo(Number* obj){
-    return new Boolean(*this<=obj);
+    Boolean* res = obj->JudgeGreaterThan(this);
+    res->flag = not res->flag;
+    return res;
 }
 Boolean* Rational::JudgeGreaterThanOrEuqalTo(Number* obj){
-    return new Boolean(*this>=obj);
+    Boolean* res = this->JudgeLessThan(obj);
+    res->flag = not res->flag;
+    return res;
 }
-
-
-bool Rational::operator < (const Ratinal& obj){
-    Rational* toCheck = SCAST_RATIONAL(this->sub(obj->toExact()));
-    return toCheck->sgn < 0;
-}
-bool Rational::operator > (const Ratinal& obj){
-    return obj < *this ;
-}
-bool Rational::operator <= (const Ratinal& obj){
-    return !(*this>obj);
-}
-bool Rational::operator >= (const Rational& obj){
-    return !(*this<obj);
-}
-
-
-

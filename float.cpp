@@ -299,7 +299,8 @@ Boolean* Float::JudgePositive(){
 
 Boolean* Float::JudgeOdd(){
     if(isInteger()){
-        return new Boolean(trunc(number_)%2==1));
+        int a = trunc(number_);
+        return new Boolean((a)%2==1);
     }else
         assert(0 and "for integer");
         return NULL;
@@ -307,7 +308,8 @@ Boolean* Float::JudgeOdd(){
 
 Boolean* Float::JudgeEven(){
     if(isInteger()){
-        return new Boolean(trunc(number_)%2==0));
+        int a = trunc(number_);
+        return new Boolean((a)%2==0);
     }else
         assert(0 and "for integer");
         return NULL;
