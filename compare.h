@@ -373,8 +373,495 @@ class ToInexact : public Opt{
         return res;
     }
 };
+class Sin : public Opt{
+    Number* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Number *res = opr->sin();
+        return res;
+    }
+};
+
+class Asin : public Opt{
+    Number* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Number *res = opr->asin();
+        return res;
+    }
+};
+class Cos : public Opt{
+    Number* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Number *res = opr->cos();
+        return res;
+    }
+};
+class Acos : public Opt{
+    Number* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Number *res = opr->acos();
+        return res;
+    }
+};
+class Tan : public Opt{
+    Number* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Number *res = opr->atan();
+        return res;
+    }
+};
+class Atan : public Opt{
+    Number* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Number *res = opr->atan();
+        return res;
+    }
+};
+class Log : public Opt{
+    Number* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Number *res = opr->log();
+        return res;
+    }
+};
+class Exp : public Opt{
+    Number* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Number *res = opr->exp();
+        return res;
+    }
+};
+
+class Magnitude : public Opt{
+    Number* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Number *res = opr->magnitude();
+        return res;
+    }
+};
+class Angle : public Opt{
+    Number* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Number *res = opr->angle();
+        return res;
+    }
+};
+class IsExact : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Boolean *res = opr->JudgeExact();
+        return res;
+    }
+};
+class IsInexact : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Boolean *res = opr->JudgeInExact();
+        return res;
+    }
+};
+class IsZero : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Boolean *res = opr->JudgeZero();
+        return res;
+    }
+};
+class IsNegative : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Boolean *res = opr->JudgeNegative();
+        return res;
+    }
+};
+class IsPositive : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Boolean *res = opr->JudgePositive();
+        return res;
+    }
+};
+class IsOdd : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Boolean *res = opr->JudgeOdd();
+        return res;
+    }
+};
+class IsEven : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Boolean *res = opr->JudgeEven();
+        return res;
+    }
+};
+class IsInteger : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Boolean *res = opr->JudgeInteger();
+        return res;
+    }
+};
+class IsRational : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Boolean *res = opr->JudgeRational();
+        return res;
+    }
+};
+
+class IsComplex : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Boolean *res = opr->JudgeComplex();
+        return res;
+    }
+};
+
+
+class IsReal : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Boolean *res = opr->JudgeReal();
+        return res;
+    }
+};
+
+
+
+
 
 //二元函数
+
+
+class ToJudgeLessThan : public Opt{
+    Boolean* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "Rectangular is only for two values");
+        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
+        Boolean* res,* last;
+        
+        if(opr1->type_ >= opr2->type_)
+            res = opr1->JudgeLessThan(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->JudgeLessThan(opr2);
+        
+        delete conv;
+        return res;
+    }
+};
+class ToJudgeGreaterThan : public Opt{
+    Boolean* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "Rectangular is only for two values");
+        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
+        Boolean* res,* last;
+        
+        if(opr1->type_ >= opr2->type_)
+            res = opr1->JudgeGreaterThan(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->JudgeGreaterThan(opr2);
+        
+        delete conv;
+        return res;
+    }
+};
+class ToJudgeLessThanOrEuqalTo : public Opt{
+    Boolean* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "Rectangular is only for two values");
+        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
+        Boolean* res,* last;
+        
+        if(opr1->type_ >= opr2->type_)
+            res = opr1->JudgeLessThanOrEuqalTo(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->JudgeLessThanOrEuqalTo(opr2);
+        
+        delete conv;
+        return res;
+    }
+};
+class ToJudgeGreaterThanOrEuqalTo : public Opt{
+    Boolean* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "Rectangular is only for two values");
+        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
+        Boolean* res,* last;
+        
+        if(opr1->type_ >= opr2->type_)
+            res = opr1->JudgeGreaterThanOrEuqalTo(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->JudgeGreaterThanOrEuqalTo(opr2);
+        
+        delete conv;
+        return res;
+    }
+};
+
+
+class Rectangular : public Opt{
+    Number* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "Rectangular is only for two values");
+        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
+        Number* res,* last;
+        
+        if(opr1->type_ >= opr2->type_)
+            res = opr1->rectangular(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->rectangular(opr2);
+        
+        delete conv;
+        return res;
+    }
+};
+class Polar : public Opt{
+    Number* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt>2)
+            assert(0 and "Polar is only for two values");
+        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
+        Number* res,* last;
+        
+        if(opr1->type_ >= opr2->type_)
+            res = opr1->polar(conv = opr1->convert(opr2));
+        else
+            res = (conv = opr2->convert(opr1) )->polar(opr2);
+        
+        delete conv;
+        return res;
+    }
+};
 
 class Quotient : public Opt{
     Number* calc(Cons* con){
@@ -474,7 +961,7 @@ class Expt : public Opt{
         return res;
     }
 };
-//二元  可多元函数
+//二元  可连续的多元函数
 
 class GCD : public Opt{
     Number* calc(Cons* con){
@@ -589,6 +1076,7 @@ class GetMin : public Opt{
         return res;
     }
 };
+
 
 
 

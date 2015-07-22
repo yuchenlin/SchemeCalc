@@ -41,8 +41,35 @@ Base *calc_exp(){
         else if(strcmp(tk1,"gcd")==0)opt=new GCD();
         else if(strcmp(tk1,"lcm")==0)opt=new LCM();
         else if(strcmp(tk1,"expt")==0)opt=new Expt();
-        else if(strcmp(tk1,"max")==0)opt=new GetMax();
-        else if(strcmp(tk1,"min")==0)opt=new GetMin();
+
+        else if(strcmp(tk1,"sin")==0)opt=new Sin();
+        else if(strcmp(tk1,"asin")==0)opt=new Asin();
+        else if(strcmp(tk1,"cos")==0)opt=new Cos();
+        else if(strcmp(tk1,"acos")==0)opt=new Acos();
+        else if(strcmp(tk1,"tan")==0)opt=new Tan();
+        else if(strcmp(tk1,"atnan")==0)opt=new Atan();
+        else if(strcmp(tk1,"exp")==0)opt=new Exp();
+        else if(strcmp(tk1,"log")==0)opt=new Log();
+        else if(strcmp(tk1,"make-rectangular")==0)opt=new Rectangular();
+        else if(strcmp(tk1,"make-polar")==0)opt=new Polar();
+        else if(strcmp(tk1,"magnitude")==0)opt=new Magnitude();
+        else if(strcmp(tk1,"angle")==0)opt=new Angle();
+        else if(strcmp(tk1,"exact?")==0)opt=new IsExact();
+        else if(strcmp(tk1,"inexact?")==0)opt=new IsInexact();
+        else if(strcmp(tk1,"zero?")==0)opt=new IsZero();
+        else if(strcmp(tk1,"negative?")==0)opt=new IsNegative();
+        else if(strcmp(tk1,"positive?")==0)opt=new IsPositive();
+        else if(strcmp(tk1,"odd?")==0)opt=new IsOdd();
+        else if(strcmp(tk1,"even?")==0)opt=new IsEven();
+        else if(strcmp(tk1,"integer?")==0)opt=new IsInteger();
+        else if(strcmp(tk1,"rational?")==0)opt=new IsRational();
+        else if(strcmp(tk1,"complex?")==0)opt=new IsComplex();
+        else if(strcmp(tk1,"real?")==0)opt=new IsReal();
+        else if(strcmp(tk1,"<")==0)opt=new ToJudgeLessThan();
+        else if(strcmp(tk1,">")==0)opt=new ToJudgeGreaterThan();
+        else if(strcmp(tk1,"<=")==0)opt=new ToJudgeLessThanOrEuqalTo();
+        else if(strcmp(tk1,">=")==0)opt=new ToJudgeGreaterThanOrEuqalTo();
+
         else throw 0;
         while ((val = (calc_exp())))
         {
