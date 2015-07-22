@@ -1024,12 +1024,11 @@ class GetMax : public Opt{
         }
         if(cnt==0) throw 0;
         
-        
         Number* res,* last;
         Number* opr = SCAST_NUMBER(con->car), *conv;
 
         res = opr;
-        con = con->cdr;
+        con = con->cdr;//取出第一个
         for (; con; con=con->cdr) {
             opr = SCAST_NUMBER(con->car);
             last = res;

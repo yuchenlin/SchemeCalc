@@ -10,11 +10,11 @@ int main(){
     
     try {
         Base *res;
-//        for(;;){
+        for(;;){
             res = calc_exp();
             res -> print();
             cout<<endl;
-//        }
+        }
 	}
 	catch(int){cerr<<"Wrong";}
     return 0;

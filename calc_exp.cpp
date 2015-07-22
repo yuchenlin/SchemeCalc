@@ -40,6 +40,8 @@ Base *calc_exp(){
         else if(strcmp(tk1,"modulo")==0)opt=new Modulo();
         else if(strcmp(tk1,"gcd")==0)opt=new GCD();
         else if(strcmp(tk1,"lcm")==0)opt=new LCM();
+        else if(strcmp(tk1,"max")==0)opt=new GetMax();
+        else if(strcmp(tk1,"min")==0)opt=new GetMin();
         else if(strcmp(tk1,"expt")==0)opt=new Expt();
 
         else if(strcmp(tk1,"sin")==0)opt=new Sin();
