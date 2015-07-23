@@ -49,7 +49,7 @@ Base *calc_exp(){
         else if(strcmp(tk1,"cos")==0)opt=new Cos();
         else if(strcmp(tk1,"acos")==0)opt=new Acos();
         else if(strcmp(tk1,"tan")==0)opt=new Tan();
-        else if(strcmp(tk1,"atnan")==0)opt=new Atan();
+        else if(strcmp(tk1,"atan")==0)opt=new Atan();
         else if(strcmp(tk1,"exp")==0)opt=new Exp();
         else if(strcmp(tk1,"log")==0)opt=new Log();
         else if(strcmp(tk1,"make-rectangular")==0)opt=new Rectangular();

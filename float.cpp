@@ -244,8 +244,24 @@ Number* Float::atan(){
 Number* Float::exp(){
     return new Float(::exp(number_));
 }
+/*
+ if(number_>=0){
+ return new Float(::sqrt(number_));
+ }else{
+ Complex* c = new Complex(new Float(0),new Float(::sqrt(fabs(number_))));
+ c->isExact = false;
+ return c;
+ }
+ 
+ */
 Number* Float::log(){
-    return new Float(::log(number_));
+    if(number_>=0)
+        return new Float(::log(number_));
+    else{
+        Complex* c = new Complex(new Float(number_),new Float(0));
+        c->isExact = false;
+        return c->log();
+    }
 }
 
 Number* Float::rectangular(Number* obj){

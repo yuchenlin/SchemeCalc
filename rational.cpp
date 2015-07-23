@@ -384,7 +384,7 @@ Number* Rational::exp(){
     return new Float(::exp(double(*this)));
 }
 Number* Rational::log(){
-    return new Float(::log(double(*this)));
+    return (new Float(double(*this)))->log();
 }
 
 Number* Rational::magnitude(){
