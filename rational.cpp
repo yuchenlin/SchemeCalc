@@ -388,11 +388,11 @@ Number* Rational::log(){
 }
 
 Number* Rational::magnitude(){
-    return new Rational(numerator_,denominator_);
+    return (new Rational(numerator_,denominator_))->abs();
 }
 
 Number* Rational::angle(){
-    complex<double> cres(0,double(*this));
+    complex<double> cres(double(*this),0);
     return new Float(std::arg(cres));
 }
 
@@ -410,14 +410,7 @@ Number* Rational::rectangular(Number* obj){
     return res;
 }
 
-Number* Rational::polar(Number* obj){
-//    complex<double> cres;
-//    cres = std::polar(SCAST_FLOAT(toInexact())->number_,SCAST_FLOAT(obj->toInexact())->number_);
-//    Complex* res = new Complex();
-//    res->isExact = false;
-//    res->real = new Float(std::real(cres));
-//    res->imag = new Float(std::imag(cres));
-//    return res;
+Number* Rational::polar(Number* obj){ 
     return this->toInexact()->polar(obj->toInexact());
 
 }

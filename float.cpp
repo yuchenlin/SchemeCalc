@@ -283,11 +283,11 @@ Number* Float::polar(Number* obj){
 }
 
 Number* Float::magnitude(){
-    return new Float(number_);
+    return (new Float(number_))->abs();
 }
 
 Number* Float::angle(){
-    complex<double> cres(0,number_);
+    complex<double> cres(number_,0.0);
     return new Float(std::arg(cres));
 }
 
