@@ -14,6 +14,7 @@
 #define SCAST_RATIONAL(x) static_cast<Rational*>(x)
 #define SCAST_FLOAT(x) static_cast<Float*>(x)
 #define SCAST_COMPLEX(x) static_cast<Complex*>(x)
+#define SCAST_BOOLEAN(x) static_cast<Boolean*>(x)
 
 class Add : public Opt {
     /* Use the lowest level type */
@@ -450,7 +451,7 @@ class Tan : public Opt{
         }
         if(cnt > 1)    throw 0;
         Number *opr = SCAST_NUMBER(con->car);
-        Number *res = opr->atan();
+        Number *res = opr->tan();
         return res;
     }
 };
@@ -535,6 +536,24 @@ class Angle : public Opt{
         return res;
     }
 };
+
+class IsNumber : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Number *opr = SCAST_NUMBER(con->car);
+        Boolean *res =SCAST_BOOLEAN(opr->JudgeNumber());
+        return res;
+    }
+};
+
 class IsExact : public Opt{
     Boolean* calc(Cons* con){
         Cons* contmp = con;

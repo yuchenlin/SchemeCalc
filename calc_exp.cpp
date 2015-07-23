@@ -63,6 +63,7 @@ Base *calc_exp(){
         else if(strcmp(tk1,"positive?")==0)opt=new IsPositive();
         else if(strcmp(tk1,"odd?")==0)opt=new IsOdd();
         else if(strcmp(tk1,"even?")==0)opt=new IsEven();
+        else if(strcmp(tk1,"number?")==0)opt=new IsNumber();
         else if(strcmp(tk1,"integer?")==0)opt=new IsInteger();
         else if(strcmp(tk1,"rational?")==0)opt=new IsRational();
         else if(strcmp(tk1,"complex?")==0)opt=new IsComplex();
