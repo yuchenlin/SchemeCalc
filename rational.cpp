@@ -411,13 +411,15 @@ Number* Rational::rectangular(Number* obj){
 }
 
 Number* Rational::polar(Number* obj){
-    complex<double> cres;
-    cres = std::polar(SCAST_FLOAT(toInexact())->number_,SCAST_FLOAT(obj->toInexact())->number_);
-    Complex* res = new Complex();
-    res->isExact = false;
-    res->real = new Float(std::real(cres));
-    res->imag = new Float(std::imag(cres));
-    return res;
+//    complex<double> cres;
+//    cres = std::polar(SCAST_FLOAT(toInexact())->number_,SCAST_FLOAT(obj->toInexact())->number_);
+//    Complex* res = new Complex();
+//    res->isExact = false;
+//    res->real = new Float(std::real(cres));
+//    res->imag = new Float(std::imag(cres));
+//    return res;
+    return this->toInexact()->polar(obj->toInexact());
+
 }
 
 Number* Rational::toInexact(){
