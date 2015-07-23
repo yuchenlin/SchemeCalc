@@ -1,4 +1,7 @@
 #include "calc_exp.h"
+#include "boolean.h"
+#include "string_.h"
+#include "char_.h"
 #include <iostream>
 #include <cstring>
 #include <string>

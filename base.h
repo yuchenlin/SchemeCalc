@@ -13,14 +13,19 @@ class Base {
 public:
     enum{
         BOOLEAN = 1,
-        NUMBER =2
+        NUMBER =2,
+        STRING = 3,
+        CHAR=4
     }classType;
     
     Base(){};
     virtual ~Base(){};
     virtual void print() = 0;
-
+    
     virtual Base* JudgeNumber()=0;
+    virtual Base* JudgeString()=0;
+    virtual Base* JudgeChar()=0;
+    
 };
 
 

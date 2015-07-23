@@ -2,6 +2,9 @@
 #include "opt.h"
 #include "compare.h"
 #include "next_token.h"
+#include "boolean.h"
+#include "string_.h"
+#include "char_.h"
 #include <cstring>
 #include <string>
 #include <cstdio>

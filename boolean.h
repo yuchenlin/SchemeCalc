@@ -31,6 +31,14 @@ public:
     virtual Base* JudgeNumber(){
         return new Boolean(false);
     }
+    
+    
+    virtual Base* JudgeChar(){
+        return new Boolean(false);
+    }
+    virtual Base* JudgeString(){
+        return new Boolean(false);
+    }
 };
 
 #endif /* defined(__SchemeCalc__boolean__) */

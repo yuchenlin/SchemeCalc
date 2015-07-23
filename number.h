@@ -85,6 +85,13 @@ public:
     Base* JudgeNumber(){ //此函数不是抽象函数
         return new Boolean(true);
     }
+    Base* JudgeString(){ //此函数不是抽象函数
+        return new Boolean(false);
+    }
+    Base* JudgeChar(){ //此函数不是抽象函数
+        return new Boolean(false);
+    }
+    
     virtual Boolean* JudgeInteger()=0;
     virtual Boolean* JudgeRational()=0;
     virtual Boolean* JudgeReal()=0;
