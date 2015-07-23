@@ -741,100 +741,6 @@ class IsReal : public Opt{
 //二元函数
 
 
-class ToJudgeLessThan : public Opt{
-    Boolean* calc(Cons* con){
-        Cons *tmp = con;
-        int cnt = 0;
-        for (; tmp; tmp=tmp->cdr) {
-            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
-                throw 0;
-            cnt++;
-        }
-        if(cnt>2)
-            assert(0 and "Rectangular is only for two values");
-        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
-        Boolean* res,* last;
-        
-        if(opr1->type_ >= opr2->type_)
-            res = opr1->JudgeLessThan(conv = opr1->convert(opr2));
-        else
-            res = (conv = opr2->convert(opr1) )->JudgeLessThan(opr2);
-        
-        delete conv;
-        return res;
-    }
-};
-class ToJudgeGreaterThan : public Opt{
-    Boolean* calc(Cons* con){
-        Cons *tmp = con;
-        int cnt = 0;
-        for (; tmp; tmp=tmp->cdr) {
-            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
-                throw 0;
-            cnt++;
-        }
-        if(cnt>2)
-            assert(0 and "Rectangular is only for two values");
-        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
-        Boolean* res,* last;
-        
-        if(opr1->type_ >= opr2->type_)
-            res = opr1->JudgeGreaterThan(conv = opr1->convert(opr2));
-        else
-            res = (conv = opr2->convert(opr1) )->JudgeGreaterThan(opr2);
-        
-        delete conv;
-        return res;
-    }
-};
-class ToJudgeLessThanOrEuqalTo : public Opt{
-    Boolean* calc(Cons* con){
-        Cons *tmp = con;
-        int cnt = 0;
-        for (; tmp; tmp=tmp->cdr) {
-            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
-                throw 0;
-            cnt++;
-        }
-        if(cnt>2)
-            assert(0 and "Rectangular is only for two values");
-        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
-        Boolean* res,* last;
-        
-        if(opr1->type_ >= opr2->type_)
-            res = opr1->JudgeLessThanOrEuqalTo(conv = opr1->convert(opr2));
-        else
-            res = (conv = opr2->convert(opr1) )->JudgeLessThanOrEuqalTo(opr2);
-        
-        delete conv;
-        return res;
-    }
-};
-class ToJudgeGreaterThanOrEuqalTo : public Opt{
-    Boolean* calc(Cons* con){
-        Cons *tmp = con;
-        int cnt = 0;
-        for (; tmp; tmp=tmp->cdr) {
-            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
-                throw 0;
-            cnt++;
-        }
-        if(cnt>2)
-            assert(0 and "Rectangular is only for two values");
-        Number* opr1 = SCAST_NUMBER(con->car), *opr2 = SCAST_NUMBER(con->cdr->car),*conv;
-        Boolean* res,* last;
-        
-        if(opr1->type_ >= opr2->type_)
-            res = opr1->JudgeGreaterThanOrEuqalTo(conv = opr1->convert(opr2));
-        else
-            res = (conv = opr2->convert(opr1) )->JudgeGreaterThanOrEuqalTo(opr2);
-        
-        delete conv;
-        return res;
-    }
-};
-
-
 class Rectangular : public Opt{
     Number* calc(Cons* con){
         Cons *tmp = con;
@@ -1096,7 +1002,150 @@ class GetMin : public Opt{
 };
 
 
-
+class ToJudgeLessThan : public Opt{
+    Boolean* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt==0) throw 0;
+        bool ok = true;
+        
+        Number* res,* last;
+        Number* opr = SCAST_NUMBER(con->car), *conv;
+        
+        res = opr;
+        con = con->cdr;
+        for (; con; con=con->cdr) {
+            opr = SCAST_NUMBER(con->car);
+            last = res;
+            if(res->type_ > opr->type_){
+                ok = res->JudgeLessThan(conv = res->convert(opr))->flag;
+            }
+            else{
+                //res = (conv = opr->convert(res))->getMin(opr);
+                ok = (conv = opr->convert(res))->JudgeLessThan(opr)->flag;
+            }
+            res = opr;
+            if(!ok)
+                break;
+            delete last;
+            delete conv;
+        }
+        return new Boolean(ok);
+    }
+};
+class ToJudgeGreaterThan : public Opt{
+    Boolean* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt==0) throw 0;
+        bool ok = true;
+        
+        Number* res,* last;
+        Number* opr = SCAST_NUMBER(con->car), *conv;
+        
+        res = opr;
+        con = con->cdr;
+        for (; con; con=con->cdr) {
+            opr = SCAST_NUMBER(con->car);
+            last = res;
+            if(res->type_ > opr->type_){
+                ok = res->JudgeGreaterThan(conv = res->convert(opr))->flag;
+            }
+            else{
+                //res = (conv = opr->convert(res))->getMin(opr);
+                ok = (conv = opr->convert(res))->JudgeGreaterThan(opr)->flag;
+            }
+            res = opr;
+            if(!ok)
+                break;
+            delete last;
+            delete conv;
+        }
+        return new Boolean(ok);
+    }
+};
+class ToJudgeLessThanOrEuqalTo : public Opt{
+    Boolean* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt==0) throw 0;
+        bool ok = true;
+        
+        Number* res,* last;
+        Number* opr = SCAST_NUMBER(con->car), *conv;
+        
+        res = opr;
+        con = con->cdr;
+        for (; con; con=con->cdr) {
+            opr = SCAST_NUMBER(con->car);
+            last = res;
+            if(res->type_ > opr->type_){
+                ok = res->JudgeLessThanOrEuqalTo(conv = res->convert(opr))->flag;
+            }
+            else{
+                //res = (conv = opr->convert(res))->getMin(opr);
+                ok = (conv = opr->convert(res))->JudgeLessThanOrEuqalTo(opr)->flag;
+            }
+            res = opr;
+            if(!ok)
+                break;
+            delete last;
+            delete conv;
+        }
+        return new Boolean(ok);
+    }
+};
+class ToJudgeGreaterThanOrEuqalTo : public Opt{
+    Boolean* calc(Cons* con){
+        Cons *tmp = con;
+        int cnt = 0;
+        for (; tmp; tmp=tmp->cdr) {
+            if(SCAST_NUMBER(tmp->car)->type_>3 or SCAST_NUMBER(tmp->car)->type_<1)
+                throw 0;
+            cnt++;
+        }
+        if(cnt==0) throw 0;
+        bool ok = true;
+        
+        Number* res,* last;
+        Number* opr = SCAST_NUMBER(con->car), *conv;
+        
+        res = opr;
+        con = con->cdr;
+        for (; con; con=con->cdr) {
+            opr = SCAST_NUMBER(con->car);
+            last = res;
+            if(res->type_ > opr->type_){
+                ok = res->JudgeGreaterThanOrEuqalTo(conv = res->convert(opr))->flag;
+            }
+            else{
+                //res = (conv = opr->convert(res))->getMin(opr);
+                ok = (conv = opr->convert(res))->JudgeGreaterThanOrEuqalTo(opr)->flag;
+            }
+            res = opr;
+            if(!ok)
+                break;
+            delete last;
+            delete conv;
+        }
+        return new Boolean(ok);
+    }
+};
 
 
 

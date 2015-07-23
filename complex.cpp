@@ -617,19 +617,19 @@ Boolean* Complex::JudgeComplex(){
 //不等判断
 Boolean* Complex::JudgeLessThan(Number* obj){
     assert(isReal() and obj->JudgeReal()->flag and "for real");
-    return new Boolean(this->real->JudgeLessThan(obj));
+    return new Boolean(this->real->JudgeLessThan(obj->real_part()));
 }
 Boolean* Complex::JudgeGreaterThan(Number* obj){
     assert(isReal() and obj->JudgeReal()->flag and "for real");
-    return new Boolean(this->real->JudgeGreaterThan(obj));
+    return new Boolean(this->real->JudgeGreaterThan(obj->real_part()));
 }
 Boolean* Complex::JudgeLessThanOrEuqalTo(Number* obj){
     assert(isReal() and obj->JudgeReal()->flag and "for real");
-    return new Boolean(this->real->JudgeLessThanOrEuqalTo(obj));
+    return new Boolean(this->real->JudgeLessThanOrEuqalTo(obj->real_part()));
 }
 Boolean* Complex::JudgeGreaterThanOrEuqalTo(Number* obj){
     assert(isReal() and obj->JudgeReal()->flag and "for real");
-    return new Boolean(this->real->JudgeGreaterThanOrEuqalTo(obj));
+    return new Boolean(this->real->JudgeGreaterThanOrEuqalTo(obj->real_part()));
 }
 
 
