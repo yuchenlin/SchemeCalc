@@ -199,16 +199,6 @@ Rational::operator double(){
     return res;
 }
 
-//把一个Rational的值转换为long double类型
-Rational::operator long double(){
-    if(denominator_==ONE){
-        return numerator_.getDouble();
-    }
-    long double res = numerator_.getDouble() / denominator_.getDouble();
-    return res;
-}
-
-
 bool Rational::is(int n){
     bool ok = (numerator_== denominator_ * n);
     return ok;
@@ -364,39 +354,39 @@ Number* Rational::expt(Number* obj){
     }else{
         Float* tmpf = new Float();
         tmpf = SCAST_FLOAT(tmpf->convert(obj));
-        return new Float(pow((long double)(*this), (long double)(*SCAST_RATIONAL(obj))));
+        return new Float(pow(double(*this), double(*SCAST_RATIONAL(obj))));
     }
 }
 
 Number* Rational::sin(){
-    return new Float(::sin((long double)(*this)));
+    return new Float(::sin(double(*this)));
 }
 
 Number* Rational::asin(){
-    Float* f = new Float((long double)(*this));
+    Float* f = new Float((double)(*this));
     return f->asin();
 }
 
 Number* Rational::cos(){
-    return new Float(::cos((long double)(*this)));
+    return new Float(::cos((double)(*this)));
 }
 Number* Rational::acos(){
-    Float* f = new Float((long double)(*this));
+    Float* f = new Float((double)(*this));
     return f->acos();
 }
 Number* Rational::tan(){
-    return new Float(::tan((long double)(*this)));
+    return new Float(::tan(double(*this)));
 }
 Number* Rational::atan(){
-    return new Float(::atan((long double)(*this)));
+    return new Float(::atan(double(*this)));
 }
 
 
 Number* Rational::exp(){
-    return new Float(::exp((long double)(*this)));
+    return new Float(::exp(double(*this)));
 }
 Number* Rational::log(){
-    return (new Float((long double)(*this)))->log();
+    return (new Float(double(*this)))->log();
 }
 
 Number* Rational::magnitude(){
@@ -404,7 +394,7 @@ Number* Rational::magnitude(){
 }
 
 Number* Rational::angle(){
-    complex<double> cres((long double)(*this),0);
+    complex<double> cres(double(*this),0);
     return new Float(std::arg(cres));
 }
 
@@ -428,7 +418,7 @@ Number* Rational::polar(Number* obj){
 }
 
 Number* Rational::toInexact(){
-    return new Float((long double)(*this));
+    return new Float(*this);
 }
 
 Number* Rational::toExact(){

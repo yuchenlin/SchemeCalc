@@ -332,9 +332,9 @@ Number* Complex::expt(Number* obj){
     Complex* a = SCAST_COMPLEX(this->toInexact());
     Complex* b = SCAST_COMPLEX(tempc->toInexact());
     
-    complex<long double> ca(SCAST_FLOAT(a->real)->number_,SCAST_FLOAT(a->imag)->number_);
-    complex<long double> cb(SCAST_FLOAT(b->real)->number_,SCAST_FLOAT(b->imag)->number_);
-    complex<long double> cres = std::exp(cb*(std::log(ca)));
+    complex<double> ca(SCAST_FLOAT(a->real)->number_,SCAST_FLOAT(a->imag)->number_);
+    complex<double> cb(SCAST_FLOAT(b->real)->number_,SCAST_FLOAT(b->imag)->number_);
+    complex<double> cres = std::exp(cb*(std::log(ca)));
     Complex* res = new Complex();
     res->isExact = false;
     res->real = new Float(::real(cres));
@@ -410,10 +410,10 @@ Number* Complex::toInexact(){
 
 Number* Complex::sin(){
     Complex* a = SCAST_COMPLEX(this->toInexact());
-    complex<long double> ca
+    complex<double> ca
     (SCAST_FLOAT(a->real)->number_,
         SCAST_FLOAT(a->imag)->number_);
-    complex<long double> cres = std::sin(ca);
+    complex<double> cres = std::sin(ca);
     Complex* res = new Complex();
     res->isExact = false;
     res->real = new Float(::real(cres));
@@ -424,10 +424,10 @@ Number* Complex::sin(){
 
 Number* Complex::asin(){
     Complex* a = SCAST_COMPLEX(this->toInexact());
-    complex<long double> ca
+    complex<double> ca
     (SCAST_FLOAT(a->real)->number_,
      SCAST_FLOAT(a->imag)->number_);
-    complex<long double> cres = std::asin(ca);
+    complex<double> cres = std::asin(ca);
     Complex* res = new Complex();
     res->isExact = false;
     res->real = new Float(::real(cres));
@@ -438,10 +438,10 @@ Number* Complex::asin(){
 
 Number* Complex::cos(){
     Complex* a = SCAST_COMPLEX(this->toInexact());
-    complex<long double> ca
+    complex<double> ca
     (SCAST_FLOAT(a->real)->number_,
      SCAST_FLOAT(a->imag)->number_);
-    complex<long double> cres = std::cos(ca);
+    complex<double> cres = std::cos(ca);
     Complex* res = new Complex();
     res->isExact = false;
     res->real = new Float(::real(cres));
@@ -451,10 +451,10 @@ Number* Complex::cos(){
 }
 Number* Complex::acos(){
     Complex* a = SCAST_COMPLEX(this->toInexact());
-    complex<long double> ca
+    complex<double> ca
     (SCAST_FLOAT(a->real)->number_,
      SCAST_FLOAT(a->imag)->number_);
-    complex<long double> cres = std::acos(ca);
+    complex<double> cres = std::acos(ca);
     Complex* res = new Complex();
     res->isExact = false;
     res->real = new Float(::real(cres));
@@ -464,10 +464,10 @@ Number* Complex::acos(){
 }
 Number* Complex::tan(){
     Complex* a = SCAST_COMPLEX(this->toInexact());
-    complex<long double> ca
+    complex<double> ca
     (SCAST_FLOAT(a->real)->number_,
      SCAST_FLOAT(a->imag)->number_);
-    complex<long double> cres = std::tan(ca);
+    complex<double> cres = std::tan(ca);
     Complex* res = new Complex();
     res->isExact = false;
     res->real = new Float(::real(cres));
@@ -477,10 +477,10 @@ Number* Complex::tan(){
 }
 Number* Complex::atan(){
     Complex* a = SCAST_COMPLEX(this->toInexact());
-    complex<long double> ca
+    complex<double> ca
     (SCAST_FLOAT(a->real)->number_,
      SCAST_FLOAT(a->imag)->number_);
-    complex<long double> cres = std::atan(ca);
+    complex<double> cres = std::atan(ca);
     Complex* res = new Complex();
     res->isExact = false;
     res->real = new Float(::real(cres));
@@ -491,10 +491,10 @@ Number* Complex::atan(){
 
 Number* Complex::exp(){
     Complex* a = SCAST_COMPLEX(this->toInexact());
-    complex<long double> ca
+    complex<double> ca
     (SCAST_FLOAT(a->real)->number_,
      SCAST_FLOAT(a->imag)->number_);
-    complex<long double> cres = std::exp(ca);
+    complex<double> cres = std::exp(ca);
     Complex* res = new Complex();
     res->isExact = false;
     res->real = new Float(::real(cres));
@@ -505,10 +505,10 @@ Number* Complex::exp(){
 
 Number* Complex::log(){
     Complex* a = SCAST_COMPLEX(this->toInexact());
-    complex<long double> ca
+    complex<double> ca
     (SCAST_FLOAT(a->real)->number_,
      SCAST_FLOAT(a->imag)->number_);
-    complex<long double> cres = std::log(ca);
+    complex<double> cres = std::log(ca);
     Complex* res = new Complex();
     res->isExact = false;
     res->real = new Float(::real(cres));
@@ -540,7 +540,7 @@ Number* Complex::rectangular(Number* obj){
 Number* Complex::polar(Number* obj){
     Complex* tempc = SCAST_COMPLEX(obj);
     if(isReal() and tempc->isReal()){
-        complex<long double> cres;
+        complex<double> cres;
         cres = std::polar((SCAST_FLOAT(this->real->toInexact())->number_,
                 SCAST_FLOAT(tempc->real->toInexact())->number_));
         Complex* res = new Complex();
@@ -556,7 +556,7 @@ Number* Complex::polar(Number* obj){
 
 Number* Complex::magnitude(){
     Complex* a = SCAST_COMPLEX(this->toInexact());
-    complex<long double> ca
+    complex<double> ca
     (SCAST_FLOAT(a->real)->number_,
      SCAST_FLOAT(a->imag)->number_);
     delete a;
@@ -565,7 +565,7 @@ Number* Complex::magnitude(){
 
 Number* Complex::angle(){
     Complex* a = SCAST_COMPLEX(this->toInexact());
-    complex<long double> ca
+    complex<double> ca
     (SCAST_FLOAT(a->real)->number_,
      SCAST_FLOAT(a->imag)->number_);
     delete a;

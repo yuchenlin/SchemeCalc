@@ -14,7 +14,7 @@
 
 #define ABS(x) ((x)<0?(-(x)):(x))
 
-Float::Float(long double number) : number_(number)
+Float::Float(double number) : number_(number)
 {
     type_ = FLOAT;
 }
@@ -212,7 +212,7 @@ Number* Float::toInexact(){
 Number* Float::toExact(){
     if(isInteger())
         return new Rational(::trunc(number_),ONE);
-    long double son = number_, mom = 1;
+    double son = number_, mom = 1;
     while (son != trunc(son)){
         son *= 2;
         mom *= 2;
