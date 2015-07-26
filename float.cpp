@@ -14,7 +14,7 @@
 
 #define ABS(x) ((x)<0?(-(x)):(x))
 
-Float::Float(double number) : number_(number)
+Float::Float(long double number) : number_(number)
 {
     type_ = FLOAT;
 }
@@ -212,7 +212,7 @@ Number* Float::toInexact(){
 Number* Float::toExact(){
     if(isInteger())
         return new Rational(::trunc(number_),ONE);
-    double son = number_, mom = 1;
+    long double son = number_, mom = 1;
     while (son != trunc(son)){
         son *= 2;
         mom *= 2;
@@ -226,6 +226,13 @@ Number* Float::sin(){
 }
 
 Number* Float::asin(){
+    if(number_>1 or number_<-1){
+        Complex* c = new Complex();
+        c->isExact = false;
+        c->real = new Float(number_);
+        c->imag = new Float(0.0);
+        return c->asin();
+    }
     return new Float(::asin(number_));
 }
 
@@ -233,7 +240,14 @@ Number* Float::cos(){
     return new Float(::cos(number_));
 }
 Number* Float::acos(){
-    return new Float(::acos(number_));
+    if(number_>1 or number_<-1){
+        Complex* c = new Complex();
+        c->isExact = false;
+        c->real = new Float(number_);
+        c->imag = new Float(0.0);
+        return c->acos();
+    }
+    return new Float(::asin(number_));
 }
 Number* Float::tan(){
     return new Float(::tan(number_));

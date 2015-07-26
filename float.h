@@ -11,7 +11,7 @@ const LongInt _one_pow_52("4503599627370496");
 
 class Float : public Number {
 public:
-    Float(double number = 0);
+    Float(long double number = 0);
     virtual ~Float();
     
     virtual Number* convert(Number *number2);
@@ -21,7 +21,7 @@ public:
     virtual Number* div(Number *number2);
     virtual void print();
     static Float *from_string(char *expression);
-    double number_;
+    long double number_;
     
     virtual Number* abs();
     virtual Number* quotient(Number* obj);

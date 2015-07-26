@@ -38,7 +38,8 @@ class String : public Base{
         return new Boolean(true);
     }
     
-    
+    static String* from_string(char* expression);
+
     
 };
 
