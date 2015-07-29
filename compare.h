@@ -10,6 +10,8 @@
 #include <complex>
 #include <cstdlib>
 #include "complex.h"
+#include "string_.h"
+#include "char_.h"
 #include <cstring>
 #define SCAST_RATIONAL(x) static_cast<Rational*>(x)
 #define SCAST_FLOAT(x) static_cast<Float*>(x)
@@ -710,7 +712,22 @@ class IsReal : public Opt{
     }
 };
 
+//字符串一元函数
 
+class StringLength : public Opt{
+    Number* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        String *opr = SCAST_STRING(con->car);
+        Number *res = SCAST_NUMBER(opr->getLength());
+        return res;
+    }
+};
 
 
 

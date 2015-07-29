@@ -76,7 +76,9 @@ Base *calc_exp(){
         else if(strcmp(tk1,">")==0)opt=new ToJudgeGreaterThan();
         else if(strcmp(tk1,"<=")==0)opt=new ToJudgeLessThanOrEuqalTo();
         else if(strcmp(tk1,">=")==0)opt=new ToJudgeGreaterThanOrEuqalTo();
-
+        
+        else if(strcmp(tk1,"string-length")==0)opt=new StringLength();
+        
         else throw 0;
         while ((val = (calc_exp())))
         {
@@ -99,12 +101,13 @@ Base *calc_exp(){
         // 增加尝试复数
 		res = Boolean::from_string(tk0);
         if(!res)
+            res = String::from_string(tk0);
+        if(!res)
             res = Rational::from_string(tk0);
 		if(!res)
             res = Float::from_string(tk0);
         if(!res)
             res = Complex::from_string(tk0);
-        
         
         if(res == NULL)
             throw 0;

@@ -5,6 +5,7 @@
 #include "boolean.h"
 #include <cstring>
 #include <string>
+#include <cmath>
 
 #define SCAST_FLOAT(x) static_cast<Float*>(x)
 const LongInt _one_pow_52("4503599627370496");
@@ -84,7 +85,8 @@ public:
     virtual Boolean* JudgeGreaterThanOrEuqalTo(Number* obj);
     
     virtual Base* JudgeEqual(Base* obj){
-        return new Boolean((number_ == SCAST_FLOAT(obj)->number_));
+        double tocheck = number_ - SCAST_FLOAT(obj)->number_;
+        return new Boolean((fabs(tocheck)<(1e-10)));
     }
 };
 

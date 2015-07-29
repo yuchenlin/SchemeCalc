@@ -13,19 +13,22 @@
 #include <string>
 #include <cstring>
 #include <iostream>
+#include "rational.h"
 #include "boolean.h"
+#include "char_.h"
+#define SCAST_STRING(x) static_cast<String*>(x)
 
 using namespace std;
 
 class String : public Base{
-    
+public:
     string s;
     String(string i=""):s(i){
         classType = STRING;
     }
     ~String(){}
     virtual void print(){
-        cout<<s;
+        cout<<"\""<<s<<"\"";
     }
     
     //一堆没什么用的判断函数
@@ -75,11 +78,73 @@ class String : public Base{
         return new Boolean(false);
     }
     
+    virtual Base* JudgeEqual(Base* obj){
+        if(obj->classType == Base::STRING and SCAST_STRING(obj)->s == s)
+            return new Boolean(true);
+        else
+            return new Boolean(false);
+   }
+    
     static String* from_string(char* expression);
+    static String* make_string(Number* len,Char* c);
     //
     
+    Base* getLength(){
+        return new Rational(s.length(),ONE);
+    }
     
+    virtual Char* getRef(Number* index);
+    virtual Boolean* JudgeStringEqual(String* obj){
+        return new Boolean(s == obj->s);
+    }
+    virtual Boolean* JudgeStringSmaller(String* obj){
+        return new Boolean(s < obj->s);
+    }
+    virtual Boolean* JudgeStringSmallerOrEqual(String* obj){
+        return new Boolean(s <= obj->s);
+    }
+    virtual Boolean* JudgeStringBigger(String* obj){
+        return new Boolean(s > obj->s);
+    }
+    virtual Boolean* JudgeStringBiggerOrEqual(String* obj){
+        return new Boolean(s >= obj->s);
+    }
     
+    static string getLower(string todo){
+        string res="";
+        for (int i = 0; i < todo.length(); ++i) {
+            res += isalpha(todo[i]) ?
+                    tolower( todo[i]) : todo[i];
+        }
+        return res;
+    }
+    
+    virtual Boolean* JudgeStringCIEqual(String* obj){
+        return new Boolean(getLower(s) == obj->getLower(s));
+    }
+    virtual Boolean* JudgeStringCISmaller(String* obj){
+        return new Boolean(getLower(s) < obj->getLower(s));
+    }
+    virtual Boolean* JudgeStringCISmallerOrEqual(String* obj){
+        return new Boolean(getLower(s) <= obj->getLower(s));
+    }
+    virtual Boolean* JudgeStringCIBigger(String* obj){
+        return new Boolean(getLower(s) > obj->getLower(s));
+    }
+    virtual Boolean* JudgeStringCIBiggerOrEqual(String* obj){
+        return new Boolean(getLower(s) >= obj->getLower(s));
+    }
+    
+    virtual String* SubStr(Number* start);
+    virtual String* SubStr(Number* start , Number* end);
+    
+    static unsigned long getIndex(Number* index){
+        if(not index->JudgeInteger() or index->JudgeNegative())
+            return -1;
+        unsigned long ind = 0;
+        ind = (double)*SCAST_RATIONAL(index->toExact()->real_part()->numerator());
+        return ind;
+    }
 };
 
 

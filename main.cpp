@@ -9,7 +9,7 @@
 #include <cmath>
 using namespace std;
 
-int main(){
+int main1(){
     
     try {
         Base *res;
@@ -22,3 +22,10 @@ int main(){
 	catch(int){cerr<<"Wrong";}
     return 0;
 }
+
+int main(){
+    
+    cout<<String::getLower("ADss_zxcADDD00,123,,")<<endl;
+    return 0;
+}
+
