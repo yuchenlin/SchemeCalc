@@ -176,7 +176,9 @@ void Complex::print(){
         Float* i = SCAST_FLOAT(real);
         i->print();
         i = SCAST_FLOAT(imag);
-        
+        if(i->number_ == 0){
+            return;
+        }
         if(i->number_ >= 0)
             cout<<"+";
         imag->print();

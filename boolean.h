@@ -39,6 +39,51 @@ public:
     virtual Base* JudgeString(){
         return new Boolean(false);
     }
+    
+    virtual Base* JudgeExact(){
+        return new Boolean(false);
+    }
+    virtual Base* JudgeInExact(){
+        return new Boolean(false);
+    }
+    virtual Base* JudgeZero(){
+        return new Boolean(false);
+    }
+    virtual Base* JudgeNegative(){
+        return new Boolean(false);
+    }
+    virtual Base* JudgePositive(){
+        return new Boolean(false);
+    }
+    virtual Base* JudgeOdd(){
+        return new Boolean(false);
+    }
+    virtual Base* JudgeEven(){
+        return new Boolean(false);
+    }
+    virtual Base* JudgeInteger(){
+        return new Boolean(false);
+    }
+    virtual Base* JudgeRational(){
+        return new Boolean(false);
+    }
+    virtual Base* JudgeReal(){
+        return new Boolean(false);
+    }
+    virtual Base* JudgeComplex(){
+        return new Boolean(false);
+    }
+    
+    static Boolean* from_string(char* expression){
+        string todo = expression;
+        if(todo == "#f")
+            return new Boolean(false);
+        else if(todo == "#t" )
+            return new Boolean(true);
+        else
+            return NULL;
+    }
+    
 };
 
 #endif /* defined(__SchemeCalc__boolean__) */

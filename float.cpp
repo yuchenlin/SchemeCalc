@@ -230,7 +230,7 @@ Number* Float::asin(){
         Complex* c = new Complex();
         c->isExact = false;
         c->real = new Float(number_);
-        c->imag = new Float(0.0);
+        c->imag = new Float(-0.0);
         return c->asin();
     }
     return new Float(::asin(number_));
@@ -244,10 +244,10 @@ Number* Float::acos(){
         Complex* c = new Complex();
         c->isExact = false;
         c->real = new Float(number_);
-        c->imag = new Float(0.0);
+        c->imag = new Float(-0.0);
         return c->acos();
     }
-    return new Float(::asin(number_));
+    return new Float(::acos(number_));
 }
 Number* Float::tan(){
     return new Float(::tan(number_));

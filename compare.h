@@ -20,25 +20,25 @@ class Add : public Opt {
     /* Use the lowest level type */
     Number *calc(Cons *con)
     {
-		Number *res = new Rational(0,1);
-		Number *last;
+        Number *res = new Rational(0,1);
+        Number *last;
         for (; con; con = con->cdr)
         {
             Number *opr = SCAST_NUMBER( con->car ), *conv;
-			if(opr->type_>3||opr->type_<1)
+            if(opr->type_>3||opr->type_<1)
                 throw 0;
-                        last = res;
+            last = res;
             //cout<<"opr type: "<<opr->type_<<endl;
-                
+            
             if (res->type_ >= opr->type_)
-			{
-				res = res->add(conv = res->convert(opr));
-			}
+            {
+                res = res->add(conv = res->convert(opr));
+            }
             else
-			{
+            {
                 res = (conv = opr->convert(res))->add(opr);
-			}
-
+            }
+            
             delete last;
             delete conv;
             
@@ -48,51 +48,51 @@ class Add : public Opt {
     }
 };
 class Sub:public Opt{
-	Number *calc(Cons *con)
-	{
-		Cons *tmp=con;
-		int cnt=0;
-		for(;tmp;tmp=tmp->cdr)
-		{
-			if(SCAST_NUMBER(tmp->car)->type_>3||SCAST_NUMBER(tmp->car)->type_<1)
-			{
-				throw 0;
-			}
-			cnt++;
-		}
-		Number *res=new Rational(0, 1),*last;
-		Number *opr = SCAST_NUMBER(con->car), *conv;
-		last=res;
-		if(cnt==1)
-		{
-			if (res->type_ > opr->type_)
-				res = res->sub(conv = res->convert(opr));
-			else
-				res = (conv = opr->convert(res))->sub(opr);
-			delete last;
-			delete conv;
-			return res;
-		}
-		if (res->type_ > opr->type_)
+    Number *calc(Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+        {
+            if(SCAST_NUMBER(tmp->car)->type_>3||SCAST_NUMBER(tmp->car)->type_<1)
+            {
+                throw 0;
+            }
+            cnt++;
+        }
+        Number *res=new Rational(0, 1),*last;
+        Number *opr = SCAST_NUMBER(con->car), *conv;
+        last=res;
+        if(cnt==1)
+        {
+            if (res->type_ > opr->type_)
+                res = res->sub(conv = res->convert(opr));
+            else
+                res = (conv = opr->convert(res))->sub(opr);
+            delete last;
+            delete conv;
+            return res;
+        }
+        if (res->type_ > opr->type_)
             res = res->add(conv = res->convert(opr));
         else
             res = (conv = opr->convert(res))->add(opr);
         con=con->cdr;
         delete last;
         delete conv;
-		for(;con;con=con->cdr)
-		{
-			opr=SCAST_NUMBER(con->car);
-			last=res;
-			if(res->type_>opr->type_)
-				res=res->sub(conv=res->convert(opr));
-			else
-				res=(conv=opr->convert(res))->sub(opr);
-			delete last;
-			delete conv;
-		}
-		return res;
-	}
+        for(;con;con=con->cdr)
+        {
+            opr=SCAST_NUMBER(con->car);
+            last=res;
+            if(res->type_>opr->type_)
+                res=res->sub(conv=res->convert(opr));
+            else
+                res=(conv=opr->convert(res))->sub(opr);
+            delete last;
+            delete conv;
+        }
+        return res;
+    }
 };
 class Mul : public Opt {
     /* Use the lowest level type */
@@ -101,10 +101,10 @@ class Mul : public Opt {
         Number *res = new Rational(1, 1), *last;
         for (; con; con = con->cdr)
         {
-			if(SCAST_NUMBER(con->car)->type_>3||SCAST_NUMBER(con->car)->type_<1)
-			{
-				throw 0;
-			}
+            if(SCAST_NUMBER(con->car)->type_>3||SCAST_NUMBER(con->car)->type_<1)
+            {
+                throw 0;
+            }
             Number *opr = SCAST_NUMBER(con->car), *conv;
             last = res;
             if (res->type_ > opr->type_)
@@ -122,52 +122,52 @@ class Mul : public Opt {
 
 
 class Div:public Opt{
-	Number *calc(Cons *con)
-	{
-		Cons *tmp=con;
-		int cnt=0;
-		for(;tmp;tmp=tmp->cdr)
-		{
-			if(SCAST_NUMBER(tmp->car)->type_>3||SCAST_NUMBER(tmp->car)->type_<1)
-			{
-				throw 0;
-			}
-			cnt++;
-		}
-		Number *res=new Rational(1,1),*last;
-		Number *opr = SCAST_NUMBER(con->car),*conv;
-		last=res;
-		Number *zero = new Float(0.0);
-		if(cnt==1)
-		{
-			if(res->type_>opr->type_)
-				res=res->div(conv=res->convert(opr));
-			else
-				res=(conv=opr->convert(res))->div(opr);
-			delete last;
-			delete conv;
-			return res;
-		}
-		if(res->type_>opr->type_)
-			res=res->mul(conv=res->convert(opr));
-		else
-			res=(conv=opr->convert(res))->mul(opr);
-		con=con->cdr;
-		delete last;
-		delete conv;
-		for(;con;con=con->cdr)
-		{
-			opr=SCAST_NUMBER(con->car);
-			last=res;
-			if(res->type_>opr->type_)
-				res=res->div(conv=res->convert(opr));
-			else
-				res=(conv=opr->convert(res))->div(opr);
-			delete last;
-			delete conv;
-		}
-		return res;
-	}
+    Number *calc(Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+        {
+            if(SCAST_NUMBER(tmp->car)->type_>3||SCAST_NUMBER(tmp->car)->type_<1)
+            {
+                throw 0;
+            }
+            cnt++;
+        }
+        Number *res=new Rational(1,1),*last;
+        Number *opr = SCAST_NUMBER(con->car),*conv;
+        last=res;
+        Number *zero = new Float(0.0);
+        if(cnt==1)
+        {
+            if(res->type_>opr->type_)
+                res=res->div(conv=res->convert(opr));
+            else
+                res=(conv=opr->convert(res))->div(opr);
+            delete last;
+            delete conv;
+            return res;
+        }
+        if(res->type_>opr->type_)
+            res=res->mul(conv=res->convert(opr));
+        else
+            res=(conv=opr->convert(res))->mul(opr);
+        con=con->cdr;
+        delete last;
+        delete conv;
+        for(;con;con=con->cdr)
+        {
+            opr=SCAST_NUMBER(con->car);
+            last=res;
+            if(res->type_>opr->type_)
+                res=res->div(conv=res->convert(opr));
+            else
+                res=(conv=opr->convert(res))->div(opr);
+            delete last;
+            delete conv;
+        }
+        return res;
+    }
 };
 
 //一元函数
@@ -543,12 +543,10 @@ class IsNumber : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
-                throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = SCAST_NUMBER(con->car);
+        Base *opr = (con->car);
         Boolean *res =SCAST_BOOLEAN(opr->JudgeNumber());
         return res;
     }
@@ -560,13 +558,11 @@ class IsExact : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
-                throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = SCAST_NUMBER(con->car);
-        Boolean *res = opr->JudgeExact();
+        Base *opr = (con->car);
+        Boolean *res = SCAST_BOOLEAN(opr->JudgeExact());
         return res;
     }
 };
@@ -576,13 +572,11 @@ class IsInexact : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
-                throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = SCAST_NUMBER(con->car);
-        Boolean *res = opr->JudgeInExact();
+        Base *opr = (con->car);
+        Boolean *res = SCAST_BOOLEAN(opr->JudgeInExact());
         return res;
     }
 };
@@ -592,13 +586,11 @@ class IsZero : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
-                throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = SCAST_NUMBER(con->car);
-        Boolean *res = opr->JudgeZero();
+        Base *opr = (con->car);
+        Boolean *res = SCAST_BOOLEAN(opr->JudgeZero());
         return res;
     }
 };
@@ -608,13 +600,11 @@ class IsNegative : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
-                throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = SCAST_NUMBER(con->car);
-        Boolean *res = opr->JudgeNegative();
+        Base *opr = (con->car);
+        Boolean *res = SCAST_BOOLEAN(opr->JudgeNegative());
         return res;
     }
 };
@@ -624,13 +614,11 @@ class IsPositive : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
-                throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = SCAST_NUMBER(con->car);
-        Boolean *res = opr->JudgePositive();
+        Base *opr = (con->car);
+        Boolean *res = SCAST_BOOLEAN(opr->JudgePositive());
         return res;
     }
 };
@@ -640,13 +628,11 @@ class IsOdd : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
-                throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = SCAST_NUMBER(con->car);
-        Boolean *res = opr->JudgeOdd();
+        Base *opr = (con->car);
+        Boolean *res = SCAST_BOOLEAN(opr->JudgeOdd());
         return res;
     }
 };
@@ -656,13 +642,11 @@ class IsEven : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
-                throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = SCAST_NUMBER(con->car);
-        Boolean *res = opr->JudgeEven();
+        Base *opr = (con->car);
+        Boolean *res = SCAST_BOOLEAN(opr->JudgeEven());
         return res;
     }
 };
@@ -672,13 +656,11 @@ class IsInteger : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
-                throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = SCAST_NUMBER(con->car);
-        Boolean *res = opr->JudgeInteger();
+        Base *opr = (con->car);
+        Boolean *res = SCAST_BOOLEAN(opr->JudgeInteger());
         return res;
     }
 };
@@ -688,13 +670,11 @@ class IsRational : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
-                throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = SCAST_NUMBER(con->car);
-        Boolean *res = opr->JudgeRational();
+        Base *opr = (con->car);
+        Boolean *res = SCAST_BOOLEAN(opr->JudgeRational());
         return res;
     }
 };
@@ -705,13 +685,11 @@ class IsComplex : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
-                throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = SCAST_NUMBER(con->car);
-        Boolean *res = opr->JudgeComplex();
+        Base *opr = (con->car);
+        Boolean *res = SCAST_BOOLEAN(opr->JudgeComplex());
         return res;
     }
 };
@@ -723,13 +701,11 @@ class IsReal : public Opt{
         int cnt = 0;
         for (; contmp; contmp = contmp->cdr)
         {
-            if(SCAST_NUMBER(contmp->car)->type_>3||SCAST_NUMBER(contmp->car)->type_<1)
-                throw 0;
             cnt++;
         }
         if(cnt > 1)    throw 0;
-        Number *opr = SCAST_NUMBER(con->car);
-        Boolean *res = opr->JudgeReal();
+        Base *opr = (con->car);
+        Boolean *res = SCAST_BOOLEAN(opr->JudgeReal());
         return res;
     }
 };
@@ -918,10 +894,10 @@ class LCM : public Opt{
         res = new Rational(1,1);
         for (; con; con=con->cdr) {
             if(SCAST_NUMBER(con->car)->type_>3 or SCAST_NUMBER(con->car)->type_<1)
-
+                
                 throw 0;
             Number* opr = SCAST_NUMBER(con->car), *conv;
-
+            
             last = res;
             if(res->type_ > opr->type_)
                 res = res->lcm(conv= res->convert(opr));
@@ -951,7 +927,7 @@ class GetMax : public Opt{
         
         Number* res,* last;
         Number* opr = SCAST_NUMBER(con->car), *conv;
-
+        
         res = opr;
         con = con->cdr;//取出第一个
         for (; con; con=con->cdr) {
@@ -984,7 +960,7 @@ class GetMin : public Opt{
         
         Number* res,* last;
         Number* opr = SCAST_NUMBER(con->car), *conv;
-
+        
         res = opr;
         con = con->cdr;
         for (; con; con=con->cdr) {

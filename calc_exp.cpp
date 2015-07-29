@@ -96,12 +96,16 @@ Base *calc_exp(){
     else
     {
         // 增加尝试复数
-		res=Rational::from_string(tk0);
+		res = Boolean::from_string(tk0);
+        if(!res)
+            res = Rational::from_string(tk0);
 		if(!res)
             res = Float::from_string(tk0);
         if(!res)
             res = Complex::from_string(tk0);
-		if(res == NULL)
+
+        
+        if(res == NULL)
             throw 0;
     }
     return res;

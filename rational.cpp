@@ -136,11 +136,16 @@ void Rational::print()
 Rational *Rational::from_string(char *expression)
 {
     char* sp = strchr(expression, '/');
-    char* end = strchr(expression,'\0');
+    
     char* d_pos = strchr(expression,'.');
+    
     char* E_pos = strchr(expression,'E');
+    
     char* e_pos = strchr(expression,'e');
+    
     char* i_pos = strchr(expression,'i');
+    
+    char* end = strchr(expression,'\0');
     
     if ( i_pos or d_pos or E_pos or e_pos)//有小数点 或者e的存在则 不是rational
         return NULL;//会去构造一个Float
