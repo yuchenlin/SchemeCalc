@@ -101,7 +101,7 @@ public:
     virtual Boolean* JudgeGreaterThan(Number* obj)=0;
     virtual Boolean* JudgeLessThanOrEuqalTo(Number* obj)=0;
     virtual Boolean* JudgeGreaterThanOrEuqalTo(Number* obj)=0;
-   
+    virtual Base* JudgeEqual(Base* obj)=0;
 };
 
 

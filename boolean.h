@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include "base.h"
 #include <iostream>
+#define SCAST_BOOLEAN(x) static_cast<Boolean*>(x)
+
 using namespace std;
 class Boolean : public Base{
     
@@ -83,7 +85,11 @@ public:
         else
             return NULL;
     }
-    
+    virtual Base* JudgeEqual(Base* obj){
+        return new Boolean((classType==obj->classType and
+                            flag == SCAST_BOOLEAN(obj)->flag
+                            ));
+    }
 };
 
 #endif /* defined(__SchemeCalc__boolean__) */

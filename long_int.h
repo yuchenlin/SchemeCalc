@@ -36,6 +36,8 @@ class LongInt{
         return in;
     }
     
+    
+    
     friend LongInt max(const LongInt &long_int1, const LongInt &long_int2);
     friend LongInt min(const LongInt &long_int1, const LongInt &long_int2);
 
@@ -44,6 +46,8 @@ public:
     static const int _base = 100;
     static const int _width = 2;
     vector<int> n;
+    
+    
     
     ~LongInt();
     LongInt(long long int num = 0) ;

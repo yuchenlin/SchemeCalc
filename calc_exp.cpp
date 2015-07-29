@@ -71,6 +71,7 @@ Base *calc_exp(){
         else if(strcmp(tk1,"rational?")==0)opt=new IsRational();
         else if(strcmp(tk1,"complex?")==0)opt=new IsComplex();
         else if(strcmp(tk1,"real?")==0)opt=new IsReal();
+        else if(strcmp(tk1,"equal?")==0)opt=new ToJudgeEqual();
         else if(strcmp(tk1,"<")==0)opt=new ToJudgeLessThan();
         else if(strcmp(tk1,">")==0)opt=new ToJudgeGreaterThan();
         else if(strcmp(tk1,"<=")==0)opt=new ToJudgeLessThanOrEuqalTo();
@@ -103,7 +104,7 @@ Base *calc_exp(){
             res = Float::from_string(tk0);
         if(!res)
             res = Complex::from_string(tk0);
-
+        
         
         if(res == NULL)
             throw 0;

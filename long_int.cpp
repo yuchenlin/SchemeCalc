@@ -204,8 +204,8 @@ LongInt LongInt::operator * (const LongInt& obj) const{
     
     if (*this==0 or obj==0)
         return 0;
-    int memory[100][100]={0};
-    bool haveMem[100][100]={0};
+    int memory[LongInt::_base][LongInt::_base]={0};
+    bool haveMem[LongInt::_base][LongInt::_base]={0};
     
     LongInt midRes;//临时中间变量
     for (int i=0;i < obj.n.size();++i)
@@ -317,8 +317,8 @@ LongInt LongInt::operator / (const LongInt &obj) const{
     LongInt ans=a,res=0;
     int i,left,right,mid;
     //尝试除法不要mode?
-    LongInt memory[100];
-    bool haveMem[100] = {0};
+    LongInt memory[LongInt::_base];
+    bool haveMem[LongInt::_base] = {0};
     for( i = a.n.size()-1; i>=0; --i)
     {
         //大数乘_base 要优化 直接移位

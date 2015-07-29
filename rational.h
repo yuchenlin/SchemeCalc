@@ -108,11 +108,14 @@ public:
     virtual Boolean* JudgeGreaterThan(Number* obj);
     virtual Boolean* JudgeLessThanOrEuqalTo(Number* obj);
     virtual Boolean* JudgeGreaterThanOrEuqalTo(Number* obj);
-
-
-    bool operator < (const Rational& obj);
-    bool operator > (const Rational& obj);
-    bool operator <= (const Rational& obj);
-    bool operator >= (const Rational& obj);
+ 
+    virtual Base* JudgeEqual(Base* obj){
+        
+        return new Boolean(
+            (numerator_ == SCAST_RATIONAL(obj)->numerator_
+                            and
+             denominator_ == SCAST_RATIONAL(obj)->denominator_
+             ));
+    }
 };
 

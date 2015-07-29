@@ -7,12 +7,15 @@
 #include <cstdlib>
 #include <string>
 #include <iostream>
+#include <sstream>
 using namespace std;
 FILE *input = stdin;
 string s="";
 int len=0;
 
 char *next_token() {
+    
+    
     char *res = NULL;
 	string ans;
     int cur=0;

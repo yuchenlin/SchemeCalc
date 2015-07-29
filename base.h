@@ -43,6 +43,7 @@ public:
     virtual Base* JudgeReal()=0;
     virtual Base* JudgeComplex()=0;
     
+    virtual Base* JudgeEqual(Base* obj)=0;
 };
 
 

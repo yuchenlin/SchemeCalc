@@ -73,14 +73,18 @@ public:
     virtual Boolean* JudgeEven();
 
     //类型判断
-   virtual Boolean* JudgeInteger();
-   virtual Boolean* JudgeRational();
-   virtual Boolean* JudgeReal();
-   virtual Boolean* JudgeComplex();
-//不等判断
-   virtual Boolean* JudgeLessThan(Number* obj);
-   virtual Boolean* JudgeGreaterThan(Number* obj);
-   virtual Boolean* JudgeLessThanOrEuqalTo(Number* obj);
-   virtual Boolean* JudgeGreaterThanOrEuqalTo(Number* obj);
+    virtual Boolean* JudgeInteger();
+    virtual Boolean* JudgeRational();
+    virtual Boolean* JudgeReal();
+    virtual Boolean* JudgeComplex();
+    //不等判断
+    virtual Boolean* JudgeLessThan(Number* obj);
+    virtual Boolean* JudgeGreaterThan(Number* obj);
+    virtual Boolean* JudgeLessThanOrEuqalTo(Number* obj);
+    virtual Boolean* JudgeGreaterThanOrEuqalTo(Number* obj);
+    
+    virtual Base* JudgeEqual(Base* obj){
+        return new Boolean((number_ == SCAST_FLOAT(obj)->number_));
+    }
 };
 

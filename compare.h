@@ -978,6 +978,47 @@ class GetMin : public Opt{
 };
 
 
+class ToJudgeEqual : public Opt{
+    Boolean* calc(Cons* con){
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+        {
+            cnt++;
+        }
+        if (cnt>2)
+            assert(0 && "error");
+        
+        Base *opr1 = con->car ,
+             *opr2 = con->cdr->car;
+        Boolean* res;
+        if (opr1->classType != opr2->classType)
+            return new Boolean(false);
+        else
+        {
+            if (opr1->classType == Base::NUMBER)
+            {
+                Number* a = SCAST_NUMBER(opr1);
+                Number* b = SCAST_NUMBER(opr2);
+                Number* conv;
+                int tocheck = SCAST_BOOLEAN(a->JudgeExact())->flag
+                                    + SCAST_BOOLEAN(b->JudgeExact())->flag;
+                if(tocheck ==0 or tocheck==2){
+                    if(a->type_ > b->type_)
+                        res = SCAST_BOOLEAN(a->JudgeEqual(conv = a->convert(b)));
+                    else
+                        res = SCAST_BOOLEAN((conv = b->convert(a))->JudgeEqual(b));
+                }else{
+                    return new Boolean(false);
+                }
+            }else{
+                res = SCAST_BOOLEAN(opr1->JudgeEqual(opr2));
+            }
+        }
+        return res;
+    }
+};
+
 class ToJudgeLessThan : public Opt{
     Boolean* calc(Cons* con){
         Cons *tmp = con;

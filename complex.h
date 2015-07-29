@@ -102,6 +102,12 @@ public:
     virtual Boolean* JudgeLessThanOrEuqalTo(Number* obj);
     virtual Boolean* JudgeGreaterThanOrEuqalTo(Number* obj);
 
+    virtual Base* JudgeEqual(Base* obj){
+        Complex* tmpc = SCAST_COMPLEX(obj);
+        bool ok1 = SCAST_BOOLEAN(tmpc->real->JudgeEqual(real))->flag;
+        bool ok2 = SCAST_BOOLEAN(tmpc->imag->JudgeEqual(imag))->flag;
+        return new Boolean((ok1 and ok2));
+    }
 
 };
 
