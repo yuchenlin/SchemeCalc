@@ -16,6 +16,8 @@
 #include "rational.h"
 #include "boolean.h"
 #include "char_.h"
+#include "complex.h"
+#include "float.h"
 #define SCAST_STRING(x) static_cast<String*>(x)
 
 using namespace std;
@@ -87,57 +89,14 @@ public:
     
     static String* from_string(char* expression);
     static String* make_string(Number* len,Char* c);
-    //
-    
-    Base* getLength(){
-        return new Rational(s.length(),ONE);
-    }
-    
-    virtual Char* getRef(Number* index);
-    virtual Boolean* JudgeStringEqual(String* obj){
-        return new Boolean(s == obj->s);
-    }
-    virtual Boolean* JudgeStringSmaller(String* obj){
-        return new Boolean(s < obj->s);
-    }
-    virtual Boolean* JudgeStringSmallerOrEqual(String* obj){
-        return new Boolean(s <= obj->s);
-    }
-    virtual Boolean* JudgeStringBigger(String* obj){
-        return new Boolean(s > obj->s);
-    }
-    virtual Boolean* JudgeStringBiggerOrEqual(String* obj){
-        return new Boolean(s >= obj->s);
-    }
-    
     static string getLower(string todo){
         string res="";
         for (int i = 0; i < todo.length(); ++i) {
             res += isalpha(todo[i]) ?
-                    tolower( todo[i]) : todo[i];
+            tolower( todo[i]) : todo[i];
         }
         return res;
     }
-    
-    virtual Boolean* JudgeStringCIEqual(String* obj){
-        return new Boolean(getLower(s) == obj->getLower(s));
-    }
-    virtual Boolean* JudgeStringCISmaller(String* obj){
-        return new Boolean(getLower(s) < obj->getLower(s));
-    }
-    virtual Boolean* JudgeStringCISmallerOrEqual(String* obj){
-        return new Boolean(getLower(s) <= obj->getLower(s));
-    }
-    virtual Boolean* JudgeStringCIBigger(String* obj){
-        return new Boolean(getLower(s) > obj->getLower(s));
-    }
-    virtual Boolean* JudgeStringCIBiggerOrEqual(String* obj){
-        return new Boolean(getLower(s) >= obj->getLower(s));
-    }
-    
-    virtual String* SubStr(Number* start);
-    virtual String* SubStr(Number* start , Number* end);
-    
     static unsigned long getIndex(Number* index){
         if(not index->JudgeInteger() or index->JudgeNegative())
             return -1;
@@ -145,6 +104,59 @@ public:
         ind = (double)*SCAST_RATIONAL(index->toExact()->real_part()->numerator());
         return ind;
     }
+    //
+    
+    Base* getLength(){
+        return new Rational(s.length(),ONE);
+    }
+    
+    Char* getRef(Number* index);
+    Boolean* JudgeStringEqual(String* obj){
+        return new Boolean(s == obj->s);
+    }
+    Boolean* JudgeStringSmaller(String* obj){
+        return new Boolean(s < obj->s);
+    }
+    Boolean* JudgeStringSmallerOrEqual(String* obj){
+        return new Boolean(s <= obj->s);
+    }
+    Boolean* JudgeStringBigger(String* obj){
+        return new Boolean(s > obj->s);
+    }
+    Boolean* JudgeStringBiggerOrEqual(String* obj){
+        return new Boolean(s >= obj->s);
+    }
+    
+    Boolean* JudgeStringCIEqual(String* obj){
+        return new Boolean(getLower(s) == getLower(obj->s));
+    }
+    Boolean* JudgeStringCISmaller(String* obj){
+        return new Boolean(getLower(s) < getLower(obj->s));
+    }
+    Boolean* JudgeStringCISmallerOrEqual(String* obj){
+        return new Boolean(getLower(s) <= getLower(obj->s));
+    }
+    Boolean* JudgeStringCIBigger(String* obj){
+        return new Boolean(getLower(s) > getLower(obj->s));
+    }
+    Boolean* JudgeStringCIBiggerOrEqual(String* obj){
+        return new Boolean(getLower(s) >= getLower(obj->s));
+    }
+    
+    String* SubString(Number* start);
+    String* SubString(Number* start , Number* end);
+    
+    String* Append(String* str){
+        return new String(s+=str->s);
+    }
+    
+    String* Copy(String* str){
+        return new String(s);
+    }
+    
+    Number* ConvertToNumber();
+    Number* ConvertToNumber(Number* base);
+    
 };
 
 

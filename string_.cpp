@@ -58,10 +58,10 @@ Char* String::getRef(Number* index){
 }
 
 
-String* String::SubStr(Number* start){
-    return SubStr(start,new Rational(s.length(),ONE));
+String* String::SubString(Number* start){
+    return SubString(start,new Rational(s.length(),ONE));
 }
-String* String::SubStr(Number* start , Number* end){
+String* String::SubString(Number* start , Number* end){
     String* res = new String();
     res->s = "";
     for (unsigned long i = getIndex(start); i < getIndex(end); ++i) {
@@ -71,10 +71,22 @@ String* String::SubStr(Number* start , Number* end){
 }
 
 
+Number* String::ConvertToNumber(){//默认就是十进制的
+    char* todo = const_cast<char *>(s.c_str());
+    Number* res;
+    
+    res = Rational::from_string(todo);
+    if(!res)
+        res = Float::from_string(todo);
+    if(!res)
+        res = Complex::from_string(todo);
+    return res;//如果都不可以的话是NULL
+}
 
-
-
-
-
+Number* String::ConvertToNumber(Number* b){//默认就是十进制的
+    unsigned long base = getIndex(b);
+    assert( base==10 and "base must be 10");
+    return ConvertToNumber();
+}
 
 

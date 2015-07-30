@@ -12,6 +12,8 @@
 #include <iostream>
 #include <cstring>
 #include "complex.h"
+#include "rational.h"
+#include "float.h"
 #include <complex>
 #include <cmath>
 
