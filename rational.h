@@ -1,9 +1,11 @@
 #pragma once
 #include "number.h"
+#include "string_.h"
 #include "long_int.h"
 #include <cstring>
 #include <cstring>
 #include <string>
+#include <sstream>
 #define SCAST_RATIONAL(x) static_cast<Rational*>(x)
 
 //避免构造大量的重复对象
@@ -36,7 +38,19 @@ public:
 	static Rational *from_string(char *expression); //从一个string里构造一个有理数
     bool is(int n);
     
-    
+    virtual string NumberToString()
+    {
+        stringstream ss;
+        ss<<numerator_;//先输出分子
+        if(denominator_ != ONE) //判断分母是否为ONE
+        {
+            ss<<'/';
+            ss<<denominator_;
+        }
+        string s; ss>>s;
+        return s;
+    }
+
     
     virtual Number* abs();
     

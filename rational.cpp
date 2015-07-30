@@ -129,7 +129,6 @@ void Rational::print()
         cout<<'/';
         cout<<denominator_;
     }
-//    cout<<endl;
 }
 
 //从string里读入一个Rational

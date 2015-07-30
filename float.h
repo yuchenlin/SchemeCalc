@@ -2,6 +2,7 @@
 
 #include "number.h"
 #include "long_int.h"
+#include "string_.h"
 #include "boolean.h"
 #include <cstring>
 #include <string>
@@ -87,6 +88,14 @@ public:
     virtual Base* JudgeEqual(Base* obj){
         double tocheck = number_ - SCAST_FLOAT(obj)->number_;
         return new Boolean((fabs(tocheck)<(1e-10)));
+    }
+    
+    virtual string NumberToString()
+    {
+        stringstream ss;
+        ss<<number_;
+        string s; ss>>s;
+        return s;
     }
 };
 

@@ -636,6 +636,40 @@ Boolean* Complex::JudgeGreaterThanOrEuqalTo(Number* obj){
     return new Boolean(this->real->JudgeGreaterThanOrEuqalTo(obj->real_part()));
 }
 
-
+string Complex::NumberToString() {
+    stringstream ss;
+    string res = "";
+    if(isExact){
+        Rational* i = SCAST_RATIONAL(real);
+        ss << i->NumberToString();
+        i = SCAST_RATIONAL(imag);
+        
+        if(i->sgn() > 0){
+            ss<<"+";
+            if(not i->is(1))
+                ss<<imag->NumberToString();
+            ss<<"i";
+        }else if(i->sgn() < 0){
+            if(i->is(-1))
+                ss<<"-";
+            else
+                ss<<imag->NumberToString();
+            ss<<"i";
+        }
+    }else{
+        Float* i = SCAST_FLOAT(real);
+        ss<<i->NumberToString();
+        i = SCAST_FLOAT(imag);
+        if(i->number_ == 0){
+            return "";
+        }
+        if(i->number_ >= 0)
+            ss<<"+";
+        ss<<imag->NumberToString();
+        ss<<"i";
+    }
+    ss>>res;
+    return res;
+}
 
 

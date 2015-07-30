@@ -77,7 +77,28 @@ Base *calc_exp(){
         else if(strcmp(tk1,"<=")==0)opt=new ToJudgeLessThanOrEuqalTo();
         else if(strcmp(tk1,">=")==0)opt=new ToJudgeGreaterThanOrEuqalTo();
         
+        /*
         else if(strcmp(tk1,"string-length")==0)opt=new StringLength();
+        else if(strcmp(tk1,"make-string")==0)opt=new MakeString();
+        else if(strcmp(tk1,"string")==0)opt=new FormString();
+        else if(strcmp(tk1,"string-length")==0)opt=new StrLen();
+        else if(strcmp(tk1,"string-ref")==0)opt=new StrRef();
+        else if(strcmp(tk1,"string=?")==0)opt=new StrEql();
+        else if(strcmp(tk1,"string<?")==0)opt=new StrMoInc();
+        else if(strcmp(tk1,"string<=?")==0)opt=new StrNonDec();
+        else if(strcmp(tk1,"string>?")==0)opt=new StrMoDec();
+        else if(strcmp(tk1,"string>=?")==0)opt=new StrNonInc();
+        else if(strcmp(tk1,"string-ci=?")==0)opt=new StrCiEql();
+        else if(strcmp(tk1,"string-ci<?")==0)opt=new StrCiMoInc();
+        else if(strcmp(tk1,"string-ci<=?")==0)opt=new StrCiNonDec();
+        else if(strcmp(tk1,"string-ci>?")==0)opt=new StrCiMoDec();
+        else if(strcmp(tk1,"string-ci>=?")==0)opt=new StrCiNonInc();
+        else if(strcmp(tk1,"substring")==0)opt=new SubStr();
+        else if(strcmp(tk1,"string-append")==0)opt=new StrApd();
+        else if(strcmp(tk1,"string-copy")==0)opt=new StrCpy();
+        else if(strcmp(tk1,"number->string")==0)opt=new NumToStr();
+        else if(strcmp(tk1,"string->number")==0)opt=new StrToNum();
+        */
         
         else throw 0;
         while ((val = (calc_exp())))

@@ -11,9 +11,12 @@
 #define SCAST_COMPLEX(x) static_cast<Complex*>(x)
 #include <cstring>
 #include <string>
+#include <sstream>
 #include "float.h"
 #include "number.h"
+#include "string_.h"
 #include "rational.h"
+
 
 class Complex:public Number {
     
@@ -109,6 +112,7 @@ public:
         return new Boolean((ok1 and ok2));
     }
 
+    virtual string NumberToString();
 };
 
 #endif

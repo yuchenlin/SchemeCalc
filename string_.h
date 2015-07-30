@@ -87,6 +87,9 @@ public:
             return new Boolean(false);
    }
     
+    String* gen_string(Char* c){
+        return new String(s+= c->c);
+    }
     static String* from_string(char* expression);
     static String* make_string(Number* len,Char* c);
     static string getLower(string todo){
@@ -150,7 +153,7 @@ public:
         return new String(s+=str->s);
     }
     
-    String* Copy(String* str){
+    String* Copy(){
         return new String(s);
     }
     

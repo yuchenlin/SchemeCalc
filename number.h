@@ -3,6 +3,7 @@
 #define SCAST_NUMBER(x) static_cast<Number*>(x)
 #include <cstring>
 #include <string>
+
 #include "base.h"
 #include "boolean.h"
 
@@ -102,6 +103,8 @@ public:
     virtual Boolean* JudgeLessThanOrEuqalTo(Number* obj)=0;
     virtual Boolean* JudgeGreaterThanOrEuqalTo(Number* obj)=0;
     virtual Base* JudgeEqual(Base* obj)=0;
+    virtual string NumberToString()=0;
+    
 };
 
 

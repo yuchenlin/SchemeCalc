@@ -539,6 +539,34 @@ class Angle : public Opt{
     }
 };
 
+class IsString : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Base *opr = (con->car);
+        Boolean *res =SCAST_BOOLEAN(opr->JudgeString());
+        return res;
+    }
+};
+class IsChar : public Opt{
+    Boolean* calc(Cons* con){
+        Cons* contmp = con;
+        int cnt = 0;
+        for (; contmp; contmp = contmp->cdr)
+        {
+            cnt++;
+        }
+        if(cnt > 1)    throw 0;
+        Base *opr = (con->car);
+        Boolean *res =SCAST_BOOLEAN(opr->JudgeChar());
+        return res;
+    }
+};
 class IsNumber : public Opt{
     Boolean* calc(Cons* con){
         Cons* contmp = con;
@@ -712,6 +740,314 @@ class IsReal : public Opt{
     }
 };
 
+
+
+//字符型函数
+
+class ToJudgeCharEqual:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        Char *a;
+        Char *opr2;
+        do
+        {
+            last = res;
+            a = SCAST_CHAR(con->car);
+            opr2 = SCAST_CHAR(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (a->JudgeCharEqual(opr2)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeCharSmaller:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        Char *a;
+        Char *b;
+        do
+        {
+            last = res;
+            a = SCAST_CHAR(con->car);
+            b = SCAST_CHAR(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (a->JudgeCharSmaller(b)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeCharBigger:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        Char *a;
+        Char *b;
+        do
+        {
+            last = res;
+            a = SCAST_CHAR(con->car);
+            b = SCAST_CHAR(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (a->JudgeCharBigger(b)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeCharSmallerOrEqual:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        Char *a;
+        Char *b;
+        do
+        {
+            last = res;
+            a = SCAST_CHAR(con->car);
+            b = SCAST_CHAR(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (a->JudgeCharSmallerOrEqual(b)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeCharBiggerOrEqual:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        Char *a;
+        Char *b;
+        do
+        {
+            last = res;
+            a = SCAST_CHAR(con->car);
+            b = SCAST_CHAR(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (a->JudgeCharBiggerOrEqual(b)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeCharCIEqual:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        Char *a;
+        Char *opr2;
+        do
+        {
+            last = res;
+            a = SCAST_CHAR(con->car);
+            opr2 = SCAST_CHAR(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (a->JudgeCharCIEqual(opr2)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeCharCISmaller:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        Char *a;
+        Char *b;
+        do
+        {
+            last = res;
+            a = SCAST_CHAR(con->car);
+            b = SCAST_CHAR(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (a->JudgeCharCISmaller(b)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeCharCIBigger:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        Char *a;
+        Char *b;
+        do
+        {
+            last = res;
+            a = SCAST_CHAR(con->car);
+            b = SCAST_CHAR(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (a->JudgeCharCIBigger(b)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeCharCISmallerOrEqual:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        Char *a;
+        Char *b;
+        do
+        {
+            last = res;
+            a = SCAST_CHAR(con->car);
+            b = SCAST_CHAR(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (a->JudgeCharCISmallerOrEqual(b)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeCharCIBiggerOrEqual:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        Char *a;
+        Char *b;
+        do
+        {
+            last = res;
+            a = SCAST_CHAR(con->car);
+            b = SCAST_CHAR(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (a->JudgeCharCIBiggerOrEqual(b)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeCharAlpha:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Char *opr = SCAST_CHAR(con->car);
+        return opr->JudgeAlpha();
+    }
+};
+class ToJudgeCharNumber:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Char *opr = SCAST_CHAR(con->car);
+        return opr->JudgeDigit();
+    }
+};
+class ToJudgeCharSpace:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Char *opr = SCAST_CHAR(con->car);
+        return opr->JudgeSpace();
+    }
+};
+class ToJudgeCharUpper:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Char *opr = SCAST_CHAR(con->car);
+        return opr->JudgeCapitalAlpha();
+    }
+};
+class ToJudgeCharLower:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Char *opr = SCAST_CHAR(con->car);
+        return opr->JudgeSmallerAlpha();
+    }
+};
+
+
+class CharGetUpper:public Opt{
+    Char* calc (Cons *con)
+    {
+        Char *opr = SCAST_CHAR(con->car);
+        return opr->GetUpper();
+    }
+};
+
+class CharGetLower:public Opt{
+    Char* calc (Cons *con)
+    {
+        Char *opr = SCAST_CHAR(con->car);
+        return opr->GetLower();
+    }
+};
+
+class CharGetNumber:public Opt{
+    Number* calc (Cons *con)
+    {
+        Char *opr = SCAST_CHAR(con->car);
+        return opr->GetNumber();
+    }
+};
+
+class NumberToChar:public Opt{
+    Char* calc (Cons *con)
+    {
+        Number *opr = SCAST_NUMBER(con->car);
+        unsigned long i =  String::getIndex(opr);
+        return new Char((char)i);
+    }
+};
+
+
+//字符型函数
+
+
 //字符串一元函数
 
 class StringLength : public Opt{
@@ -728,6 +1064,7 @@ class StringLength : public Opt{
         return res;
     }
 };
+
 
 
 
@@ -879,7 +1216,407 @@ class Expt : public Opt{
         return res;
     }
 };
+
+
+//字符串二元函数 不可连续
+
+class SubStr:public Opt{
+    String* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+
+        if (cnt == 2)
+        {
+            String* str = SCAST_STRING(con->car);
+            Number* start = SCAST_NUMBER(con->cdr->car);
+            return str->SubString(start);
+        }
+        else if (cnt == 3)
+        {
+            String* str = SCAST_STRING(con->car);
+            Number* start = SCAST_NUMBER(con->cdr->car);
+            Number* end = SCAST_NUMBER(con->cdr->cdr->car);
+            return str->SubString(start, end);
+        }
+        return NULL;
+    }
+};
+
+
+class StringAppend : public Opt {
+    String *calc(Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        if (cnt==0)
+            return new String("");
+        String *res = new String(""),
+                *last;
+        String *opr;
+        
+        for(;con;con=con->cdr)
+        {
+            opr = SCAST_STRING(con->car);
+            last=res;
+            res = res->Append(opr);
+            delete last;
+        }
+        return res;
+    }
+};
+class StringCopy : public Opt {
+    String* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        String *opr = SCAST_STRING(con->car);
+        return opr->Copy();
+    }
+};
+
+class StringToNumber : public Opt{
+    Number* calc (Cons* con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        if (cnt == 1){
+            String* opr = SCAST_STRING(con->car);
+            return opr->ConvertToNumber();
+        }else if (cnt == 2){
+            String* opr = SCAST_STRING(con->car);
+            Number* base = SCAST_NUMBER(con->cdr->car);
+            return opr->ConvertToNumber(base);
+        }
+        return NULL;
+    }
+};
+
+class NumberToString : public Opt{
+    String* calc (Cons* con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        if (cnt == 1){
+            Number* opr = SCAST_NUMBER(con->car);
+            return new String(opr->NumberToString());
+        }
+        return NULL;
+    }
+};
+
 //二元  可连续的多元函数
+
+class MakeString : public Opt{
+    String* calc(Cons* con){
+        
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        
+        if (cnt == 2)
+        {
+            Base* opr1 = con->car;
+            Base* opr2 = con->cdr->car;
+            Number* len = SCAST_NUMBER(opr1);
+            Char* ch = SCAST_CHAR(opr2);
+            String* res = String::make_string(len,ch);
+            return res;
+        }
+        else
+        {
+            Base* opr1 = con->car;
+            Number* len = SCAST_NUMBER(opr1);
+            Char* ch = new Char('\0');
+            String* res = String::make_string(len,ch);
+            return res;
+        }
+    }
+};
+
+
+class GenerateString : public Opt{
+    String* calc(Cons* con){
+        
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        
+        if (cnt==0) return new String("");
+        String *res = new String(""),*last;
+        
+        Char *opr;
+        for(;con;con=con->cdr)
+        {
+            opr  = SCAST_CHAR(con->car);
+            last = res;
+            res  = res->gen_string(opr);
+            delete last;
+        }
+        return res;
+    }
+};
+
+class StringRef:public Opt{
+    Base* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        
+        Base* opr1 = con->car;
+        Base* opr2 = con->cdr->car;
+        
+        String* s = SCAST_STRING(opr1);
+        Number* index = SCAST_NUMBER(opr2);
+        return s->getRef(index);
+    }
+};
+//字符串比较函数开始
+class ToJudgeStringEqual:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        String *opr1;
+        String *opr2;
+        do
+        {
+            last = res;
+            opr1 = SCAST_STRING(con->car);
+            opr2 = SCAST_STRING(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (opr1->JudgeStringEqual(opr2)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+class ToJudgeStringSmaller:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        String *opr1;
+        String *opr2;
+        do
+        {
+            last = res;
+            opr1 = SCAST_STRING(con->car);
+            opr2 = SCAST_STRING(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (opr1->JudgeStringSmaller(opr2)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeStringSmallerOrEqual:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        String *opr1;
+        String *opr2;
+        do
+        {
+            last = res;
+            opr1 = SCAST_STRING(con->car);
+            opr2 = SCAST_STRING(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (opr1->JudgeStringSmallerOrEqual(opr2)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeStringBigger:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        String *opr1;
+        String *opr2;
+        do
+        {
+            last = res;
+            opr1 = SCAST_STRING(con->car);
+            opr2 = SCAST_STRING(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (opr1->JudgeStringBigger(opr2)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeStringBiggerOrEqual:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        String *opr1;
+        String *opr2;
+        do
+        {
+            last = res;
+            opr1 = SCAST_STRING(con->car);
+            opr2 = SCAST_STRING(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (opr1->JudgeStringBiggerOrEqual(opr2)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+
+class ToJudgeStringCIEqual:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        String *opr1;
+        String *opr2;
+        do
+        {
+            last = res;
+            opr1 = SCAST_STRING(con->car);
+            opr2 = SCAST_STRING(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (opr1->JudgeStringCIEqual(opr2)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+class ToJudgeStringCISmaller:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        String *opr1;
+        String *opr2;
+        do
+        {
+            last = res;
+            opr1 = SCAST_STRING(con->car);
+            opr2 = SCAST_STRING(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (opr1->JudgeStringCISmaller(opr2)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeStringCISmallerOrEqual:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        String *opr1;
+        String *opr2;
+        do
+        {
+            last = res;
+            opr1 = SCAST_STRING(con->car);
+            opr2 = SCAST_STRING(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (opr1->JudgeStringCISmallerOrEqual(opr2)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeStringCIBigger:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        String *opr1;
+        String *opr2;
+        do
+        {
+            last = res;
+            opr1 = SCAST_STRING(con->car);
+            opr2 = SCAST_STRING(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (opr1->JudgeStringCIBigger(opr2)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+class ToJudgeStringCIBiggerOrEqual:public Opt{
+    Boolean* calc (Cons *con)
+    {
+        Cons *tmp=con;
+        int cnt=0;
+        for(;tmp;tmp=tmp->cdr)
+            cnt++;
+        Boolean *res = new Boolean(true),*last;
+        String *opr1;
+        String *opr2;
+        do
+        {
+            last = res;
+            opr1 = SCAST_STRING(con->car);
+            opr2 = SCAST_STRING(con->cdr->car);
+            con=con->cdr;
+            res->flag = res->flag and (opr1->JudgeStringCIBiggerOrEqual(opr2)->flag);
+            delete last;
+        }while(con->cdr);
+        return res;
+    }
+};
+
+//字符串比较函数结束
+
 
 class GCD : public Opt{
     Number* calc(Cons* con){
@@ -901,8 +1638,6 @@ class GCD : public Opt{
         return res;
     }
 };
-
-
 
 class LCM : public Opt{
     Number* calc(Cons* con){
