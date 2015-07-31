@@ -25,6 +25,14 @@ public:
     virtual void print(){
         cout<<"#\\"<<c;
     }
+    
+    static Char* from_string(char* xpr){
+        string x = xpr;
+        if(x.length()==3 and x[0]=='#' and x[1]=='\\'){
+            return new Char(xpr[2]);
+        }
+        return NULL;
+    }
 
     //一堆没什么用的判断函数
     

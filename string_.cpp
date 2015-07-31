@@ -27,8 +27,24 @@ String* String::from_string(char* xpr){
     for(int i = 1; i < l - 1; ++i){
         if(str[i]!='\\')
             res->s += str[i];
-        else//跳过
-            res->s += str[++i];
+        else{
+            //这是str[i]是'\\' str[i+1]可能是t n b 等等
+            //res->s += str[i];
+            if(i<=l-3){
+                switch (str[i+1]) {
+                    case 't':
+                        res->s += '\t';
+                        i++;
+                        break;
+                    case 'n':
+                        res->s += '\n';
+                        i++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
     return res;
 }
@@ -37,10 +53,8 @@ String* String::from_string(char* xpr){
 
 String* String::make_string(Number* len, Char* c){
     String* res = new String();
-    if(not len->JudgeInteger() or len->JudgeNegative())
-        return NULL;
     unsigned long l = getIndex(len);
-    for (int i = 1; i < l; ++i) {
+    for (int i = 0; i < l; ++i) {
         res->s += c->c;
     }
     return res;

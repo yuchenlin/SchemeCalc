@@ -30,7 +30,28 @@ public:
     }
     ~String(){}
     virtual void print(){
-        cout<<"\""<<s<<"\"";
+        //
+        
+        //转义字符的输出
+        string toprint="";
+        for (int i = 0; i < s.length(); ++i) {
+            switch (s[i]) {
+                case '\"':
+                    toprint += "\\\"";
+                    break;
+                case '\t':
+                    toprint += "\\t";
+                    break;
+                case '\n':
+                    toprint += "\\n";
+                    break;
+                default:
+                    toprint += s[i];
+                    break;
+            }
+        }
+        
+        cout<<"\""<<toprint<<"\"";
     }
     
     //一堆没什么用的判断函数
@@ -101,8 +122,8 @@ public:
         return res;
     }
     static unsigned long getIndex(Number* index){
-        if(not index->JudgeInteger() or index->JudgeNegative())
-            return -1;
+//        if(not index->JudgeInteger() or index->JudgeNegative())
+//            return -1;
         unsigned long ind = 0;
         ind = (double)*SCAST_RATIONAL(index->toExact()->real_part()->numerator());
         return ind;

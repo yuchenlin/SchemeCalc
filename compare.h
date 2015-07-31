@@ -760,7 +760,7 @@ class ToJudgeCharEqual:public Opt{
             a = SCAST_CHAR(con->car);
             opr2 = SCAST_CHAR(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (a->JudgeCharEqual(opr2)->flag);
+            res= new Boolean( res->flag and (a->JudgeCharEqual(opr2)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -783,7 +783,7 @@ class ToJudgeCharSmaller:public Opt{
             a = SCAST_CHAR(con->car);
             b = SCAST_CHAR(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (a->JudgeCharSmaller(b)->flag);
+            res= new Boolean( res->flag and (a->JudgeCharSmaller(b)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -806,7 +806,7 @@ class ToJudgeCharBigger:public Opt{
             a = SCAST_CHAR(con->car);
             b = SCAST_CHAR(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (a->JudgeCharBigger(b)->flag);
+            res= new Boolean( res->flag and (a->JudgeCharBigger(b)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -816,10 +816,6 @@ class ToJudgeCharBigger:public Opt{
 class ToJudgeCharSmallerOrEqual:public Opt{
     Boolean* calc (Cons *con)
     {
-        Cons *tmp=con;
-        int cnt=0;
-        for(;tmp;tmp=tmp->cdr)
-            cnt++;
         Boolean *res = new Boolean(true),*last;
         Char *a;
         Char *b;
@@ -829,7 +825,7 @@ class ToJudgeCharSmallerOrEqual:public Opt{
             a = SCAST_CHAR(con->car);
             b = SCAST_CHAR(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (a->JudgeCharSmallerOrEqual(b)->flag);
+            res= new Boolean( res->flag and (a->JudgeCharSmallerOrEqual(b)->flag) );
             delete last;
         }while(con->cdr);
         return res;
@@ -852,7 +848,7 @@ class ToJudgeCharBiggerOrEqual:public Opt{
             a = SCAST_CHAR(con->car);
             b = SCAST_CHAR(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (a->JudgeCharBiggerOrEqual(b)->flag);
+            res= new Boolean( res->flag and (a->JudgeCharBiggerOrEqual(b)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -875,7 +871,7 @@ class ToJudgeCharCIEqual:public Opt{
             a = SCAST_CHAR(con->car);
             opr2 = SCAST_CHAR(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (a->JudgeCharCIEqual(opr2)->flag);
+            res= new Boolean( res->flag and (a->JudgeCharCIEqual(opr2)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -898,7 +894,7 @@ class ToJudgeCharCISmaller:public Opt{
             a = SCAST_CHAR(con->car);
             b = SCAST_CHAR(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (a->JudgeCharCISmaller(b)->flag);
+            res= new Boolean( res->flag and (a->JudgeCharCISmaller(b)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -921,7 +917,7 @@ class ToJudgeCharCIBigger:public Opt{
             a = SCAST_CHAR(con->car);
             b = SCAST_CHAR(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (a->JudgeCharCIBigger(b)->flag);
+            res= new Boolean( res->flag and (a->JudgeCharCIBigger(b)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -944,7 +940,7 @@ class ToJudgeCharCISmallerOrEqual:public Opt{
             a = SCAST_CHAR(con->car);
             b = SCAST_CHAR(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (a->JudgeCharCISmallerOrEqual(b)->flag);
+            res= new Boolean( res->flag and (a->JudgeCharCISmallerOrEqual(b)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -967,7 +963,7 @@ class ToJudgeCharCIBiggerOrEqual:public Opt{
             a = SCAST_CHAR(con->car);
             b = SCAST_CHAR(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (a->JudgeCharCIBiggerOrEqual(b)->flag);
+            res= new Boolean( res->flag and (a->JudgeCharCIBiggerOrEqual(b)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -1220,7 +1216,7 @@ class Expt : public Opt{
 
 //字符串二元函数 不可连续
 
-class SubStr:public Opt{
+class SubString:public Opt{
     String* calc (Cons *con)
     {
         Cons *tmp=con;
@@ -1402,7 +1398,7 @@ class ToJudgeStringEqual:public Opt{
             opr1 = SCAST_STRING(con->car);
             opr2 = SCAST_STRING(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (opr1->JudgeStringEqual(opr2)->flag);
+            res= new Boolean( res->flag and (opr1->JudgeStringEqual(opr2)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -1424,7 +1420,7 @@ class ToJudgeStringSmaller:public Opt{
             opr1 = SCAST_STRING(con->car);
             opr2 = SCAST_STRING(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (opr1->JudgeStringSmaller(opr2)->flag);
+            res= new Boolean( res->flag and (opr1->JudgeStringSmaller(opr2)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -1447,7 +1443,7 @@ class ToJudgeStringSmallerOrEqual:public Opt{
             opr1 = SCAST_STRING(con->car);
             opr2 = SCAST_STRING(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (opr1->JudgeStringSmallerOrEqual(opr2)->flag);
+            res= new Boolean( res->flag and (opr1->JudgeStringSmallerOrEqual(opr2)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -1470,7 +1466,7 @@ class ToJudgeStringBigger:public Opt{
             opr1 = SCAST_STRING(con->car);
             opr2 = SCAST_STRING(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (opr1->JudgeStringBigger(opr2)->flag);
+            res= new Boolean( res->flag and (opr1->JudgeStringBigger(opr2)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -1493,7 +1489,7 @@ class ToJudgeStringBiggerOrEqual:public Opt{
             opr1 = SCAST_STRING(con->car);
             opr2 = SCAST_STRING(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (opr1->JudgeStringBiggerOrEqual(opr2)->flag);
+            res= new Boolean( res->flag and (opr1->JudgeStringBiggerOrEqual(opr2)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -1517,7 +1513,7 @@ class ToJudgeStringCIEqual:public Opt{
             opr1 = SCAST_STRING(con->car);
             opr2 = SCAST_STRING(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (opr1->JudgeStringCIEqual(opr2)->flag);
+            res= new Boolean( res->flag and (opr1->JudgeStringCIEqual(opr2)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -1539,7 +1535,7 @@ class ToJudgeStringCISmaller:public Opt{
             opr1 = SCAST_STRING(con->car);
             opr2 = SCAST_STRING(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (opr1->JudgeStringCISmaller(opr2)->flag);
+            res= new Boolean( res->flag and (opr1->JudgeStringCISmaller(opr2)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -1562,7 +1558,7 @@ class ToJudgeStringCISmallerOrEqual:public Opt{
             opr1 = SCAST_STRING(con->car);
             opr2 = SCAST_STRING(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (opr1->JudgeStringCISmallerOrEqual(opr2)->flag);
+            res= new Boolean( res->flag and (opr1->JudgeStringCISmallerOrEqual(opr2)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -1573,9 +1569,6 @@ class ToJudgeStringCIBigger:public Opt{
     Boolean* calc (Cons *con)
     {
         Cons *tmp=con;
-        int cnt=0;
-        for(;tmp;tmp=tmp->cdr)
-            cnt++;
         Boolean *res = new Boolean(true),*last;
         String *opr1;
         String *opr2;
@@ -1585,7 +1578,7 @@ class ToJudgeStringCIBigger:public Opt{
             opr1 = SCAST_STRING(con->car);
             opr2 = SCAST_STRING(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (opr1->JudgeStringCIBigger(opr2)->flag);
+            res= new Boolean( res->flag and (opr1->JudgeStringCIBigger(opr2)->flag));
             delete last;
         }while(con->cdr);
         return res;
@@ -1596,9 +1589,6 @@ class ToJudgeStringCIBiggerOrEqual:public Opt{
     Boolean* calc (Cons *con)
     {
         Cons *tmp=con;
-        int cnt=0;
-        for(;tmp;tmp=tmp->cdr)
-            cnt++;
         Boolean *res = new Boolean(true),*last;
         String *opr1;
         String *opr2;
@@ -1608,7 +1598,7 @@ class ToJudgeStringCIBiggerOrEqual:public Opt{
             opr1 = SCAST_STRING(con->car);
             opr2 = SCAST_STRING(con->cdr->car);
             con=con->cdr;
-            res->flag = res->flag and (opr1->JudgeStringCIBiggerOrEqual(opr2)->flag);
+            res= new Boolean( res->flag and (opr1->JudgeStringCIBiggerOrEqual(opr2)->flag));
             delete last;
         }while(con->cdr);
         return res;

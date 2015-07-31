@@ -71,34 +71,60 @@ Base *calc_exp(){
         else if(strcmp(tk1,"rational?")==0)opt=new IsRational();
         else if(strcmp(tk1,"complex?")==0)opt=new IsComplex();
         else if(strcmp(tk1,"real?")==0)opt=new IsReal();
+        else if(strcmp(tk1,"string?")==0)opt=new IsString();
+        else if(strcmp(tk1,"char?")==0)opt=new IsChar();
+        
         else if(strcmp(tk1,"equal?")==0)opt=new ToJudgeEqual();
         else if(strcmp(tk1,"<")==0)opt=new ToJudgeLessThan();
         else if(strcmp(tk1,">")==0)opt=new ToJudgeGreaterThan();
         else if(strcmp(tk1,"<=")==0)opt=new ToJudgeLessThanOrEuqalTo();
         else if(strcmp(tk1,">=")==0)opt=new ToJudgeGreaterThanOrEuqalTo();
         
-        /*
+        //字符串
         else if(strcmp(tk1,"string-length")==0)opt=new StringLength();
         else if(strcmp(tk1,"make-string")==0)opt=new MakeString();
-        else if(strcmp(tk1,"string")==0)opt=new FormString();
-        else if(strcmp(tk1,"string-length")==0)opt=new StrLen();
-        else if(strcmp(tk1,"string-ref")==0)opt=new StrRef();
-        else if(strcmp(tk1,"string=?")==0)opt=new StrEql();
-        else if(strcmp(tk1,"string<?")==0)opt=new StrMoInc();
-        else if(strcmp(tk1,"string<=?")==0)opt=new StrNonDec();
-        else if(strcmp(tk1,"string>?")==0)opt=new StrMoDec();
-        else if(strcmp(tk1,"string>=?")==0)opt=new StrNonInc();
-        else if(strcmp(tk1,"string-ci=?")==0)opt=new StrCiEql();
-        else if(strcmp(tk1,"string-ci<?")==0)opt=new StrCiMoInc();
-        else if(strcmp(tk1,"string-ci<=?")==0)opt=new StrCiNonDec();
-        else if(strcmp(tk1,"string-ci>?")==0)opt=new StrCiMoDec();
-        else if(strcmp(tk1,"string-ci>=?")==0)opt=new StrCiNonInc();
-        else if(strcmp(tk1,"substring")==0)opt=new SubStr();
-        else if(strcmp(tk1,"string-append")==0)opt=new StrApd();
-        else if(strcmp(tk1,"string-copy")==0)opt=new StrCpy();
-        else if(strcmp(tk1,"number->string")==0)opt=new NumToStr();
-        else if(strcmp(tk1,"string->number")==0)opt=new StrToNum();
-        */
+        else if(strcmp(tk1,"string")==0)opt=new GenerateString();
+        else if(strcmp(tk1,"string-length")==0)opt=new StringLength();
+        else if(strcmp(tk1,"string-ref")==0)opt=new StringRef();
+        else if(strcmp(tk1,"string=?")==0)opt=new ToJudgeStringEqual();
+        else if(strcmp(tk1,"string<?")==0)opt=new ToJudgeStringSmaller();
+        else if(strcmp(tk1,"string<=?")==0)opt=new ToJudgeStringSmallerOrEqual();
+        else if(strcmp(tk1,"string>?")==0)opt=new ToJudgeStringBigger();
+        else if(strcmp(tk1,"string>=?")==0)opt=new ToJudgeStringBiggerOrEqual();
+        else if(strcmp(tk1,"string-ci=?")==0)opt=new ToJudgeStringCIEqual();
+        else if(strcmp(tk1,"string-ci<?")==0)opt=new ToJudgeStringCISmaller();
+        else if(strcmp(tk1,"string-ci<=?")==0)opt=new ToJudgeStringCISmallerOrEqual();
+        else if(strcmp(tk1,"string-ci>?")==0)opt=new ToJudgeStringCIBigger();
+        else if(strcmp(tk1,"string-ci>=?")==0)opt=new ToJudgeStringCIBiggerOrEqual();
+        else if(strcmp(tk1,"substring")==0)opt=new SubString();
+        else if(strcmp(tk1,"string-append")==0)opt=new StringAppend();
+        else if(strcmp(tk1,"string-copy")==0)opt=new StringCopy();
+        else if(strcmp(tk1,"number->string")==0)opt=new NumberToString();
+        else if(strcmp(tk1,"string->number")==0)opt=new StringToNumber();
+        
+        //字符
+        
+        else if(strcmp(tk1,"char=?")==0)opt=new ToJudgeCharEqual();
+        else if(strcmp(tk1,"char<?")==0)opt=new ToJudgeCharSmaller();
+        else if(strcmp(tk1,"char<=?")==0)opt=new ToJudgeCharSmallerOrEqual();
+        else if(strcmp(tk1,"char>?")==0)opt=new ToJudgeCharBigger();
+        else if(strcmp(tk1,"char>=?")==0)opt=new ToJudgeCharBiggerOrEqual();
+        else if(strcmp(tk1,"char-ci=?")==0)opt=new ToJudgeCharCIEqual();
+        else if(strcmp(tk1,"char-ci<?")==0)opt=new ToJudgeCharCISmaller();
+        else if(strcmp(tk1,"char-ci<=?")==0)opt=new ToJudgeCharCISmallerOrEqual();
+        else if(strcmp(tk1,"char-ci>?")==0)opt=new ToJudgeCharCIBigger();
+        else if(strcmp(tk1,"char-ci>=?")==0)opt=new ToJudgeCharCIBiggerOrEqual();
+        else if(strcmp(tk1,"char-alphabetic?")==0)opt=new ToJudgeCharAlpha();
+        else if(strcmp(tk1,"char-numeric?")==0)opt=new ToJudgeCharNumber();
+        else if(strcmp(tk1,"char-whitespace?")==0)opt=new ToJudgeCharSpace();
+        else if(strcmp(tk1,"char-upper-case?")==0)opt=new ToJudgeCharUpper();
+        else if(strcmp(tk1,"char-lower-case?")==0)opt=new ToJudgeCharLower();
+        else if(strcmp(tk1,"char->integer")==0)opt=new CharGetNumber();
+        else if(strcmp(tk1,"integer->char")==0)opt=new NumberToChar();
+        else if(strcmp(tk1,"char-upcase")==0)opt=new CharGetUpper();
+        else if(strcmp(tk1,"char-downcase")==0)opt=new CharGetLower();
+        
+        
         
         else throw 0;
         while ((val = (calc_exp())))
@@ -121,6 +147,8 @@ Base *calc_exp(){
     {
         // 增加尝试复数
 		res = Boolean::from_string(tk0);
+        if(!res)
+            res = Char::from_string(tk0);
         if(!res)
             res = String::from_string(tk0);
         if(!res)

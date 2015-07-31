@@ -1,3 +1,13 @@
+//
+//  next_token.h
+//  SchemeCalc
+//
+//  Created by LinYuchen on 7/31/15.
+//  Copyright (c) 2015 LinYuchen. All rights reserved.
+//
+
+#ifndef SchemeCalc_next_token_h
+#define SchemeCalc_next_token_h
 #pragma once
 
 #include <cstdio>
@@ -19,11 +29,11 @@ char *next_token() {
     char *res = NULL;
 	string ans;
     int cur=0;
-    int ch;
+    char ch;
+    bool startString = false;
     while (!cur)
     {
-        //cout << "test next_token" << endl;
-        if(len > 0 && (s[0] == '(' || s[0] == ')'))// for cases:'(' ')'
+        if( startString==false and( len > 0 && (s[0] == '(' || s[0] == ')')))
         {
             ans=s;
             cur=len;
@@ -31,33 +41,54 @@ char *next_token() {
             len=0;
             break;
         }
-        if ((ch = fgetc(input)) == EOF)
-        // want to judge if the input has done. but sth is wrong with it. Ctrl+z or d cannot terminate the process
-            break;
-        switch (ch)
-        {
-            case '(':
-            case ')':
-                if(len>0)
-                    ans=s;cur=len;
-                s="";
-                s=s+(char)ch;
-                len=1;
-                break;
-            default:
-                if (isspace(ch))
+        if ((ch = fgetc(input)) == EOF) break;
+        
+        if(startString){
+            s+=(char)ch;
+            len++;
+            //judge end
+            int last_quo = s.find_last_of('\"');
+            if(last_quo > 0 and s[last_quo-1]!='\\'){// string is end
+                startString = false;
+            }
+        }else{
+            //有可能是char
+            if(s=="#\\" and ch!=' '){
+                s+=ch;
+                len++;
+            }else{
+                switch (ch)
                 {
-                    if(len>0)
-                         ans=s;cur=len;
-                    s="";
-                    len=0;
+                    case '\"':
+                        startString = true;
+                        s+=(char)ch;
+                        len++;
+                        break;
+                    case '(':
+                    case ')':
+                        if(len>0)
+                            ans=s;cur=len;
+                        s="";
+                        s=s+(char)ch;
+                        len=1;
+                        break;
+                    default:
+                        if (isspace(ch))
+                        {
+                            if(len>0)
+                                ans=s;cur=len;
+                            s="";
+                            len=0;
+                        }
+                        else
+                        {
+                            s=s+(char)ch;
+                            len++;
+                        }
                 }
-                else
-				{
-					s=s+(char)ch;
-                    len++;
-                }
+            }
         }
+        
     }
     if(cur>0)
     {
@@ -70,3 +101,22 @@ char *next_token() {
 }
 
 
+//
+//
+//char *next_token2(){
+//    
+//    char* res = NULL;
+//    
+//    if(cur>0)
+//    {
+//        res=new char[cur+2];
+//        for(int i=0;i<=cur-1;i++)
+//            res[i]=ans[i];
+//        res[cur]='\0';
+//    }
+//    
+//    
+//    
+//}
+
+#endif
