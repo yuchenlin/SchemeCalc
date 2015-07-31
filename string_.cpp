@@ -32,6 +32,10 @@ String* String::from_string(char* xpr){
             //res->s += str[i];
             if(i<=l-3){
                 switch (str[i+1]) {
+                    case '\"':
+                        res->s+= '\"';
+                        i++;
+                        break;
                     case 't':
                         res->s += '\t';
                         i++;
@@ -41,6 +45,8 @@ String* String::from_string(char* xpr){
                         i++;
                         break;
                     default:
+                        res->s += str[i+1];
+                        i++;
                         break;
                 }
             }

@@ -753,14 +753,14 @@ class ToJudgeCharEqual:public Opt{
             cnt++;
         Boolean *res = new Boolean(true),*last;
         Char *a;
-        Char *opr2;
+        Char *b;
         do
         {
             last = res;
             a = SCAST_CHAR(con->car);
-            opr2 = SCAST_CHAR(con->cdr->car);
+            b = SCAST_CHAR(con->cdr->car);
             con=con->cdr;
-            res= new Boolean( res->flag and (a->JudgeCharEqual(opr2)->flag));
+            res= new Boolean( res->flag and (a->JudgeCharEqual(b)->flag));
             delete last;
         }while(con->cdr);
         return res;

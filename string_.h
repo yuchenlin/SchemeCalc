@@ -45,6 +45,9 @@ public:
                 case '\n':
                     toprint += "\\n";
                     break;
+                case '\\':
+                    toprint += "\\\\";
+                    break;
                 default:
                     toprint += s[i];
                     break;

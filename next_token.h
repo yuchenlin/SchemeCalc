@@ -31,9 +31,10 @@ char *next_token() {
     int cur=0;
     char ch;
     bool startString = false;
+    bool startChar = false;
     while (!cur)
     {
-        if( startString==false and( len > 0 && (s[0] == '(' || s[0] == ')')))
+        if( startString==false and startChar==false and( len > 0 && (s[0] == '(' || s[0] == ')')))
         {
             ans=s;
             cur=len;
@@ -48,12 +49,16 @@ char *next_token() {
             len++;
             //judge end
             int last_quo = s.find_last_of('\"');
+            if(s=="\"\\\\\"")
+                startString = false;
             if(last_quo > 0 and s[last_quo-1]!='\\'){// string is end
                 startString = false;
             }
         }else{
             //有可能是char
-            if(s=="#\\" and ch!=' '){
+            
+            if(s.length()>=2 and s[s.length()-2]=='#' and s[s.length()-1]=='\\'){
+                //startChar = true;
                 s+=ch;
                 len++;
             }else{

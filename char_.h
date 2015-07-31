@@ -17,17 +17,46 @@ using namespace std;
 class Char: public Base{
 public:
     char c;
-    Char(){classType = CHAR;}
+    Char() {  c = ' '; classType = CHAR;}
+    bool isSpace;
+    bool isNewline;
     Char(char i):c(i){
         classType = CHAR;
+        isSpace = false;
+        isNewline = false;
     }
     ~Char(){}
+    void updateC(){
+        if(isNewline){
+            c = '\n';
+        }else if(isSpace){
+            c = ' ';
+        }
+    }
     virtual void print(){
-        cout<<"#\\"<<c;
+        if(isSpace)
+           cout<< "#\\space";
+        else if (isNewline)
+           cout<< "#\\newline";
+        else
+            cout<<"#\\"<<c;
     }
     
     static Char* from_string(char* xpr){
         string x = xpr;
+        if(x == "#\\space"){
+            Char* c = new Char();
+            c->isSpace = true;
+            c->updateC();
+            return c;
+        }
+        else if(x == "#\\newline"){
+            Char* c = new Char();
+            c->isNewline = true;
+            c->updateC();
+            return c;
+        }
+        
         if(x.length()==3 and x[0]=='#' and x[1]=='\\'){
             return new Char(xpr[2]);
         }
@@ -90,10 +119,32 @@ public:
     
     
     Char* GetUpper(){
+        if(isNewline){
+            Char* c = new Char();
+            c->isNewline = true;
+            c->updateC();
+            return c;
+        }else if(isSpace){
+            Char* c = new Char();
+            c->isSpace = true;
+            c->updateC();
+            return c;
+        }
         return new Char(toupper(c));
     }
     
     Char* GetLower(){
+        if(isNewline){
+            Char* c = new Char();
+            c->isNewline = true;
+            c->updateC();
+            return c;
+        }else if(isSpace){
+            Char* c = new Char();
+            c->isSpace = true;
+            c->updateC();
+            return c;
+        }
         return new Char(tolower(c));
     }
     
@@ -102,10 +153,11 @@ public:
     }
     
     Boolean* JudgeSpace(){
-        return new Boolean(c==' ');
+        return new Boolean(isNewline or isSpace);
     }
     
     Boolean* JudgeCapitalAlpha(){
+        
         return new Boolean(c>='A' and c<='Z');
     }
     
